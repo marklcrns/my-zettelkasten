@@ -4,3 +4,4 @@
 - [[2.universality]]
 - [[3.religion]]
 - [[4.cosmic_perspective]]
+- [[5.basal_ganglia]]
