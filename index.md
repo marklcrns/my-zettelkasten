@@ -5,3 +5,4 @@
 - [[3.religion]]
 - [[4.cosmic_perspective]]
 - [[5.basal_ganglia]]
+- [[6.habits]]
