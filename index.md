@@ -8,3 +8,4 @@
   - [[5.a.basal_ganglia_thoughts]]
 - [[6.habits]]
   - [[6.a.habit_loop]]
+  - [[6.b.cravings]]
