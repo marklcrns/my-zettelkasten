@@ -9,4 +9,5 @@
 - [[6.habits]]
   - [[6.a.habit_loop]]
   - [[6.b.cravings]]
+  - [[6.c.habit_change]]
 - [[7.object_oriented_programming]]
