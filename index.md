@@ -11,4 +11,5 @@
   - [[6.b.cravings]]
   - [[6.c.habit_change]]
     - [[6.c.i.belief]]
+  - [[6.d.keytone_habits]]
 - [[7.object_oriented_programming]]
