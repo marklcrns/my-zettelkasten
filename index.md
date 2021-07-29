@@ -13,5 +13,5 @@ Zettlekasten by Mark Lucernas [![GitHub followers](https://img.shields.io/github
   - [[6.b.cravings]]
   - [[6.c.habit_change]]
     - [[6.c.i.belief]]
-  - [[6.d.keytone_habits]]
+  - [[6.d.keystone_habits]]
 - [[7.object_oriented_programming]]
