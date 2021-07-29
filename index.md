@@ -1,6 +1,8 @@
 # Index
 
-Zettlekasten by Mark Lucernas [![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
+Zettlekasten by Mark Lucernas
+
+[![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
 
 - [[1.the_big_bang_theory]]
 - [[2.universality]]
