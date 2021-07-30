@@ -26,6 +26,7 @@ Zettlekasten by Mark Lucernas
 - [[7.object_oriented_programming]]
   - [[7.a.design_principle_1]]
   - [[7.b.design_principle_2]]
+  - [[7.c.design_principle_3]]
 
 ## Misc
 
