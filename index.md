@@ -20,6 +20,7 @@ Zettlekasten by Mark Lucernas
   - [[6.c.habit_change]]
     - [[6.c.i.belief]]
   - [[6.d.keystone_habits]]
+    - [[6.d.i.small_wins]]
 
 ## Programming
 
