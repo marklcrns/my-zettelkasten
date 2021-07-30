@@ -27,7 +27,7 @@ For other ways to edit your notes (editors, web interface), see the [neuron guid
 Got questions? Checkout the [[faq]]. To find who else is using this template *publicly on GitHub*, [see here](https://github.com/search?o=desc&q=filename%3Aneuron.dhall&s=indexed&type=Code).
 
 [neuron]: https://neuron.zettel.page
-[examples]: https://neuron.zettel.page/examples
+[examples]: https://marklcrns.github.io/my-zettelkasten/
 [linking]: https://neuron.zettel.page/linking
 [create]: https://neuron.zettel.page/create
 
