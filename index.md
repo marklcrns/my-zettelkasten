@@ -17,3 +17,5 @@ Zettlekasten by Mark Lucernas
     - [[6.c.i.belief]]
   - [[6.d.keystone_habits]]
 - [[7.object_oriented_programming]]
+  - [[7.a.design_principle_1]]
+  - [[7.b.design_principle_2]]
