@@ -18,9 +18,10 @@ Zettlekasten by Mark Lucernas
   - [[6.a.habit_loop]]
   - [[6.b.cravings]]
   - [[6.c.habit_change]]
-    - [[6.c.i.belief]]
+    - [[6.c.1.belief]]
+    - [[6.c.2.willpower]]
   - [[6.d.keystone_habits]]
-    - [[6.d.i.small_wins]]
+    - [[6.d.1.small_wins]]
 
 ## Programming
 
