@@ -22,6 +22,7 @@ Zettlekasten by Mark Lucernas
     - [[6.c.2.willpower]]
   - [[6.d.keystone_habits]]
     - [[6.d.1.small_wins]]
+  - [[6.e.organizational_habits]]
 
 ## Programming
 
