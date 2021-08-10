@@ -31,6 +31,7 @@ Zettlekasten by Mark Lucernas
   - [[7.a.design_principle_1]]
   - [[7.b.design_principle_2]]
   - [[7.c.design_principle_3]]
+  - [[7.e.the_strategy_pattern]]
 
 ## Misc
 
