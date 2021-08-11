@@ -24,6 +24,7 @@ Zettlekasten by Mark Lucernas
     - [[6.d.1.small_wins]]
   - [[6.e.organizational_habits]]
     - [[6.e.1.the_power_of_crisis]]
+  - [[6.f.familiarity]]
 
 ## Programming
 
