@@ -1,16 +1,17 @@
 ---
+slug: basal-ganglia
 title: Basal Ganglia
-date: 2021-07-21T08:20
 tags:
-  - the power of habit
+  - basal-ganglia
+  - psychology
   - habits
+  - psychology/habits
   - brain
   - memory
-  - basal ganglia
+  - the-power-of-habit
+date: 2021-07-21T08:20
 ---
 
-
-# Basal Ganglia
 
 ![Basal Ganglia Image](https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Basal_ganglia_and_related_structures_%282%29.svg/1200px-Basal_ganglia_and_related_structures_%282%29.svg.png)
 > image from Wikipedia (cc)
@@ -24,12 +25,11 @@ ganglia which was recently discovered of its actual functionality.
 
 Basal ganglia controls our automatic behavior such as walking or breathing.
 Repeated actions or behavior undergo the process called "chunking", our brain's
-way of learning new #[[6.habits|habits]]. As we process new information, our
-brain requires more memory space to store new memory for recollection.
-Converting routine activity into a concrete habit is one of our brains primal
-ability for maximum efficiency. Executing habits require far lesser brain
-activity and cognitive power than processing new information for the first few
-times.
+way of learning new #[[b11c411a]]. As we process new information, our brain
+requires more memory space to store new memory for recollection.  Converting
+routine activity into a concrete habit is one of our brains primal ability for
+maximum efficiency. Executing habits require far lesser brain activity and
+cognitive power than processing new information for the first few times.
 
 Also, our basal ganglia, being the core of our brain, is the last to give up
 when the rest of our memory shuts down. Its the reason why some diseases
