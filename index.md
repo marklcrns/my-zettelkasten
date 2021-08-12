@@ -24,3 +24,7 @@ Zettlekasten by Mark Lucernas
 
 [[z:zettels?tag=sapiens&grouped&timeline]]
 
+## All
+
+[[z:zettels?tag=**&showid]]#
+
