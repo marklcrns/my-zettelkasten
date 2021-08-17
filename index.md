@@ -26,4 +26,4 @@ Zettlekasten by Mark Lucernas
 
 ## All
 
-[[z:zettels?tag=**&showid]]
+[[z:zettels?tag=*&showid]]
