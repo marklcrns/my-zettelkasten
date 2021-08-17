@@ -1,7 +1,7 @@
 ---
 slug: observer-pattern
 title: Observer Pattern
-tags: observer-pattern
+tags:
   - observer-pattern
   - programming
   - oop
