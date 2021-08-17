@@ -19,6 +19,9 @@ The Observer Pattern
 :   Defines a one-to-many dependency between objects so that when one object
 changes state, all of its dependents are notified and updated automatically.
 
+The Observer Pattern provides an object design where subjects and observers are
+[[d7d0203f|loosely coupled]]#.
+
 ## Resources
 
 - _Head First Design Pattern_ by Elisabeth Freeman and Kathy Sierra
