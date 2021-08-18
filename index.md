@@ -4,6 +4,8 @@ Zettlekasten by Mark Lucernas
 
 [![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
 
+Here is my [Folgezettel Heterarchy Impulse](/impulse.html)
+
 ## Topics
 
 [[z:zettels?tag=science/**&grouped&timeline]]
