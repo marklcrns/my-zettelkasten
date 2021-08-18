@@ -1,10 +1,11 @@
 # Index
 
-Zettlekasten by Mark Lucernas
+Personal Zettlekasten by Mark Lucernas
 
 [![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
 
-Here is my [Folgezettel Heterarchy Impulse](/impulse.html)
+Check out my [Folgezettel Heterarchy Impulse](/impulse.html) and an awesome
+[[2e45a952|Interactive Directed Graph]] of my Zettelkasten database.
 
 ## Topics
 
@@ -29,3 +30,4 @@ Here is my [Folgezettel Heterarchy Impulse](/impulse.html)
 ## All
 
 [[z:zettels?tag=**&showid]]
+
