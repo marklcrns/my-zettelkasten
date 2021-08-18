@@ -1,4 +1,4 @@
-d3.json("../cache.json", function (d) {
+d3.json("../../cache.json", function (d) {
   return d;
 })
   .then(function (data) {
