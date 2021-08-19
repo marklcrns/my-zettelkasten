@@ -26,6 +26,12 @@ For other ways to edit your notes (editors, web interface), see the [neuron guid
 
 Got questions? Checkout the [[faq]]. To find who else is using this template *publicly on GitHub*, [see here](https://github.com/search?o=desc&q=filename%3Aneuron.dhall&s=indexed&type=Code).
 
+## Adding Custom Domain
+
+Add `cname` option in `./github/workflows/publish.yaml` under
+`peaceiris/actions-gh-pages@vX.X.X-X` as demonstrated in this
+[pr](https://github.com/peaceiris/actions-gh-pages/pull/119)
+
 [neuron]: https://neuron.zettel.page
 [examples]: https://marklcrns.github.io/my-zettelkasten/
 [linking]: https://neuron.zettel.page/linking
