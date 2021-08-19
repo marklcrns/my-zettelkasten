@@ -9,6 +9,9 @@ tags:
   - programming/oop/design-pattern
   - object-oriented-programming
   - head-first-design-pattern
+  - elisabeth-freeman
+  - kathy-sierra
+  - elisabeth-freeman-and-kathy-sierra
 date: 2021-08-16T21:30
 ---
 
