@@ -16,7 +16,7 @@ date: 2021-07-21T08:20
 ---
 
 
-![Basal Ganglia Image](https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Basal_ganglia_and_related_structures_%282%29.svg/1200px-Basal_ganglia_and_related_structures_%282%29.svg.png)
+![wide](https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Basal_ganglia_and_related_structures_%282%29.svg/1200px-Basal_ganglia_and_related_structures_%282%29.svg.png)
 > image from Wikipedia (cc)
 
 Our brain is one of the most fragile part of our body that constantly stores new
