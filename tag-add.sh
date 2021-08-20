@@ -17,13 +17,17 @@ cat << EOF
 USAGE: <required> [optional]
 
   ./${SCRIPT_NAME} <content-pattern> <tag> <directory> [start]
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . 1
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . "old-tag"
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . "old-*"
 
   content-pattern   regex pattern to match the file(s) content to be included in
                     tag appending.
   tag               name of tag to append.
   directory         directory to search into (recursively).
-  start             0 to append to start of tags meta list, 1 to append at the
-                    end of the list, or a tag to append next to.
+  start             0 (default) to append to start of tags meta list, 1 to
+                    append at the end of the list, or a tag to append next to.
 
 EOF
 }
@@ -100,10 +104,10 @@ for file in $MATCH_FILES; do
       fi
       continue
     elif [[ ${begin_tags} -eq 1 ]]; then
-      if [[ "${line}" == "${INDENT}- ${START}" ]]; then
+      if [[ "${line}" =~ ${INDENT}-\ ${START} ]]; then
         ((line_nr++))
         break
-      elif [[ "${line}" =~ ${INDENT}-.* ]]; then
+      elif [[ "${line}" =~ ${INDENT}-* ]]; then
         continue
       else
         break

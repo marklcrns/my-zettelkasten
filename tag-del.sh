@@ -17,6 +17,8 @@ cat << EOF
 USAGE: <required> [optional]
 
   ./${SCRIPT_NAME} <content-pattern> <tag> <directory> [start]
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-*' .
 
   content-pattern   regex pattern to match the file(s) content to be included in
                     tag deletion.
@@ -91,12 +93,12 @@ for file in $MATCH_FILES; do
       continue
     elif [[ ${begin_tags} -eq 1 ]]; then
 
-      if [[ "${line}" == "${INDENT}- ${TAG}" ]]; then
+      if [[ "${line}" =~ ${INDENT}-\ ${TAG} ]]; then
         ((line_nr++))
         echo "Deleting '${TAG}' tag from ${file}..."
         sed -i "${line_nr}d" "${file}"
         break
-      elif [[ "${line}" =~ ${INDENT}-.* ]]; then
+      elif [[ "${line}" =~ ${INDENT}-* ]]; then
         ((line_nr++))
         continue
       else
