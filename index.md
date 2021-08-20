@@ -23,7 +23,7 @@ Welcome! to my personal
 Luhmann, powered by [neuron](https://github.com/srid/neuron).
 
 Check out the [Impulse](/impulse.html) page for the list of all my zettels in
-cluster.
+clusters.
 
 <br>
 <br>

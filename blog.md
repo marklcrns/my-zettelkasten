@@ -3,4 +3,4 @@ title: Blog
 feed:
   count: 5
 ---
-[[z:zettels?tag=**&limit=10&timeline]]
+[[z:zettels?tag=**&timeline]]#
