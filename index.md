@@ -49,11 +49,5 @@ graph on this awesome [D3.js](https://d3js.org/) graph._
 
 ## Book Notes
 
-[[z:zettels?tag=the-power-of-habit&grouped&timeline]]
-
-[[z:zettels?tag=head-first-design-pattern&grouped&timeline]]
-
-[[z:zettels?tag=astrophysics-for-people-in-a-hurry&grouped&timeline]]
-
-[[z:zettels?tag=sapiens&grouped&timeline]]
+[[z:zettels?tag=book/*&grouped&timeline]]
 
