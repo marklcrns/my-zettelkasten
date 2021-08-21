@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Replaces YAML frontmatter tags in markdowns for neuron entries
+
 set -o pipefail
 set -o nounset
 
@@ -16,9 +18,11 @@ usage() {
 cat << EOF
 USAGE: <required> [optional]
 
-  ./${SCRIPT_NAME} [!] <content-pattern> <tag> [all] [directory]
+  ./${SCRIPT_NAME} [!] <content-pattern> <tag-match> <tag-replace> [all] [exact] [directory]
   ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
-  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' .
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' test-dir/
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-*' 1
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' 1 test-dir/
 
   [!]                 Only include files not matching <content-pattern>.
   <content-pattern>   regex pattern to match the file(s) content to be included
@@ -26,12 +30,13 @@ USAGE: <required> [optional]
   <tag>               name of tag to delete.
   [all]               0 (default) to delete first match. 1 to delete all
                       matching pattern.
+  [exact]             0 for loose tag matching. 1 (default) for exact tag match.
   [directory]         directory (default '.') to search into, recursively.
 
 EOF
 }
 
-if [[ ${#} -gt 5 ]] || [[ ${#} -lt 2 ]]; then
+if [[ ${#} -gt 6 ]] || [[ ${#} -lt 3 ]]; then
   usage
   echo "ERROR: arg count: ${#}"
   exit 1
@@ -57,29 +62,47 @@ else
 fi
 
 if [[ -n ${2+x} ]]; then
-  TAG="${2}"
+  TAG_MATCH="${2}"
 else
   usage
   exit 1
 fi
 
-ALL="${3:-0}"
-
-if [[ "${ALL}" != "." ]] && [[ "${ALL}" -eq "${ALL}" ]]; then
-  shift 1
+if [[ -n ${3+x} ]]; then
+  TAG_REPLACE="${3}"
+else
+  usage
+  exit 1
 fi
 
-TARGET_DIR="${3:-.}"
+if [[ -n ${4+x} ]] && [[ "${4:-.}" != "." ]] && [[ "${4}" -eq "${4}" ]]; then
+  ALL=${4}
+  shift 1
+else
+  ALL=0
+fi
 
+if [[ -n ${4+x} ]] && [[ "${4:-.}" != "." ]] && [[ "${4}" -eq "${4}" ]]; then
+  EXACT=${4}
+  shift 1
+else
+  EXACT=0
+fi
+
+TARGET_DIR="${4:-.}"
 if ! [[ -d "${TARGET_DIR}" ]]; then
   usage
   echo "ERROR: Target directory does not exist"
   exit 1
+else
+  # Strip trailing whitespace
+  TARGET_DIR=$(echo "${TARGET_DIR}" | sed 's,/*$,,')
 fi
 
 readonly GREP_FLAGS
 readonly PATTERN
-readonly TAG
+readonly TAG_MATCH
+readonly TAG_REPLACE
 readonly ALL
 readonly TARGET_DIR
 
@@ -87,6 +110,7 @@ readonly SCRIPT_PATH
 readonly SCRIPT_DIR
 readonly SCRIPT_NAME
 readonly INDENT="  "
+readonly CHANGELOG=".changelog.txt"
 
 MATCH_FILES="$( \
   grep ${GREP_FLAGS} \
@@ -127,14 +151,18 @@ for file in $MATCH_FILES; do
       continue
     elif [[ ${begin_tags} -eq 1 ]]; then
 
-      if [[ "${line}" =~ ${INDENT}-\ ${TAG} ]]; then
+      if [[ "${line}" =~ ${INDENT}-\ ${TAG_MATCH} ]]; then
         ((line_nr++))
-        echo "Deleting '${line}' tag from ${file}..."
-        sed -i "${line_nr}d" "${file}"
+        if [[ ${EXACT} -eq 1 ]]; then
+          sed -i "${line_nr}s,\(${INDENT}- \)${TAG_MATCH}\( \)*$,\1${TAG_REPLACE},w ${CHANGELOG}" "${file}"
+        else
+          sed -i "${line_nr}s,\(${INDENT}- .*\)${TAG_MATCH}\(.*\)\( \)*$,\1${TAG_REPLACE}\2,w ${CHANGELOG}" "${file}"
+        fi
+        if [[ -s ${CHANGELOG} ]]; then
+          echo "Replacing 'line ${line_nr}: ${line}' tag with '$(tail -n 1 ${CHANGELOG})' in ${file}..."
+        fi
         if [[ ${ALL} -eq 0 ]]; then
           break
-        else
-          ((line_nr--))
         fi
       elif [[ "${line}" =~ ${INDENT}-* ]]; then
         ((line_nr++))
@@ -170,5 +198,6 @@ done
 if [[ -z ${MATCH_FILES} ]]; then
   echo "no matching file"
 else
+  [[ -e ${CHANGELOG} ]] && rm ${CHANGELOG}
   echo "Done!"
 fi

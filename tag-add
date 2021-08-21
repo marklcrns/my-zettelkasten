@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Append YAML frontmatter tags in markdowns for neuron entries
+
 set -o pipefail
 set -o nounset
 
@@ -16,22 +18,27 @@ usage() {
 cat << EOF
 USAGE: <required> [optional]
 
-  ./${SCRIPT_NAME} [!] <content-pattern> <tag> [all] [directory]
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
-  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' .
+  ./${SCRIPT_NAME} [!] <content-pattern> <tag> [start] [pos] [directory]
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag'
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' 1 .
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' "old-tag"
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-tag' "old-*" test-dir/
 
   [!]                 Only include files not matching <content-pattern>.
   <content-pattern>   regex pattern to match the file(s) content to be included
-                      in tag deletion.
-  <tag>               name of tag to delete.
-  [all]               0 (default) to delete first match. 1 to delete all
-                      matching pattern.
+                      in tag appending.
+  <tag>               name of tag to append.
+  [start]             0 (default) to append to start of tags meta list, 1 to
+                      append at the end of the list, or a tag to append before
+                      or after to. see [pos].
+  [pos]               0 to append before or 1 (default) to append after tag from
+                      the matching [start].
   [directory]         directory (default '.') to search into, recursively.
 
 EOF
 }
 
-if [[ ${#} -gt 5 ]] || [[ ${#} -lt 2 ]]; then
+if [[ ${#} -gt 6 ]] || [[ ${#} -lt 2 ]]; then
   usage
   echo "ERROR: arg count: ${#}"
   exit 1
@@ -63,24 +70,35 @@ else
   exit 1
 fi
 
-ALL="${3:-0}"
-
-if [[ "${ALL}" != "." ]] && [[ "${ALL}" -eq "${ALL}" ]]; then
+if [[ -n ${3+x} ]] && ! [[ -d "${3:-.}" ]]; then
+  START=${3}
   shift 1
+else
+  START=0
+fi
+
+if [[ -n ${3+x} ]] && [[ "${3:-.}" != "." ]] && [[ "${3}" -eq "${3}" ]]; then
+  POS=${3}
+  shift 1
+else
+  POS=1
 fi
 
 TARGET_DIR="${3:-.}"
-
 if ! [[ -d "${TARGET_DIR}" ]]; then
   usage
   echo "ERROR: Target directory does not exist"
   exit 1
+else
+  # Strip trailing whitespace
+  TARGET_DIR=$(echo "${TARGET_DIR}" | sed 's,/*$,,')
 fi
 
 readonly GREP_FLAGS
 readonly PATTERN
 readonly TAG
-readonly ALL
+readonly START
+readonly POS
 readonly TARGET_DIR
 
 readonly SCRIPT_PATH
@@ -105,12 +123,13 @@ MATCH_FILES="$( \
 )"
 
 for file in $MATCH_FILES; do
-  line_nr="$(awk "/tags:/{ print NR; exit }" "${file}")"
-
   begin_meta=0
   begin_tags=0
-  while IFS='' read -r line || [ -n "${line}" ]; do
+  line_nr=0
 
+  # Append at the end of tags
+  while IFS='' read -r line || [ -n "${line}" ]; do
+    ((line_nr++))
     # Bound search only within metadata space
     if [[ "${line}" == "---" ]]; then
       if [[ ${begin_meta} -eq 0 ]]; then
@@ -124,20 +143,18 @@ for file in $MATCH_FILES; do
     # Bound search only under tags meta
     if [[ "${line}" =~ tags:* ]] && [[ ${begin_tags} -eq 0 ]]; then
       begin_tags=1
+      if [[ ${START} == '1' ]]; then
+        ((line_nr++))
+        break
+      fi
       continue
     elif [[ ${begin_tags} -eq 1 ]]; then
-
-      if [[ "${line}" =~ ${INDENT}-\ ${TAG} ]]; then
-        ((line_nr++))
-        echo "Deleting '${line}' tag from ${file}..."
-        sed -i "${line_nr}d" "${file}"
-        if [[ ${ALL} -eq 0 ]]; then
-          break
-        else
-          ((line_nr--))
+      if [[ "${line}" =~ ${INDENT}-\ ${START} ]]; then
+        if [[ ${POS} -eq 1 ]]; then
+          ((line_nr++))
         fi
+        break
       elif [[ "${line}" =~ ${INDENT}-* ]]; then
-        ((line_nr++))
         continue
       else
         break
@@ -147,24 +164,19 @@ for file in $MATCH_FILES; do
     fi
   done < ${file}
 
-  # Delete tags: meta if no more tags
-  if [[ ${begin_tags} -eq 1 ]]; then
-    line_nr="$(awk "/tags:/{ print NR; exit }" "${file}")"
-    next=$(sed -n "$((line_nr+1))p" "${file}")
-    if [[ -n ${line_nr} ]] && ! [[ "${next}" =~ ${INDENT}-.* ]]; then
-      sed -i "${line_nr}d" "${file}"
-    fi
+  # Additionally append two --- if not existing at beginning of the file
+  if [[ ${begin_meta} -eq 0 ]]; then
+    awk "NR==1{print \"---\n---\"}1" "${file}" > tmp && mv tmp "${file}"
+    line_nr=2
+  fi
+  # Additionally append tags meta if not exists
+  if [[ ${begin_tags} -eq 0 ]]; then
+    awk "NR==${line_nr}{print \"tags:\"}1" "${file}" > tmp && mv tmp "${file}"
+    ((line_nr++))
   fi
 
-  # Delete both --- metadata fence if no more metas
-  if [[ ${begin_meta} -eq 1 ]]; then
-    line_nr="$(awk "/---/{ print NR; exit }" "${file}")"
-    next=$(sed -n "$((line_nr+1))p" "${file}")
-    if [[ -n ${line_nr} ]] && [[ "${next}" == '---' ]]; then
-      sed -i "${line_nr}d" "${file}"
-      sed -i "${line_nr}d" "${file}"
-    fi
-  fi
+  echo "Appending '${TAG}' tag into ${file}:${line_nr}..."
+  awk "NR==${line_nr}{print \"${INDENT}- ${TAG}\"}1" "${file}" > tmp && mv tmp "${file}"
 done
 
 if [[ -z ${MATCH_FILES} ]]; then
