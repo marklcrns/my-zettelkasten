@@ -31,13 +31,9 @@ _Credits goes to [Devon Morris](https://github.com/DevonMorris)'s
 [Zettelkasten](https://github.com/DevonMorris/zettelkasten) for his awesome
 directed graph made with [D3.js](https://d3js.org/)_
 
----
-
 ## Recent Posts
 
 [[z:zettels?tag=**&limit=10&timeline]]#
-
----
 
 ## Topics
 
@@ -49,9 +45,9 @@ directed graph made with [D3.js](https://d3js.org/)_
 
 [[z:zettels?tag=history/**&grouped&timeline]]
 
----
-
 ## Book Notes
 
 [[z:zettels?tag=book/*&grouped&timeline]]
 
+{.ui .horizontal .divider}
+<section id="subscriptionLinks"></section>

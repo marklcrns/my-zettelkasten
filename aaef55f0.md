@@ -27,6 +27,9 @@ changes state, all of its dependents are notified and updated automatically.
 The Observer Pattern provides an object design where subjects and observers are
 [[d7d0203f|loosely coupled]]#.
 
+<div class="ui section divider"></div>
+<section id="socialMediaLinks"></section>
+
 ## Resources
 
 - _Head First Design Pattern_ by Elisabeth Freeman and Kathy Sierra

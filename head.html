@@ -1,7 +1,6 @@
 <!-- Credits: https://github.com/DevonMorris/zettelkasten/blob/master/head.html -->
 <!--          https://github.com/alex-a-soto/zettelkasten/blob/master/head.html -->
 
-
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@700&family=Cormorant:ital,wght@0,600;1,600&family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script async="" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -10,11 +9,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
 <style>
-
-body .universe {
-  background-color: #fff !important;
-  color: #333;
-}
+  body .universe {
+    background-color: #fff !important;
+    color: #333;
+  }
 
   a {
     color: teal;
@@ -139,10 +137,6 @@ body .universe {
     padding-left: 1em;
   }
 
-  div.ui.center.aligned.container.footer-version {
-    display: none !important;
-  }
-
   progress[value] {
     /* Reset the default appearance */
     -webkit-appearance: none;
@@ -186,35 +180,21 @@ body .universe {
       socialButtons.innerHTML +=
         "<a id='facebook' title='Share on Facebook' class='ui facebook button'><i class='facebook icon'></i> Share</a><a id='twitter' title='Tweet' class='ui twitter button'><i class='twitter icon'></i> Tweet</a><a id='linkedin' title='Share on LinkedIn' class='ui linkedin button'><i class='linkedin icon'></i> Share</a><a id='reddit' title='Share on Reddit' class='ui reddit button'><i class='reddit icon'></i> Share</a><a id='hnews' title='Share on Hacker News' class='ui hacker news button'><i class='hacker news icon'></i> Share</a>"
 
-
-
-
       document.getElementById("facebook").addEventListener("click", function(e) {
           window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;
         });
-
       document.getElementById("twitter").addEventListener("click", function(e) {
           window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20' + encodeURIComponent(document.URL)); return false;
         });
-
       document.getElementById("linkedin").addEventListener("click", function(e) {
           window.open('https://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;
         });
-
       document.getElementById("reddit").addEventListener("click", function(e) {
           window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;
         });
-
       document.getElementById("hnews").addEventListener("click", function(e) {
           window.open('https://news.ycombinator.com/submitlink?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.title)); return false;
         });
-
-      document.getElementById("rss").addEventListener("click", function(e) {
-          window.open('https://marklucernas.dev/blog.xml');
-        });
-
-
-
     })
 </script>
 
@@ -223,16 +203,11 @@ body .universe {
       var socialButtons = document.getElementById("subscriptionLinks");
 
       socialButtons.innerHTML +=
-        "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a> <a id='mail' title='Subscribe to mailing list' class='ui paper plane button'><i class='paper plane icon'></i> Subscribe</a>"
+        "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a>"
 
       document.getElementById("rss").addEventListener("click", function(e) {
-          window.open('https://alexsoto.dev/blog.xml');
+          window.open('https://marklucernas.dev/index.xml');
         });
-
-      document.getElementById("mail").addEventListener("click", function(e) {
-          window.open('https://buttondown.email/alexsotodev');
-        });
-
     })
 </script>
 
@@ -274,7 +249,7 @@ body .universe {
 
 </style>
 
-<!-- replace logo  -->
+<!-- replace logo with copyright -->
 <script>
   window.addEventListener("load", function(){
       let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
@@ -283,16 +258,15 @@ body .universe {
       console.log(parent)
 
       let p = document.createElement("p")
-      let n = document.createTextNode("© 2021 Alexander Soto")
+      let n = document.createTextNode("© 2021 Mark Lucernas")
       p.appendChild(n)
-      p.style.height = "80px";
+      p.style.height = "100%";
+      p.style.paddingBottom = "10px";
       // parent.appendChild(n)
       parent.replaceChild(p, parent.firstChild)
       // parent.replaceChild(element.parentNode, p)
     });
 </script>
-
-
 
 <!-- mermaidjs -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
@@ -335,7 +309,5 @@ body .universe {
 </script>
 
 <script defer src="https://cdn.commento.io/js/commento.js"></script>
-
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
-
