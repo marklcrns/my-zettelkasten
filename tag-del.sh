@@ -16,18 +16,28 @@ usage() {
 cat << EOF
 USAGE: <required> [optional]
 
-  ./${SCRIPT_NAME} [!] <content-pattern> <tag> <directory> [start]
+  ./${SCRIPT_NAME} [!] <content-pattern> <tag> [all] [directory]
   ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
-  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' .
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' test-dir/
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-*' 1
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' 1 test-dir/
 
-  !                 Only include files not matching <content-pattern>.
-  content-pattern   regex pattern to match the file(s) content to be included in
-                    tag deletion.
-  tag               name of tag to delete.
-  directory         directory to search into (recursively).
+  [!]                 Only include files not matching <content-pattern>.
+  <content-pattern>   regex pattern to match the file(s) content to be included
+                      in tag deletion.
+  <tag>               name of tag to delete.
+  [all]               0 (default) to delete first match. 1 to delete all
+                      matching pattern.
+  [directory]         directory (default '.') to search into, recursively.
 
 EOF
 }
+
+if [[ ${#} -gt 5 ]] || [[ ${#} -lt 2 ]]; then
+  usage
+  echo "ERROR: arg count: ${#}"
+  exit 1
+fi
 
 if [[ -n ${1+x} ]]; then
   if [[ "${1}" == "!" ]]; then
@@ -55,18 +65,27 @@ else
   exit 1
 fi
 
-if [[ -n ${3+x} ]]; then
-  TARGET_DIR="${3}"
-else
+ALL="${3:-0}"
+if [[ "${ALL}" != "." ]] || [[ "${ALL}" -eq "${ALL}" ]]; then
+  shift 1
+fi
+
+TARGET_DIR="${3:-.}"
+if ! [[ -d "${TARGET_DIR}" ]]; then
   usage
+  echo "ERROR: Target directory does not exist"
   exit 1
+else
+  # Strip trailing whitespace
+  TARGET_DIR=$(echo "${TARGET_DIR}" | sed 's,/*$,,')
 fi
 
 readonly GREP_FLAGS
 readonly PATTERN
 readonly TAG
+readonly ALL
 readonly TARGET_DIR
-readonly START
+
 readonly SCRIPT_PATH
 readonly SCRIPT_DIR
 readonly SCRIPT_NAME
@@ -94,6 +113,7 @@ for file in $MATCH_FILES; do
   begin_meta=0
   begin_tags=0
   while IFS='' read -r line || [ -n "${line}" ]; do
+
     # Bound search only within metadata space
     if [[ "${line}" == "---" ]]; then
       if [[ ${begin_meta} -eq 0 ]]; then
@@ -114,7 +134,11 @@ for file in $MATCH_FILES; do
         ((line_nr++))
         echo "Deleting '${TAG}' tag from ${file}..."
         sed -i "${line_nr}d" "${file}"
-        break
+        if [[ ${ALL} -eq 0 ]]; then
+          break
+        else
+          ((line_nr--))
+        fi
       elif [[ "${line}" =~ ${INDENT}-* ]]; then
         ((line_nr++))
         continue

@@ -16,22 +16,31 @@ usage() {
 cat << EOF
 USAGE: <required> [optional]
 
-  ./${SCRIPT_NAME} <content-pattern> <tag> <directory> [start]
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . 1
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . "old-tag"
-  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-tag' . "old-*"
+  ./${SCRIPT_NAME} [!] <content-pattern> <tag> [start] [pos] [directory]
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag'
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' 1 .
+  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' "old-tag"
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-tag' "old-*" test-dir/
 
-  !                 Only include files not matching <content-pattern>.
-  content-pattern   regex pattern to match the file(s) content to be included in
-                    tag appending.
-  tag               name of tag to append.
-  directory         directory to search into (recursively).
-  start             0 (default) to append to start of tags meta list, 1 to
-                    append at the end of the list, or a tag to append next to.
+  [!]                 Only include files not matching <content-pattern>.
+  <content-pattern>   regex pattern to match the file(s) content to be included
+                      in tag appending.
+  <tag>               name of tag to append.
+  [start]             0 (default) to append to start of tags meta list, 1 to
+                      append at the end of the list, or a tag to append before
+                      or after to. see [pos].
+  [pos]               0 to append before or 1 (default) to append after tag from
+                      the matching [start].
+  [directory]         directory (default '.') to search into, recursively.
 
 EOF
 }
+
+if [[ ${#} -gt 6 ]] || [[ ${#} -lt 2 ]]; then
+  usage
+  echo "ERROR: arg count: ${#}"
+  exit 1
+fi
 
 if [[ -n ${1+x} ]]; then
   if [[ "${1}" == "!" ]]; then
@@ -59,20 +68,33 @@ else
   exit 1
 fi
 
-if [[ -n ${3+x} ]]; then
-  TARGET_DIR="${3}"
-else
-  usage
-  exit 1
+START="${3:-0}"
+if ! [[ -d "${START}" ]] || [[ "${START}" -eq "${START}" ]]; then
+  shift 1
 fi
 
-START="${4:-0}"
+POS="${3:-1}"
+if [[ "${POS}" != "." ]] || [[ "${POS}" -eq "${POS}" ]]; then
+  shift 1
+fi
+
+TARGET_DIR="${3:-.}"
+if ! [[ -d "${TARGET_DIR}" ]]; then
+  usage
+  echo "ERROR: Target directory does not exist"
+  exit 1
+else
+  # Strip trailing whitespace
+  TARGET_DIR=$(echo "${TARGET_DIR}" | sed 's,/*$,,')
+fi
 
 readonly GREP_FLAGS
 readonly PATTERN
 readonly TAG
-readonly TARGET_DIR
 readonly START
+readonly POS
+readonly TARGET_DIR
+
 readonly SCRIPT_PATH
 readonly SCRIPT_DIR
 readonly SCRIPT_NAME
@@ -122,7 +144,9 @@ for file in $MATCH_FILES; do
       continue
     elif [[ ${begin_tags} -eq 1 ]]; then
       if [[ "${line}" =~ ${INDENT}-\ ${START} ]]; then
-        ((line_nr++))
+        if [[ ${POS} -eq 1 ]]; then
+          ((line_nr++))
+        fi
         break
       elif [[ "${line}" =~ ${INDENT}-* ]]; then
         continue
