@@ -29,6 +29,18 @@ EOF
 }
 
 if [[ -n ${1+x} ]]; then
+  if [[ "${1}" == "!" ]]; then
+    GREP_FLAGS=-rLi
+    shift 1
+  else
+    GREP_FLAGS=-rli
+  fi
+else
+  usage
+  exit 1
+fi
+
+if [[ -n ${1+x} ]]; then
   PATTERN="${1}"
 else
   usage
@@ -49,6 +61,7 @@ else
   exit 1
 fi
 
+readonly GREP_FLAGS
 readonly PATTERN
 readonly TAG
 readonly TARGET_DIR
@@ -59,16 +72,19 @@ readonly SCRIPT_NAME
 readonly INDENT="  "
 
 MATCH_FILES="$( \
-  grep -rli \
-  --exclude-dir=.git \
-  --exclude-dir=.neuron \
-  --exclude-dir=.github \
-  --exclude-dir=.static \
-  --exclude-dir=.vscode \
-  --include \*.md \
+  grep ${GREP_FLAGS} \
+  --exclude-dir=".git" \
+  --exclude-dir=".neuron" \
+  --exclude-dir=".github" \
+  --exclude-dir=".static" \
+  --exclude-dir=".vscode" \
+  --exclude="index.md" \
+  --exclude="todo.md" \
+  --exclude="faq.md" \
+  --exclude="README.md" \
   -- \
   "${PATTERN}" \
-  ${TARGET_DIR} \
+  ${TARGET_DIR}/*.md \
 )"
 
 for file in $MATCH_FILES; do
