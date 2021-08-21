@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 # Append YAML frontmatter tags in markdowns for neuron entries
+#
+# Author:   Mark Lucernas
+# Date:     Aug 21, 2021
+# License:  MIT
 
 set -o pipefail
 set -o nounset
