@@ -7,5 +7,5 @@ feed:
 
 ## Work In Progress Zettels
 
-[[z:zettels?tag=todo&timeline]]#
+[[z:zettels?tag=wip&timeline]]#
 
