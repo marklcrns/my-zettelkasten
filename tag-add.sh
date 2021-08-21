@@ -20,8 +20,9 @@ USAGE: <required> [optional]
   ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
   ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . 1
   ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . "old-tag"
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' . "old-*"
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-tag' . "old-*"
 
+  !                 Only include files not matching <content-pattern>.
   content-pattern   regex pattern to match the file(s) content to be included in
                     tag appending.
   tag               name of tag to append.

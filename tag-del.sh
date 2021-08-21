@@ -16,10 +16,11 @@ usage() {
 cat << EOF
 USAGE: <required> [optional]
 
-  ./${SCRIPT_NAME} <content-pattern> <tag> <directory> [start]
+  ./${SCRIPT_NAME} [!] <content-pattern> <tag> <directory> [start]
   ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-*' .
+  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' .
 
+  !                 Only include files not matching <content-pattern>.
   content-pattern   regex pattern to match the file(s) content to be included in
                     tag deletion.
   tag               name of tag to delete.
