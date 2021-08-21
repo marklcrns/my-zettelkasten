@@ -2,6 +2,7 @@
 slug: observer-pattern
 title: Observer Pattern
 tags:
+  - blog
   - observer-pattern
   - programming
   - oop

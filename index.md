@@ -33,7 +33,7 @@ directed graph made with [D3.js](https://d3js.org/)_
 
 ## Recent Posts
 
-[[z:zettels?tag=**&limit=10&timeline]]#
+[[z:zettels?tag=blog&limit=10&timeline]]#
 
 ## Topics
 

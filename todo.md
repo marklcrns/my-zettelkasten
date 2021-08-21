@@ -1,5 +1,7 @@
 ---
 title: Todo
+feed:
+  count: 5
 ---
 
 
