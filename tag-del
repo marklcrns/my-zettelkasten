@@ -110,6 +110,7 @@ MATCH_FILES="$( \
   --exclude="todo.md" \
   --exclude="faq.md" \
   --exclude="README.md" \
+  --exclude="LICENSE.md" \
   -- \
   "${PATTERN}" \
   ${TARGET_DIR}/*.md \
