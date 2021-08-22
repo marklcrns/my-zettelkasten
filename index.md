@@ -40,6 +40,11 @@ feed:
 <script src="./static/3d-graph.js" type="module"></script>
 ```
 
+> Drag to rellocate a node. Click to focus on node (while rotation is paused).
+> Double click a node to view its Zettel page. Double click background to
+> zoom-to-fit. Nodes are colored and sized based on clustering. Nodes that has
+> more subnodes will be displayed relatively bigger.
+
 Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph)
 
 <!-- ``` {=html}                                             -->
@@ -60,8 +65,6 @@ Luhmann, powered by [neuron](https://github.com/srid/neuron).
 
 Check out the [Impulse](/impulse.html) page for the list of all my zettels in.
 
-
-<br>
 <br>
 
 <!-- _Credits goes to [Devon Morris](https://github.com/DevonMorris)'s           -->

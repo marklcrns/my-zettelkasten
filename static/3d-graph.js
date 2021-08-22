@@ -120,7 +120,7 @@ $.getJSON('../cache.json', function(data) {
   const highlightLinks = new Set();
   let hoverNode = null;
 
-  var camDistance = 600
+  var camDistance = 300;
   var isCamRotationActive = false;
   var isAnimationActive = true;
 
