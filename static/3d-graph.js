@@ -109,10 +109,9 @@ $.getJSON('../cache.json', function(data) {
   const onClickCamDistance = 150;
   const focusTransitionDuration = 2500;
   const doubleClickDuration = 500;
-  const zoomToFitView = 100;
   // const forceStrength = -graph.nodes.length * 2;
   const forceStrength = -15;
-  const bloomPassStrength = 2;
+  const bloomPassStrength = 1.5;
   const bloomPassRadius = 1;
   const bloomPassThreshold = 0.1;
 
@@ -186,11 +185,12 @@ $.getJSON('../cache.json', function(data) {
 
   // OnClick listeners
   Graph
-    .onBackgroundClick(() => {
+    .onBackgroundClick((node) => {
       var d = new Date();
       var t = d.getTime();
       if ((t - lastBackgroundClick) < doubleClickDuration) {    // double click
-        Graph.zoomToFit(zoomToFitView)
+        Graph
+          .zoomToFit(500, 0, node => true);
       }
       lastBackgroundClick = t;
     })
@@ -301,6 +301,27 @@ $.getJSON('../cache.json', function(data) {
     isAnimationActive ? Graph.pauseAnimation() : Graph.resumeAnimation();
     isAnimationActive = !isAnimationActive;
     event.target.innerHTML = `${(isAnimationActive ? 'Pause' : 'Resume')} Animation`;
+  });
+
+  const loader = new THREE.FontLoader();
+  loader.load('./static/optimer_regular.typface.json', function(font) {
+    const geometry = new THREE.TextGeometry( 'INDEX', {
+      font: font,
+      size: 120,
+      height: 10,
+      curveSegments: 12,
+      bevelEnabled: true,
+      bevelThickness: 10,
+      bevelSize: 6,
+      bevelOffset: 0,
+      bevelSegments: 5
+    });
+    const material = new THREE.MeshLambertMaterial({color: 0x313131, side: THREE.DoubleSide});
+
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(-200, 100, -500); // (x, y, z)
+
+    Graph.scene().add(mesh);
   });
 })
 
