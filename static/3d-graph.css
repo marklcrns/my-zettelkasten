@@ -5,3 +5,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   user-select: none;
 }
+
+.node-label::hover {
+  visibility: hidden;
+}
