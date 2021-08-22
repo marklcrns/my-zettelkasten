@@ -7,15 +7,35 @@ feed:
 # Hi! <img src="https://user-images.githubusercontent.com/1303154/88677602-1635ba80-d120-11ea-84d8-d263ba5fc3c0.gif" width="28px" alt="hi"> I'm Mark.
 
 ``` {=html}
+
+<!-- DAG -->
+<script src="//unpkg.com/d3-dsv"></script>
+<script src="//unpkg.com/dat.gui"></script>
+<script src="//unpkg.com/d3-octree"></script>
+<script src="//unpkg.com/d3-force-3d"></script>
+
+<!-- Essentials -->
 <script src="//unpkg.com/three"></script>
-<!-- <script src="//unpkg.com/three-spritetext"></script> -->
-<script src="//unpkg.com/three/examples/js/renderers/CSS2DRenderer.js"></script>
 <script src="//unpkg.com/element-resize-detector/dist/element-resize-detector.min.js"></script>
 <script src="//unpkg.com/3d-force-graph"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Node renderer -->
+<!-- <script src="//unpkg.com/three-spritetext"></script> -->
+<script src="//unpkg.com/three/examples/js/renderers/CSS2DRenderer.js"></script>
+
+<!-- Styles -->
 <link rel="stylesheet" href="./static/3d-graph.css">
 
 <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
+<div style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+  <button id="animationToggle" style="margin: 8px; height: 25px; width: 150px;">
+    Pause Animation
+  </button>
+  <button id="rotationToggle" style="margin: 8px; height: 25px; width: 150px;">
+    Resume Rotation
+  </button>
+</div>
 
 <script src="./static/3d-graph.js" type="module"></script>
 ```
