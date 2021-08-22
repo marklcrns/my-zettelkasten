@@ -80,6 +80,7 @@ $.getJSON('../cache.json', function(data) {
   let hoverNode = null;
 
   var lastNodeClick = 0;
+  var lastBackgroundClick = 0;
   const doubleClickDuration = 800;
 
   // const Graph = ForceGraph3D()
@@ -119,9 +120,17 @@ $.getJSON('../cache.json', function(data) {
     .d3Force("charge")
     .strength(-graph.nodes.length * 2);
 
+
   // OnClick listeners
   Graph
-    .onBackgroundClick(() => Graph.zoomToFit(100))
+    .onBackgroundClick(() => {
+      var d = new Date();
+      var t = d.getTime();
+      if ((t - lastBackgroundClick) < doubleClickDuration) {    // double click
+        Graph.zoomToFit(100)
+      }
+      lastBackgroundClick = t;
+    })
     .onNodeClick(node => {
       var d = new Date();
       var t = d.getTime();
