@@ -63,7 +63,8 @@ Welcome! to my personal
 [Zettlekasten](https://en.wikipedia.org/wiki/Zettelkasten) inspired by Niklas
 Luhmann, powered by [neuron](https://github.com/srid/neuron).
 
-Check out the [Impulse](/impulse.html) page for the list of all my zettels in.
+Check out the [Impulse](/impulse.html) page for the list of all my zettels in
+folgezettel clusters.
 
 <br>
 
