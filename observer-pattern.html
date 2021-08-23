@@ -181,6 +181,7 @@
       for (const [index, e] of document.getElementById('neuron-tags-pane').firstChild.childNodes.entries()) {
         if (e.innerHTML === "wip" || e.innerHTML === "todo") {
           isWIP = true;
+          // Add work in progress title to zettels with wip or todo tag metadata
           var wip = document.createElement("h1");
           var title = document.getElementById("title-h1");
           wip.innerHTML = "🚧 WORK IN PROGRESS!";
