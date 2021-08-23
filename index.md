@@ -1,5 +1,5 @@
 ---
-title: Index
+title: 🧠 Index 🧠
 feed:
   count: 5
 ---
