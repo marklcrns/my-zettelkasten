@@ -74,7 +74,7 @@ folgezettel clusters.
 
 ## Recent Posts
 
-#[[z:zettels?tag=blog&limit=10&timeline]]
+[[z:zettels?tag=blog&limit=10&timeline]]#
 
 ## Topics
 
