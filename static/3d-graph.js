@@ -3,135 +3,184 @@
 
 import { UnrealBloomPass } from '//cdn.skypack.dev/three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-const excludedNodes = ["index", "README", "faq", "LICENSE"];
+var excludedNodes = ["index", "README", "faq", "LICENSE"];
 
-var graph = {};
 $.getJSON('../cache.json', function(data) {
+
   console.log(data.Graph);
-  var clusterCount = 0;
-  var nodeMap = {};
 
-  // Build nodes
-  var nodes = [];
-  Object.entries(data.Graph.vertices).forEach(([node,e]) => {
-    if (!excludedNodes.includes(e.ID)) {
-      var node = {}
-      // Meta
-      node.id = e.ID;
-      node.name = e.Title;
-      node.value = e.Slug;
-      node.date = new Date(e.Date).toDateString();
-      node.tags = e.Meta.tags;
-      node.clusterid = 0;
-      node.size = 0;
-      // For cross-linking
-      node.neighbors = [];
-      node.links = [];
-      // Push to nodeMap for ref
-      nodeMap[node.id] = nodes.length;
+  function buildGraph(data) {
+    var graph = {};
+    var nodeMap = {};
+    var clusterCount = 0;
 
-      nodes.push(node);
-    }
-  })
+    // Build nodes
+    var nodes = [];
+    Object.entries(data.vertices).forEach(([node,e]) => {
+      if (!excludedNodes.includes(e.ID)) {
+        var node = {}
+        // Meta
+        node.id = e.ID;
+        node.name = e.Title;
+        node.value = e.Slug;
+        node.date = new Date(e.Date).toDateString();
+        node.tags = e.Meta.tags;
+        node.clusterid = 0;
+        node.size = 0;
+        // For cross-linking
+        node.neighbors = [];
+        node.links = [];
+        // Push to nodeMap for ref
+        nodeMap[node.id] = nodes.length;
 
-  // Build links
-  var links = [];
-  Object.entries(data.Graph.adjacencyMap).forEach(([source, entry]) => {
-    if (!$.isEmptyObject(entry)) {
-      Object.entries(entry).forEach((e) => {
-        var target = e[0];
-        var folgeType = e[1][0];
+        nodes.push(node);
+      }
+    })
 
-        if (!excludedNodes.includes(source) && !excludedNodes.includes(target)) {
-          var link = {};
-          if (folgeType === "folgeinv") {
-            link.source = target;
-            link.target = source;
-          } else {
-            link.source = source;
-            link.target = target;
+    // Build links
+    var links = [];
+    Object.entries(data.adjacencyMap).forEach(([source, entry]) => {
+      if (!$.isEmptyObject(entry)) {
+        Object.entries(entry).forEach((e) => {
+          var target = e[0];
+          var folgeType = e[1][0];
+
+          if (!excludedNodes.includes(source) && !excludedNodes.includes(target)) {
+            var link = {};
+            if (folgeType === "folgeinv") {
+              link.source = target;
+              link.target = source;
+            } else if (folgeType === "folge") {
+              link.source = source;
+              link.target = target;
+            } else {
+              return;   // equivalent to conventional `continue`
+            }
+
+            // Inherit clusterid from source node
+            if (nodes[nodeMap[link.source]].clusterid === 0) {
+              nodes[nodeMap[link.source]].clusterid = ++clusterCount;
+            }
+            nodes[nodeMap[link.target]].clusterid = nodes[nodeMap[link.source]].clusterid;
+
+            // Make source node bigger
+            nodes[nodeMap[link.source]].size += 1;
+
+            links.push(link);
           }
+        });
+      }
+    })
+    graph.nodes = nodes;
+    graph.links = links;
 
-          // Inherit clusterid from source node
-          if (nodes[nodeMap[link.source]].clusterid === 0) {
-            nodes[nodeMap[link.source]].clusterid = ++clusterCount;
-          }
-          nodes[nodeMap[link.target]].clusterid = nodes[nodeMap[link.source]].clusterid;
+    // Cross-link node objects
+    graph.links.forEach(link => {
+      const a = graph.nodes[nodeMap[link.source]];
+      const b = graph.nodes[nodeMap[link.target]];
+      a.neighbors.push(b);
+      b.neighbors.push(a);
+      a.links.push(link);
+      b.links.push(link);
+    });
 
-          // Make source node bigger
-          nodes[nodeMap[link.source]].size += 1;
+    // // Random tree graph
+    // const N = 1000;
+    // graph = {
+      //   nodes: [...Array(N).keys()].map(i => ({
+        //     id: i,
+        //     name: "Chesca",
+        //     neighbors: [],
+        //     links: [],
+        //   })),
+      //   links: [...Array(N).keys()]
+      //   .filter(id => id)
+      //   .map(id => ({
+        //     source: id,
+        //     target: Math.round(Math.random() * (id-1))
+        //   }))
+      // };
+    // 
+      // // Cross-link node objects
+    // graph.links.forEach(link => {
+      //   const a = graph.nodes[link.source];
+      //   const b = graph.nodes[link.target];
+      //   a.neighbors.push(b);
+      //   b.neighbors.push(a);
+      //   a.links.push(link);
+      //   b.links.push(link);
+      // });
 
-          links.push(link);
-        }
-      });
-    }
-  })
-  graph.nodes = nodes;
-  graph.links = links;
+    return graph;
+  }
 
-  // Cross-link node objects
-  graph.links.forEach(link => {
-    const a = graph.nodes[nodeMap[link.source]];
-    const b = graph.nodes[nodeMap[link.target]];
-    a.neighbors.push(b);
-    b.neighbors.push(a);
-    a.links.push(link);
-    b.links.push(link);
-  });
+  const NODE_REL_SIZE = 3;
+  const ON_CLICK_CAM_DISTANCE = 150;
+  const FOCUS_TRANSITION_DURATION = 2500;
+  const DOUBLE_CLICK_DURATION = 500;
+  // const FORCE_STRENGTH = -graph.nodes.length * 2;
+  const FORCE_STRENGTH = -15;
+  const BLOOM_PASS_STRENGTH = 1.5;
+  const BLOOM_PASS_RADIUS = 1;
+  const BLOOM_PASS_THRESHOLD = 0.1;
 
-  // // Random tree graph
-  // const N = 1000;
-  // graph = {
-  //   nodes: [...Array(N).keys()].map(i => ({
-  //     id: i,
-  //     name: "Chesca",
-  //     neighbors: [],
-  //     links: [],
-  //   })),
-  //   links: [...Array(N).keys()]
-  //   .filter(id => id)
-  //   .map(id => ({
-  //     source: id,
-  //     target: Math.round(Math.random() * (id-1))
-  //   }))
-  // };
-  // 
-  // // Cross-link node objects
-  // graph.links.forEach(link => {
-  //   const a = graph.nodes[link.source];
-  //   const b = graph.nodes[link.target];
-  //   a.neighbors.push(b);
-  //   b.neighbors.push(a);
-  //   a.links.push(link);
-  //   b.links.push(link);
-  // });
-
-  const onClickCamDistance = 150;
-  const focusTransitionDuration = 2500;
-  const doubleClickDuration = 500;
-  // const forceStrength = -graph.nodes.length * 2;
-  const forceStrength = -15;
-  const bloomPassStrength = 1.5;
-  const bloomPassRadius = 1;
-  const bloomPassThreshold = 0.1;
-
-  const highlightNodes = new Set();
-  const highlightLinks = new Set();
-  let hoverNode = null;
-
-  var camDistance = 300;
+  var hoverNode = null;
+  var highlightNodes = new Set();
+  var highlightLinks = new Set();
   var isCamRotationActive = false;
   var isAnimationActive = true;
+  var camDistance = 300;
 
   var lastNodeClick = 0;
   var lastBackgroundClick = 0;
 
+  // controls
+  const controls = { '3D Graph DAG': 'null'};
+  const gui = new dat.GUI();
+  gui.add(controls, '3D Graph DAG', [
+      'null',
+      'td',
+      'bu',
+      'lr',
+      'rl',
+      'zout',
+      'zin',
+      'radialout',
+      'radialin',
+      "null-index",
+      'td-index',
+      'bu-index',
+      'lr-index',
+      'rl-index',
+      'zout-index',
+      'zin-index',
+      'radialout-index',
+      'radialin-index',
+    ])
+    .onChange(orientation => {
+      if (orientation.includes('index')) {
+        const idx = excludedNodes.indexOf('index');
+        if (idx > -1) {
+          excludedNodes.splice(idx, 1);
+          Graph.graphData(buildGraph(data.Graph));
+        }
+        Graph && Graph.dagMode(orientation.replace('-index', ''));
+      } else {
+        if (!excludedNodes.includes('index')) {
+          excludedNodes.push('index');
+          Graph.graphData(buildGraph(data.Graph));
+        }
+        Graph && Graph.dagMode(orientation)
+      }
+      console.log("excluded nodes: [" + excludedNodes + "]");
+    });
+
+  // // Text-only nodes graph
   // const Graph = ForceGraph3D()
   //   (document.getElementById("3d-graph"))
   //   .graphData(graph)
   //
   // Graph
-  // // Text-only nodes
   //   .nodeThreeObject((node) => {
   //     // const sprite = new SpriteText(node.name);
   //     // sprite.material.depthWrite = false; // make sprite background transparent
@@ -140,18 +189,10 @@ $.getJSON('../cache.json', function(data) {
   //     // return sprite;
   //   })
 
-  // controls
-  const controls = { '3D Graph DAG': 'null'};
-  const gui = new dat.GUI();
-  gui.add(controls, '3D Graph DAG', ['td', 'bu', 'lr', 'rl', 'zout', 'zin', 'radialout', 'radialin', null])
-    .onChange(orientation => Graph && Graph.dagMode(orientation));
-
-  const NODE_REL_SIZE = 3;
-
   // Create graph
   const Graph = ForceGraph3D({ extraRenderers: [new THREE.CSS2DRenderer()] })
     (document.getElementById("3d-graph"))
-    .graphData(graph);
+    .graphData(buildGraph(data.Graph));
 
   // HTML-nodes
   Graph
@@ -172,7 +213,7 @@ $.getJSON('../cache.json', function(data) {
     .linkColor(() => 'rgba(255,255,255,0.4)')
     .height('600')
     .showNavInfo(true)
-    .d3Force("charge").strength(forceStrength);
+    .d3Force("charge").strength(FORCE_STRENGTH);
 
   // DAG
   Graph
@@ -188,7 +229,7 @@ $.getJSON('../cache.json', function(data) {
     .onBackgroundClick((node) => {
       var d = new Date();
       var t = d.getTime();
-      if ((t - lastBackgroundClick) < doubleClickDuration) {    // double click
+      if ((t - lastBackgroundClick) < DOUBLE_CLICK_DURATION) {    // double click
         Graph
           .zoomToFit(500, 0, node => true);
       }
@@ -198,19 +239,19 @@ $.getJSON('../cache.json', function(data) {
       var d = new Date();
       var t = d.getTime();
       // Double click
-      if ((t - lastNodeClick) < doubleClickDuration) {
+      if ((t - lastNodeClick) < DOUBLE_CLICK_DURATION) {
         window.open("../" + node.value + ".html", "_blank").focus();
       // Single click
       } else{
         if (!isCamRotationActive) {
           // Aim at node from outside it
-          camDistance = onClickCamDistance;
+          camDistance = ON_CLICK_CAM_DISTANCE;
           const distRatio = 1 + camDistance/Math.hypot(node.x, node.y, node.z);
 
           Graph.cameraPosition(
             { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
             node, // lookAt ({ x, y, z })
-            focusTransitionDuration  // ms transition duration
+            FOCUS_TRANSITION_DURATION  // ms transition duration
           );
         }
       }
@@ -259,9 +300,9 @@ $.getJSON('../cache.json', function(data) {
 
   // Bloom Post-Processing effect
   const bloomPass = new UnrealBloomPass();
-  bloomPass.strength = bloomPassStrength;
-  bloomPass.radius = bloomPassRadius;
-  bloomPass.threshold = bloomPassThreshold;
+  bloomPass.strength = BLOOM_PASS_STRENGTH;
+  bloomPass.radius = BLOOM_PASS_RADIUS;
+  bloomPass.threshold = BLOOM_PASS_THRESHOLD;
   Graph.postProcessingComposer().addPass(bloomPass);
 
   // Auto resize canvas
