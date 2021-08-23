@@ -73,7 +73,7 @@ Check out the [Impulse](/impulse.html) page for the list of all my zettels in.
 
 ## Recent Posts
 
-[[z:zettels?tag=blog&limit=10&timeline]]#
+#[[z:zettels?tag=blog&limit=10&timeline]]
 
 ## Topics
 
