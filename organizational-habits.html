@@ -171,45 +171,124 @@
   }
 </style>
 
-<!-- add social share buttons  -->
+<!-- Modify html onload -->
 <script>
-  window.addEventListener("load", function(){
-      var socialButtons = document.getElementById("socialMediaLinks");
-
-      socialButtons.innerHTML +=
-        "<a id='facebook' title='Share on Facebook' class='ui facebook button'><i class='facebook icon'></i> Share</a><a id='twitter' title='Tweet' class='ui twitter button'><i class='twitter icon'></i> Tweet</a><a id='linkedin' title='Share on LinkedIn' class='ui linkedin button'><i class='linkedin icon'></i> Share</a><a id='reddit' title='Share on Reddit' class='ui reddit button'><i class='reddit icon'></i> Share</a><a id='hnews' title='Share on Hacker News' class='ui hacker news button'><i class='hacker news icon'></i> Share</a>"
-
-      document.getElementById("facebook").addEventListener("click", function(e) {
+  window.onload = function() {
+    // Add social share buttons if zettel not WIP
+    var isWIP = false;
+    var tagsPane = document.getElementById('neuron-tags-pane');
+    if (tagsPane) {
+      for (const [index, e] of document.getElementById('neuron-tags-pane').firstChild.childNodes.entries()) {
+        if (e.innerHTML === "wip" || e.innerHTML === "todo") {
+          isWIP = true;
+          break;
+        }
+      }
+      if (!isWIP) {
+        var contentDiv = document.getElementsByClassName("zettel-content")[0];
+        var sectionDiv = document.createElement("div");
+        sectionDiv.classList = "ui section divider";
+        var sectionSocial = document.createElement("div");
+        sectionSocial.id = "socialMediaLinks";
+        // Facebook btn
+        var facebookBtn = document.createElement("a");
+        var facebookIcon = document.createElement("i");
+        facebookBtn.id = "facebook";
+        facebookBtn.title = "Share on Facebook";
+        facebookBtn.classList = "ui facebook button";
+        facebookIcon.classList = "facebook icon";
+        facebookBtn.addEventListener("click", function(e) {
           window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;
         });
-      document.getElementById("twitter").addEventListener("click", function(e) {
+        facebookBtn.appendChild(facebookIcon);
+        facebookBtn.innerHTML += "Share";
+        // Tweeter btn
+        var twitterBtn = document.createElement("a");
+        var twitterIcon = document.createElement("i");
+        twitterBtn.id = "twitter";
+        twitterBtn.title = "Tweet";
+        twitterBtn.classList = "ui twitter button";
+        twitterIcon.classList = "twitter icon";
+        twitterBtn.addEventListener("click", function(e) {
           window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20' + encodeURIComponent(document.URL)); return false;
         });
-      document.getElementById("linkedin").addEventListener("click", function(e) {
+        twitterBtn.appendChild(twitterIcon);
+        twitterBtn.innerHTML += "Tweet";
+        // LinkedIn btn
+        var linkedinBtn = document.createElement("a");
+        var linkedinIcon = document.createElement("i");
+        linkedinBtn.id = "linkedin";
+        linkedinBtn.title = "Share on LinkedIn";
+        linkedinBtn.classList = "ui linkedin button";
+        linkedinIcon.classList = "linkedin icon";
+        linkedinBtn.addEventListener("click", function(e) {
           window.open('https://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;
         });
-      document.getElementById("reddit").addEventListener("click", function(e) {
+        linkedinBtn.appendChild(linkedinIcon);
+        linkedinBtn.innerHTML += "Share";
+        // Reddit btn
+        var redditBtn = document.createElement("a");
+        var redditIcon = document.createElement("i");
+        redditBtn.id = "reddit";
+        redditBtn.title = "Share on Reddit";
+        redditBtn.classList = "ui reddit button";
+        redditIcon.classList = "reddit icon";
+        redditBtn.addEventListener("click", function(e) {
           window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;
         });
-      document.getElementById("hnews").addEventListener("click", function(e) {
+        redditBtn.appendChild(redditIcon);
+        redditBtn.innerHTML += "Share";
+
+        var hackernewsBtn = document.createElement("a");
+        var hackernewsIcon = document.createElement("i");
+        hackernewsBtn.id = "hackernews";
+        hackernewsBtn.title = "Share on Hacker News";
+        hackernewsBtn.classList = "ui hacker news button";
+        hackernewsIcon.classList = "hacker news icon";
+        hackernewsBtn.addEventListener("click", function(e) {
           window.open('https://news.ycombinator.com/submitlink?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.title)); return false;
         });
-    })
+        hackernewsBtn.appendChild(hackernewsIcon);
+        hackernewsBtn.innerHTML += "Share";
+
+        sectionSocial.appendChild(facebookBtn);
+        sectionSocial.appendChild(twitterBtn);
+        sectionSocial.appendChild(linkedinBtn);
+        sectionSocial.appendChild(redditBtn);
+        sectionSocial.appendChild(hackernewsBtn);
+        contentDiv.appendChild(sectionDiv);
+        contentDiv.appendChild(sectionSocial);
+      }
+    }
+
+    // replace logo with copyright
+    let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
+    let parent = element.parentNode.parentNode.parentNode
+    // element.remove()
+
+    let p = document.createElement("p")
+    let n = document.createTextNode("© 2021 Mark Lucernas")
+    p.appendChild(n)
+    p.style.height = "100%";
+    p.style.paddingBottom = "10px";
+    // parent.appendChild(n)
+    parent.replaceChild(p, parent.firstChild)
+    // parent.replaceChild(element.parentNode, p)
+  }
 </script>
 
+<!-- Add event listener to RSS btn -->
 <script>
   window.addEventListener("load", function(){
-      var socialButtons = document.getElementById("subscriptionLinks");
-
-      socialButtons.innerHTML +=
-        "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a>"
-
+    var socialButtons = document.getElementById("subscriptionLinks");
+    if (socialButtons) {
+      socialButtons.innerHTML += "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a>"
       document.getElementById("rss").addEventListener("click", function(e) {
-          window.open('https://marklucernas.dev/index.xml');
-        });
-    })
+        window.open('https://marklucernas.dev/index.xml');
+      });
+    }
+  })
 </script>
-
 
 <style>
 #socialMediaLinks {
@@ -240,31 +319,7 @@
   text-align: center;
 
 }
-
-#subscriptionLinks .ui.paper.plane.button {
-  background: #5A90E0;
-  color: #ffffff;
-}
-
 </style>
-
-<!-- replace logo with copyright -->
-<script>
-  window.addEventListener("load", function(){
-      let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
-      let parent = element.parentNode.parentNode.parentNode
-      // element.remove()
-
-      let p = document.createElement("p")
-      let n = document.createTextNode("© 2021 Mark Lucernas")
-      p.appendChild(n)
-      p.style.height = "100%";
-      p.style.paddingBottom = "10px";
-      // parent.appendChild(n)
-      parent.replaceChild(p, parent.firstChild)
-      // parent.replaceChild(element.parentNode, p)
-    });
-</script>
 
 <!-- mermaidjs -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
@@ -308,6 +363,4 @@
 
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
-<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-07-22T09:29"><a href="habits">Habits</a></span></span></div></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link"><a href=".">Index</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Organizational Habits</h1><p>Organizational habits are <span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-07-22T09:29"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="habits">Habits</a></span></span> that are formed within a body of an organization or company by the independent decisions of each member which can either help keep the best interest of the company, or stir internecine war within.</p><p>Organizational habits or “routines”, as Richard Nelson and Sidney Winter, authors of <em>An Evolutionary Theory of Economic Change</em>, describes it, “creates truces that allow work to get done” (The Power of Habit, ch.6). Without routines, employees and executives of a company will compete against each other in pursuit of self-interest, putting the company’s wellfare in jeopardy. Also, routines allow a company to streamline decision makings and create more predictable results, that even when the VP suddenly quit, the company will still be functional.</p><div class="ui section divider"></div>
-<section id="socialMediaLinks"></section>
-<h2 id="resources">Resources</h2><ul><li><em>The Power of Habit</em> by Charles Duhigg<ul><li>Chapter 6: The Power of a Crisis</li></ul></li></ul></div><div class="metadata"><div class="date" title="Zettel date"><time datetime="2021-08-04T07:47">2021-08-04</time></div></div></article><nav class="ui attached segment deemphasized backlinksPane" id="neuron-backlinks-pane"><h3 class="ui header"><span title="Backlinks from folgezettel children">Downlinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-08-05T09:00"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="the-power-of-crisis">The Power of Crisis</a></span></span><ul class="context-list" style="zoom: 85%;"><li class="item"><div class="pandoc"><p>Some <span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-08-04T07:47"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="organizational-habits">Organizational Habits</a></span></span> are so ingrained into the culture that the only way for a reform is through a crisis. Any good leaders know that a crisis is the best way to create habits that can <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Habit Change"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="habit-change">replace the existing ones</a></span></span>. In 2000, Rhode Island Hospital cultivates destructive organizational habits where it harbors enmity between its doctors and nurses. Nurses where treated unfairly and without respect by some doctors which caused series of grave operational accidents. One doctor insisted to proceed with the skull surgery for blood cloth, disregarding the nurse’s insistence for confirmation with furious reprimand for his authority, the doctor committed the location of the blood cloth to memory and ended up operating on the wrong side that later caused the patients death. Not long after, similar incident happended with a child being operated on the wrong part of the child’s mouth during a cleft palate surgery. Another report from the hospital was a drill bit was left inside a man’s head.</p></div></li></ul></li></ul><h3 class="ui header"><span title="Backlinks from folgezettel parents">Uplinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folge"><span class="zettel-link"><a href=".">Index</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"></ul></li></ul></nav><nav class="ui attached segment deemphasized bottomPane" id="neuron-tags-pane"><div><span class="ui basic label zettel-tag" title="Tag">blog</span><span class="ui basic label zettel-tag" title="Tag">book</span><span class="ui basic label zettel-tag" title="Tag">book/the-power-of-habit</span><span class="ui basic label zettel-tag" title="Tag">charles-duhigg</span><span class="ui basic label zettel-tag" title="Tag">habits</span><span class="ui basic label zettel-tag" title="Tag">institutional-habits</span><span class="ui basic label zettel-tag" title="Tag">organizational-habits</span><span class="ui basic label zettel-tag" title="Tag">psychology</span><span class="ui basic label zettel-tag" title="Tag">psychology/habits</span><span class="ui basic label zettel-tag" title="Tag">the-power-of-habit</span></div></nav><nav class="ui bottom attached icon compact inverted menu red" id="neuron-nav-bar"><!--replace-start-9--><a class="item" href="." title="Home"><i class="home icon"></i></a><!--replace-end-9--><a class="right item" href="impulse" title="Open Impulse"><i class="wave square icon"></i></a></nav></div></div><!--replace-end-6--><!--replace-end-3--><!--replace-end-2--><div class="ui center aligned container footer-version"><div class="ui tiny image"><a href="https://neuron.zettel.page"><img alt="logo" src="https://raw.githubusercontent.com/srid/neuron/master/assets/neuron.svg" title="Generated by Neuron 1.9.35.0" /></a></div></div></div></body></html>
+<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-07-22T09:29"><a href="habits">Habits</a></span></span></div></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link"><a href=".">Index</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Organizational Habits</h1><p>Organizational habits are <span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-07-22T09:29"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="habits">Habits</a></span></span> that are formed within a body of an organization or company by the independent decisions of each member which can either help keep the best interest of the company, or stir internecine war within.</p><p>Organizational habits or “routines”, as Richard Nelson and Sidney Winter, authors of <em>An Evolutionary Theory of Economic Change</em>, describes it, “creates truces that allow work to get done” (The Power of Habit, ch.6). Without routines, employees and executives of a company will compete against each other in pursuit of self-interest, putting the company’s wellfare in jeopardy. Also, routines allow a company to streamline decision makings and create more predictable results, that even when the VP suddenly quit, the company will still be functional.</p><h2 id="resources">Resources</h2><ul><li><em>The Power of Habit</em> by Charles Duhigg<ul><li>Chapter 6: The Power of a Crisis</li></ul></li></ul></div><div class="metadata"><div class="date" title="Zettel date"><time datetime="2021-08-04T07:47">2021-08-04</time></div></div></article><nav class="ui attached segment deemphasized backlinksPane" id="neuron-backlinks-pane"><h3 class="ui header"><span title="Backlinks from folgezettel children">Downlinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-08-05T09:00"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="the-power-of-crisis">The Power of Crisis</a></span></span><ul class="context-list" style="zoom: 85%;"><li class="item"><div class="pandoc"><p>Some <span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-08-04T07:47"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="organizational-habits">Organizational Habits</a></span></span> are so ingrained into the culture that the only way for a reform is through a crisis. Any good leaders know that a crisis is the best way to create habits that can <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Habit Change"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="habit-change">replace the existing ones</a></span></span>. In 2000, Rhode Island Hospital cultivates destructive organizational habits where it harbors enmity between its doctors and nurses. Nurses where treated unfairly and without respect by some doctors which caused series of grave operational accidents. One doctor insisted to proceed with the skull surgery for blood cloth, disregarding the nurse’s insistence for confirmation with furious reprimand for his authority, the doctor committed the location of the blood cloth to memory and ended up operating on the wrong side that later caused the patients death. Not long after, similar incident happended with a child being operated on the wrong part of the child’s mouth during a cleft palate surgery. Another report from the hospital was a drill bit was left inside a man’s head.</p></div></li></ul></li></ul><h3 class="ui header"><span title="Backlinks from folgezettel parents">Uplinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folge"><span class="zettel-link"><a href=".">Index</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"></ul></li></ul></nav><nav class="ui attached segment deemphasized bottomPane" id="neuron-tags-pane"><div><span class="ui basic label zettel-tag" title="Tag">blog</span><span class="ui basic label zettel-tag" title="Tag">book</span><span class="ui basic label zettel-tag" title="Tag">book/the-power-of-habit</span><span class="ui basic label zettel-tag" title="Tag">charles-duhigg</span><span class="ui basic label zettel-tag" title="Tag">habits</span><span class="ui basic label zettel-tag" title="Tag">institutional-habits</span><span class="ui basic label zettel-tag" title="Tag">organizational-habits</span><span class="ui basic label zettel-tag" title="Tag">psychology</span><span class="ui basic label zettel-tag" title="Tag">psychology/habits</span><span class="ui basic label zettel-tag" title="Tag">the-power-of-habit</span></div></nav><nav class="ui bottom attached icon compact inverted menu red" id="neuron-nav-bar"><!--replace-start-9--><a class="item" href="." title="Home"><i class="home icon"></i></a><!--replace-end-9--><a class="right item" href="impulse" title="Open Impulse"><i class="wave square icon"></i></a></nav></div></div><!--replace-end-6--><!--replace-end-3--><!--replace-end-2--><div class="ui center aligned container footer-version"><div class="ui tiny image"><a href="https://neuron.zettel.page"><img alt="logo" src="https://raw.githubusercontent.com/srid/neuron/master/assets/neuron.svg" title="Generated by Neuron 1.9.35.0" /></a></div></div></div></body></html>

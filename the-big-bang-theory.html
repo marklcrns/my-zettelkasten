@@ -171,45 +171,124 @@
   }
 </style>
 
-<!-- add social share buttons  -->
+<!-- Modify html onload -->
 <script>
-  window.addEventListener("load", function(){
-      var socialButtons = document.getElementById("socialMediaLinks");
-
-      socialButtons.innerHTML +=
-        "<a id='facebook' title='Share on Facebook' class='ui facebook button'><i class='facebook icon'></i> Share</a><a id='twitter' title='Tweet' class='ui twitter button'><i class='twitter icon'></i> Tweet</a><a id='linkedin' title='Share on LinkedIn' class='ui linkedin button'><i class='linkedin icon'></i> Share</a><a id='reddit' title='Share on Reddit' class='ui reddit button'><i class='reddit icon'></i> Share</a><a id='hnews' title='Share on Hacker News' class='ui hacker news button'><i class='hacker news icon'></i> Share</a>"
-
-      document.getElementById("facebook").addEventListener("click", function(e) {
+  window.onload = function() {
+    // Add social share buttons if zettel not WIP
+    var isWIP = false;
+    var tagsPane = document.getElementById('neuron-tags-pane');
+    if (tagsPane) {
+      for (const [index, e] of document.getElementById('neuron-tags-pane').firstChild.childNodes.entries()) {
+        if (e.innerHTML === "wip" || e.innerHTML === "todo") {
+          isWIP = true;
+          break;
+        }
+      }
+      if (!isWIP) {
+        var contentDiv = document.getElementsByClassName("zettel-content")[0];
+        var sectionDiv = document.createElement("div");
+        sectionDiv.classList = "ui section divider";
+        var sectionSocial = document.createElement("div");
+        sectionSocial.id = "socialMediaLinks";
+        // Facebook btn
+        var facebookBtn = document.createElement("a");
+        var facebookIcon = document.createElement("i");
+        facebookBtn.id = "facebook";
+        facebookBtn.title = "Share on Facebook";
+        facebookBtn.classList = "ui facebook button";
+        facebookIcon.classList = "facebook icon";
+        facebookBtn.addEventListener("click", function(e) {
           window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&quote=' + encodeURIComponent(document.URL)); return false;
         });
-      document.getElementById("twitter").addEventListener("click", function(e) {
+        facebookBtn.appendChild(facebookIcon);
+        facebookBtn.innerHTML += "Share";
+        // Tweeter btn
+        var twitterBtn = document.createElement("a");
+        var twitterIcon = document.createElement("i");
+        twitterBtn.id = "twitter";
+        twitterBtn.title = "Tweet";
+        twitterBtn.classList = "ui twitter button";
+        twitterIcon.classList = "twitter icon";
+        twitterBtn.addEventListener("click", function(e) {
           window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20' + encodeURIComponent(document.URL)); return false;
         });
-      document.getElementById("linkedin").addEventListener("click", function(e) {
+        twitterBtn.appendChild(twitterIcon);
+        twitterBtn.innerHTML += "Tweet";
+        // LinkedIn btn
+        var linkedinBtn = document.createElement("a");
+        var linkedinIcon = document.createElement("i");
+        linkedinBtn.id = "linkedin";
+        linkedinBtn.title = "Share on LinkedIn";
+        linkedinBtn.classList = "ui linkedin button";
+        linkedinIcon.classList = "linkedin icon";
+        linkedinBtn.addEventListener("click", function(e) {
           window.open('https://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;
         });
-      document.getElementById("reddit").addEventListener("click", function(e) {
+        linkedinBtn.appendChild(linkedinIcon);
+        linkedinBtn.innerHTML += "Share";
+        // Reddit btn
+        var redditBtn = document.createElement("a");
+        var redditIcon = document.createElement("i");
+        redditBtn.id = "reddit";
+        redditBtn.title = "Share on Reddit";
+        redditBtn.classList = "ui reddit button";
+        redditIcon.classList = "reddit icon";
+        redditBtn.addEventListener("click", function(e) {
           window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;
         });
-      document.getElementById("hnews").addEventListener("click", function(e) {
+        redditBtn.appendChild(redditIcon);
+        redditBtn.innerHTML += "Share";
+
+        var hackernewsBtn = document.createElement("a");
+        var hackernewsIcon = document.createElement("i");
+        hackernewsBtn.id = "hackernews";
+        hackernewsBtn.title = "Share on Hacker News";
+        hackernewsBtn.classList = "ui hacker news button";
+        hackernewsIcon.classList = "hacker news icon";
+        hackernewsBtn.addEventListener("click", function(e) {
           window.open('https://news.ycombinator.com/submitlink?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.title)); return false;
         });
-    })
+        hackernewsBtn.appendChild(hackernewsIcon);
+        hackernewsBtn.innerHTML += "Share";
+
+        sectionSocial.appendChild(facebookBtn);
+        sectionSocial.appendChild(twitterBtn);
+        sectionSocial.appendChild(linkedinBtn);
+        sectionSocial.appendChild(redditBtn);
+        sectionSocial.appendChild(hackernewsBtn);
+        contentDiv.appendChild(sectionDiv);
+        contentDiv.appendChild(sectionSocial);
+      }
+    }
+
+    // replace logo with copyright
+    let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
+    let parent = element.parentNode.parentNode.parentNode
+    // element.remove()
+
+    let p = document.createElement("p")
+    let n = document.createTextNode("© 2021 Mark Lucernas")
+    p.appendChild(n)
+    p.style.height = "100%";
+    p.style.paddingBottom = "10px";
+    // parent.appendChild(n)
+    parent.replaceChild(p, parent.firstChild)
+    // parent.replaceChild(element.parentNode, p)
+  }
 </script>
 
+<!-- Add event listener to RSS btn -->
 <script>
   window.addEventListener("load", function(){
-      var socialButtons = document.getElementById("subscriptionLinks");
-
-      socialButtons.innerHTML +=
-        "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a>"
-
+    var socialButtons = document.getElementById("subscriptionLinks");
+    if (socialButtons) {
+      socialButtons.innerHTML += "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a>"
       document.getElementById("rss").addEventListener("click", function(e) {
-          window.open('https://marklucernas.dev/index.xml');
-        });
-    })
+        window.open('https://marklucernas.dev/index.xml');
+      });
+    }
+  })
 </script>
-
 
 <style>
 #socialMediaLinks {
@@ -240,31 +319,7 @@
   text-align: center;
 
 }
-
-#subscriptionLinks .ui.paper.plane.button {
-  background: #5A90E0;
-  color: #ffffff;
-}
-
 </style>
-
-<!-- replace logo with copyright -->
-<script>
-  window.addEventListener("load", function(){
-      let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
-      let parent = element.parentNode.parentNode.parentNode
-      // element.remove()
-
-      let p = document.createElement("p")
-      let n = document.createTextNode("© 2021 Mark Lucernas")
-      p.appendChild(n)
-      p.style.height = "100%";
-      p.style.paddingBottom = "10px";
-      // parent.appendChild(n)
-      parent.replaceChild(p, parent.firstChild)
-      // parent.replaceChild(element.parentNode, p)
-    });
-</script>
 
 <!-- mermaidjs -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
@@ -308,6 +363,4 @@
 
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
-<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link"><a href=".">Index</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">The Big Bang Theory</h1><p><img alt="wide" src="https://www.publicdomainpictures.net/pictures/380000/nahled/big-bang-theory-1607444724TIM.jpg" title="image from Public Domain Pictures (cc)" /></p><p>In the beginning, the universe was hot and expanding, and was a mere cauldron cooking matter-antimatter pairs in a battle for survival. Clashing against each other, as matter creates, antimatter annihilates. As the universe began to cool, matters very subtly outweighted antimatter leading to the creation of the the universe as we know it. All this happend under <span class="math inline">\(10^{-43}\)</span> second of time.</p><p>Billion years later when the universe was cool enough, stars were formed and underwent thermonuclear fusion. Some thrived but some exploded due to high-mass, scattering their chemically rich bodies across the universe. Consequently, galaxies, the Milky Way, and the Sun were born.</p><p>The gas clouds from which the Sun was created, formed planets that orbits around it. Earth, not too far away and not too close from the Sun to freeze or to evaporate the ocean, produced life in its primordial form. Bacteria. These anaerobic organisms sets the Earth’s environment by excreting enough oxygen for aerobic organisms to live and breath in, and dominate the ocean and the surface of the earth. Life began as we know it. Outsized dinosours dominate. Stray asteroids hit the Earth, leading to the end of Cretaceous Periods. Intelligent mammals flourished. Homo Sapiens thrived.</p><div class="ui section divider"></div>
-<section id="socialMediaLinks"></section>
-<h2 id="resources">Resources</h2><ul><li><em>Astrophysics for People in a Hurry</em> by Neil DeGrasse Tyson<ul><li>Chapter 1: The Greatest Story Ever Told</li></ul></li></ul></div><div class="metadata"><div class="date" title="Zettel date"><time datetime="2021-05-22T15:08">2021-05-22</time></div></div></article><nav class="ui attached segment deemphasized backlinksPane" id="neuron-backlinks-pane"><h3 class="ui header"><span title="Backlinks from folgezettel children">Downlinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-07-19T06:57"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="cosmic-perspective">Cosmic Perspective</a></span></span><ul class="context-list" style="zoom: 85%;"><li class="item"><div class="pandoc"><p>Are we just an accident that happened billions of years after <span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-05-22T15:08"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="the-big-bang-theory">The Big Bang Theory</a></span></span>? Are we alone in the universe, or are there extraterrestrial beings with more advance technology eavesdropping us in secret? However the answer to these existential questions, it is wise to to meditate upon that our existence isn’t so unique and superior than we think of ourselves after all, that our modern ways may have been history to some other advance civilizations ahead of us.</p></div></li></ul></li></ul><h3 class="ui header"><span title="Backlinks from folgezettel parents">Uplinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folge"><span class="zettel-link"><a href=".">Index</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"></ul></li></ul></nav><nav class="ui attached segment deemphasized bottomPane" id="neuron-tags-pane"><div><span class="ui basic label zettel-tag" title="Tag">astrophysics</span><span class="ui basic label zettel-tag" title="Tag">astrophysics-for-people-in-a-hurry</span><span class="ui basic label zettel-tag" title="Tag">blog</span><span class="ui basic label zettel-tag" title="Tag">book</span><span class="ui basic label zettel-tag" title="Tag">book/astrophysics-for-people-in-a-hurry</span><span class="ui basic label zettel-tag" title="Tag">neil-degrasse-tyson</span><span class="ui basic label zettel-tag" title="Tag">science</span><span class="ui basic label zettel-tag" title="Tag">science/astrophysics</span><span class="ui basic label zettel-tag" title="Tag">the-big-bang-theory</span></div></nav><nav class="ui bottom attached icon compact inverted menu red" id="neuron-nav-bar"><!--replace-start-9--><a class="item" href="." title="Home"><i class="home icon"></i></a><!--replace-end-9--><a class="right item" href="impulse" title="Open Impulse"><i class="wave square icon"></i></a></nav></div></div><!--replace-end-6--><!--replace-end-3--><!--replace-end-2--><div class="ui center aligned container footer-version"><div class="ui tiny image"><a href="https://neuron.zettel.page"><img alt="logo" src="https://raw.githubusercontent.com/srid/neuron/master/assets/neuron.svg" title="Generated by Neuron 1.9.35.0" /></a></div></div></div></body></html>
+<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link"><a href=".">Index</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">The Big Bang Theory</h1><p><img alt="wide" src="https://www.publicdomainpictures.net/pictures/380000/nahled/big-bang-theory-1607444724TIM.jpg" title="image from Public Domain Pictures (cc)" /></p><p>In the beginning, the universe was hot and expanding, and was a mere cauldron cooking matter-antimatter pairs in a battle for survival. Clashing against each other, as matter creates, antimatter annihilates. As the universe began to cool, matters very subtly outweighted antimatter leading to the creation of the the universe as we know it. All this happend under <span class="math inline">\(10^{-43}\)</span> second of time.</p><p>Billion years later when the universe was cool enough, stars were formed and underwent thermonuclear fusion. Some thrived but some exploded due to high-mass, scattering their chemically rich bodies across the universe. Consequently, galaxies, the Milky Way, and the Sun were born.</p><p>The gas clouds from which the Sun was created, formed planets that orbits around it. Earth, not too far away and not too close from the Sun to freeze or to evaporate the ocean, produced life in its primordial form. Bacteria. These anaerobic organisms sets the Earth’s environment by excreting enough oxygen for aerobic organisms to live and breath in, and dominate the ocean and the surface of the earth. Life began as we know it. Outsized dinosours dominate. Stray asteroids hit the Earth, leading to the end of Cretaceous Periods. Intelligent mammals flourished. Homo Sapiens thrived.</p><h2 id="resources">Resources</h2><ul><li><em>Astrophysics for People in a Hurry</em> by Neil DeGrasse Tyson<ul><li>Chapter 1: The Greatest Story Ever Told</li></ul></li></ul></div><div class="metadata"><div class="date" title="Zettel date"><time datetime="2021-05-22T15:08">2021-05-22</time></div></div></article><nav class="ui attached segment deemphasized backlinksPane" id="neuron-backlinks-pane"><h3 class="ui header"><span title="Backlinks from folgezettel children">Downlinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-07-19T06:57"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="cosmic-perspective">Cosmic Perspective</a></span></span><ul class="context-list" style="zoom: 85%;"><li class="item"><div class="pandoc"><p>Are we just an accident that happened billions of years after <span class="zettel-link-container folgeinv"><span class="zettel-link" title="2021-05-22T15:08"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="the-big-bang-theory">The Big Bang Theory</a></span></span>? Are we alone in the universe, or are there extraterrestrial beings with more advance technology eavesdropping us in secret? However the answer to these existential questions, it is wise to to meditate upon that our existence isn’t so unique and superior than we think of ourselves after all, that our modern ways may have been history to some other advance civilizations ahead of us.</p></div></li></ul></li></ul><h3 class="ui header"><span title="Backlinks from folgezettel parents">Uplinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folge"><span class="zettel-link"><a href=".">Index</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"></ul></li></ul></nav><nav class="ui attached segment deemphasized bottomPane" id="neuron-tags-pane"><div><span class="ui basic label zettel-tag" title="Tag">astrophysics</span><span class="ui basic label zettel-tag" title="Tag">astrophysics-for-people-in-a-hurry</span><span class="ui basic label zettel-tag" title="Tag">blog</span><span class="ui basic label zettel-tag" title="Tag">book</span><span class="ui basic label zettel-tag" title="Tag">book/astrophysics-for-people-in-a-hurry</span><span class="ui basic label zettel-tag" title="Tag">neil-degrasse-tyson</span><span class="ui basic label zettel-tag" title="Tag">science</span><span class="ui basic label zettel-tag" title="Tag">science/astrophysics</span><span class="ui basic label zettel-tag" title="Tag">the-big-bang-theory</span></div></nav><nav class="ui bottom attached icon compact inverted menu red" id="neuron-nav-bar"><!--replace-start-9--><a class="item" href="." title="Home"><i class="home icon"></i></a><!--replace-end-9--><a class="right item" href="impulse" title="Open Impulse"><i class="wave square icon"></i></a></nav></div></div><!--replace-end-6--><!--replace-end-3--><!--replace-end-2--><div class="ui center aligned container footer-version"><div class="ui tiny image"><a href="https://neuron.zettel.page"><img alt="logo" src="https://raw.githubusercontent.com/srid/neuron/master/assets/neuron.svg" title="Generated by Neuron 1.9.35.0" /></a></div></div></div></body></html>

@@ -305,7 +305,7 @@ function loadGraphZettelJumbotron(graph) {
   loader.load('./static/optimer_regular.typface.json', function(font) {
 
     const titleGeometry = new THREE.TextGeometry(
-      document.getElementById('title-h1').innerHTML.toUpperCase(),
+      document.getElementById('title-h1').innerText.toUpperCase(),
       {
         font: font,
         size: 150,
