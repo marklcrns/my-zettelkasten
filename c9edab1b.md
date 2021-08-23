@@ -1,5 +1,5 @@
 ---
-title: The Framework For Changing Habits
+title: The Framework for Changing Habits
 slug: the-framework-for-changing-habits
 tags:
   - wip
