@@ -181,6 +181,10 @@
       for (const [index, e] of document.getElementById('neuron-tags-pane').firstChild.childNodes.entries()) {
         if (e.innerHTML === "wip" || e.innerHTML === "todo") {
           isWIP = true;
+          var wip = document.createElement("h1");
+          var title = document.getElementById("title-h1");
+          wip.innerHTML = "🚧 WORK IN PROGRESS!";
+          title.parentNode.insertBefore(wip, title);
           break;
         }
       }
