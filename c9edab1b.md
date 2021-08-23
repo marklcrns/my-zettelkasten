@@ -34,9 +34,6 @@ to help us strategically attack those habits while minimizing relapses.
 - [[b8010b9f]]#
 - [[bb63ba32]]#
 
-<div class="ui section divider"></div>
-<section id="socialMediaLinks"></section>
-
 ## Resources
 
 - _The Power of Habit_ by Charles Duhigg

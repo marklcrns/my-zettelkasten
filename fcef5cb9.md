@@ -43,9 +43,6 @@ Habit, ch 1). Without our basal ganglia, we would never process even the
 simplest of task such as recognizing facial expression for not knowing where to
 focus our eyes on in a conversation.
 
-<div class="ui section divider"></div>
-<section id="socialMediaLinks"></section>
-
 ## Resources
 
 - _The Power of Habit_ by Charles Duhigg
