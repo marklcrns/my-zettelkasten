@@ -319,9 +319,9 @@ function loadGraphZettelJumbotron(graph) {
       }
     );
     titleGeometry.computeBoundingSphere();
-    const titleMaterial = new THREE.MeshLambertMaterial({color: 0x5F5F5F, side: THREE.DoubleSide});
+    const titleMaterial = new THREE.MeshLambertMaterial({color: 0x3F3F3F, side: THREE.DoubleSide});
     const titleMesh = new THREE.Mesh(titleGeometry, titleMaterial);
-    titleMesh.position.set(-titleGeometry.boundingSphere.radius, 100, -600); // (x, y, z)
+    titleMesh.position.set(-titleGeometry.boundingSphere.radius, 100, -800); // (x, y, z)
 
     const countGeometry = new THREE.TextGeometry(
       'ct: ' +  graph.graphData().nodes.length.toString(),
@@ -338,7 +338,7 @@ function loadGraphZettelJumbotron(graph) {
       }
     );
     countGeometry.computeBoundingSphere();
-    const countMaterial = new THREE.MeshLambertMaterial({color: 0xAF8700, side: THREE.DoubleSide});
+    const countMaterial = new THREE.MeshLambertMaterial({color: 0x8F6700, side: THREE.DoubleSide});
     const countMesh = new THREE.Mesh(countGeometry, countMaterial);
     countMesh.position.set(
       -titleMesh.position.x - countGeometry.boundingSphere.radius,  // x
