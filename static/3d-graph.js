@@ -100,7 +100,7 @@ $.getJSON('../cache.json', function(data) {
         //     target: Math.round(Math.random() * (id-1))
         //   }))
       // };
-    // 
+    //
       // // Cross-link node objects
     // graph.links.forEach(link => {
       //   const a = graph.nodes[link.source];
@@ -162,13 +162,19 @@ $.getJSON('../cache.json', function(data) {
         const idx = excludedNodes.indexOf('index');
         if (idx > -1) {
           excludedNodes.splice(idx, 1);
-          Graph.graphData(buildGraph(data.Graph));
+          Graph &&
+            Graph
+            .nodeAutoColorBy("size")
+            .graphData(buildGraph(data.Graph));
         }
         Graph && Graph.dagMode(orientation.replace('-index', ''));
       } else {
         if (!excludedNodes.includes('index')) {
           excludedNodes.push('index');
-          Graph.graphData(buildGraph(data.Graph));
+          Graph &&
+            Graph
+              .nodeAutoColorBy("clusterid")
+              .graphData(buildGraph(data.Graph));
         }
         Graph && Graph.dagMode(orientation)
       }
