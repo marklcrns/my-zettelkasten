@@ -304,8 +304,9 @@ function loadGraphZettelJumbotron(graph) {
   const loader = new THREE.FontLoader();
   loader.load('./static/optimer_regular.typface.json', function(font) {
 
+    // Fetch title-h1 element stripped of non-alphanumeric characters to uppercase
     const titleGeometry = new THREE.TextGeometry(
-      document.getElementById('title-h1').innerText.toUpperCase(),
+      document.getElementById('title-h1').innerText.replace(/\W/g, '').toUpperCase(),
       {
         font: font,
         size: 150,
