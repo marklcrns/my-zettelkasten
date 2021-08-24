@@ -8,5 +8,5 @@ feed:
 
 ## Zettels in Review
 
-[[z:zettels?tag=wip&timeline]]#
+[[z:zettels?tag=draft&timeline]]#
 
