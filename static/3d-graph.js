@@ -9,37 +9,19 @@ $.getJSON('../cache.json', function(data) {
   console.log(data.Graph);
 
   const NODE_REL_SIZE = 3;
-  const ON_CLICK_CAM_DISTANCE = 150;
+  const ON_CLICK_CAM_DISTANCE = 300;
   const FOCUS_TRANSITION_DURATION = 2500;
   const DOUBLE_CLICK_DURATION = 500;
   // const FORCE_STRENGTH = -graph.nodes.length * 2;
-  const FORCE_STRENGTH = -15;
-
-  // Dim Bloom Post-Processing effect
-  const bloomPassDim = new UnrealBloomPass();
-  bloomPassDim.strength = 0.8;
-  bloomPassDim.radius = 1;
-  bloomPassDim.threshold = 0.1;
-
-  // Low Bloom Post-Processing effect
-  const bloomPassLow = new UnrealBloomPass();
-  bloomPassLow.strength = 1.3;
-  bloomPassLow.radius = 1;
-  bloomPassLow.threshold = 0.1;
-
-  // Bright Bloom Post-Processing effect
-  const bloomPassBright = new UnrealBloomPass();
-  bloomPassBright.strength = 1.5;
-  bloomPassBright.radius = 1;
-  bloomPassBright.threshold = 0.1;
+  // const FORCE_STRENGTH = -100;
 
   var hoverNode = null;
   var highlightNodes = new Set();
   var highlightLinks = new Set();
   var isCamRotationActive = false;
   var isAnimationActive = true;
-  var camDistance = 300;
-  var nodeGeometryMode = 0;   // 0: text-node, 1: text-only, 2: node-only
+  var camDistance = 1000;
+  var nodeGeometryMode = 1;   // 0: text-node, 1: text-only, 2: node-only
 
   var lastNodeClick = 0;
   var lastBackgroundClick = 0;
@@ -49,15 +31,12 @@ $.getJSON('../cache.json', function(data) {
   // Some Properties
   Graph
     .nodeAutoColorBy("clusterid")
-    .nodeLabel('date')
     .nodeVal('size')
     .linkColor(() => 'rgba(255,255,255,0.4)')
     .height('600')
     .showNavInfo(true)
-    .d3Force("charge").strength(FORCE_STRENGTH);
-
-  Graph
-    .postProcessingComposer().addPass(bloomPassBright);
+    .d3Force("charge")
+    .strength(node => { return -(node.size * 10); });
 
   // DAG
   Graph
@@ -66,7 +45,7 @@ $.getJSON('../cache.json', function(data) {
     .nodeRelSize(NODE_REL_SIZE)
     .backgroundColor('#101020')
     .d3Force('collision', d3.forceCollide(node => Math.cbrt(node.size) * NODE_REL_SIZE))
-    .d3VelocityDecay(0.3);
+    .d3VelocityDecay(0.3)
 
   // OnClick listeners
   Graph
@@ -172,24 +151,12 @@ $.getJSON('../cache.json', function(data) {
     var text = "";
     switch (nodeGeometryMode) {
       case 0:   text = "Text-Node Mode";
-                Graph
-                  .nodeLabel('date')
-                  .postProcessingComposer().passes[1] = bloomPassBright;
                 break;
       case 1:   text = "Text-Only Mode";
-                Graph
-                  .nodeLabel('date')
-                  .postProcessingComposer().passes[1] = bloomPassDim;
                 break;
       case 2:   text = "Node-Only Mode";
-                Graph
-                  .nodeLabel('name')
-                  .postProcessingComposer().passes[1] = bloomPassLow;
                 break;
       default:  text = "--- Mode";
-                Graph
-                  .nodeLabel('date')
-                  .postProcessingComposer().passes[1] = bloomPassBright;
                 break;
     }
 
@@ -223,7 +190,12 @@ function createNewForceGraph(mode, data) {
 
 function setNodeGeometryMode(graph, mode) {
   if (mode === 0) {
+    // Bright Bloom Post-Processing effect
     console.log("text-node mode");
+    const bloomPassBright = new UnrealBloomPass();
+    bloomPassBright.strength = 1.8;
+    bloomPassBright.radius = 1;
+    bloomPassBright.threshold = 0.1;
     graph
       .nodeThreeObject((node) => {
         const nodeEl = document.createElement('div');
@@ -232,9 +204,16 @@ function setNodeGeometryMode(graph, mode) {
         nodeEl.className = 'node-label';
         return new THREE.CSS2DObject(nodeEl);
       })
-      .nodeThreeObjectExtend(true);
+      .nodeThreeObjectExtend(true)
+      .nodeLabel('date')
+      .postProcessingComposer().passes[1] = bloomPassBright;
   } else if (mode === 1) {
+    // Dim Bloom Post-Processing effect
     console.log("text-only mode");
+    const bloomPassDim = new UnrealBloomPass();
+    bloomPassDim.strength = 0.8;
+    bloomPassDim.radius = 1;
+    bloomPassDim.threshold = 0.1;
     graph
       .nodeThreeObject((node) => {
         const sprite = new SpriteText(node.name);
@@ -244,8 +223,15 @@ function setNodeGeometryMode(graph, mode) {
         return sprite;
       })
       .nodeThreeObjectExtend(false)
+      .nodeLabel('date')
+      .postProcessingComposer().passes[1] = bloomPassDim;
   } else if (mode === 2){
+    // Low Bloom Post-Processing effect
     console.log("node-only mode");
+    const bloomPassLow = new UnrealBloomPass();
+    bloomPassLow.strength = 1.4;
+    bloomPassLow.radius = 1;
+    bloomPassLow.threshold = 0.1;
     graph
       .nodeThreeObject((node) => {
         var sphere = new THREE.SphereGeometry();
@@ -255,7 +241,9 @@ function setNodeGeometryMode(graph, mode) {
         group.add(mesh);
         return group;
       })
-      .nodeThreeObjectExtend(true);
+      .nodeThreeObjectExtend(true)
+      .nodeLabel('name')
+      .postProcessingComposer().passes[1] = bloomPassLow;
   }
 }
 
@@ -314,14 +302,33 @@ function buildGraph(data) {
           }
           nodes[nodeMap[link.target]].clusterid = nodes[nodeMap[link.source]].clusterid;
 
-          // Make source node bigger
-          nodes[nodeMap[link.source]].size += 1;
+          var visited = [];
+          // recache clusterid from target's existing links
+          recacheNodeImmediateLinks(link.target, links, nodeMap, visited, false);
+          // Simply resize source without changing clusterid
+          recacheNodeImmediateLinks(link.source, links, nodeMap, visited, true);
 
           links.push(link);
         }
       });
     }
   })
+
+  function recacheNodeImmediateLinks(source, links, nodeMap, visited, isResize) {
+    for (var i = 0; i < links.length; ++i) {
+      if (!visited.includes(i) && links[i].source === source) {
+        var scid = nodes[nodeMap[source]].clusterid;
+        visited.push(i);
+        if (nodes[nodeMap[links[i].target]].clusterid === scid) {
+          nodes[nodeMap[source]].size += 2;
+        } else if (!isResize){
+          nodes[nodeMap[links[i].target]].clusterid = scid;
+        }
+        recacheNodeImmediateLinks(links[i].source, links, nodeMap, visited, isResize);
+      }
+    }
+  }
+
   graph.nodes = nodes;
   graph.links = links;
 
@@ -454,7 +461,6 @@ function addGUIDAGControls(graph, data) {
           excludedNodes.splice(idx, 1);
           graph &&
             graph
-            .nodeAutoColorBy("size")
             .graphData(buildGraph(data));
           loadGraphZettelJumbotron(graph);
         }
@@ -464,7 +470,6 @@ function addGUIDAGControls(graph, data) {
           excludedNodes.push('index');
           graph &&
             graph
-            .nodeAutoColorBy("clusterid")
             .graphData(buildGraph(data));
           loadGraphZettelJumbotron(graph);
         }
