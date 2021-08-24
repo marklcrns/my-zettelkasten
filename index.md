@@ -29,13 +29,13 @@ feed:
 
 <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
 <div style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
-  <button id="geometryToggle" style="margin: 8px; height: 25px; width: 150px;">
+  <button id="geometryToggle" style="margin: 8px; height: 40px; width: 150px;">
     Text-Node Mode
   </button>
-  <button id="animationToggle" style="margin: 8px; height: 25px; width: 150px;">
+  <button id="animationToggle" style="margin: 8px; height: 40px; width: 150px;">
     Pause Animation
   </button>
-  <button id="rotationToggle" style="margin: 8px; height: 25px; width: 150px;">
+  <button id="rotationToggle" style="margin: 8px; height: 40px; width: 150px;">
     Resume Rotation
   </button>
 </div>
@@ -62,7 +62,7 @@ Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph
 
 [![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
 
-Welcome! to my personal
+Welcome! To my personal
 [Zettlekasten](https://en.wikipedia.org/wiki/Zettelkasten) inspired by Niklas
 Luhmann, powered by [neuron](https://github.com/srid/neuron).
 

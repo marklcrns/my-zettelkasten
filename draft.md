@@ -6,7 +6,7 @@ feed:
 ---
 
 
-## Zettels in Review
+## Zettels In Review
 
 [[z:zettels?tag=draft&timeline]]#
 
