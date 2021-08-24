@@ -176,16 +176,24 @@
   window.onload = function() {
     // Add social share buttons if zettel not WIP
     var isWIP = false;
+    var isDraft = false;
     var tagsPane = document.getElementById('neuron-tags-pane');
     if (tagsPane) {
       for (const [index, e] of document.getElementById('neuron-tags-pane').firstChild.childNodes.entries()) {
-        if (e.innerHTML === "wip" || e.innerHTML === "todo") {
+        if (e.innerHTML === "wip" || e.innerHTML === "draft") {
           isWIP = true;
-          // Add work in progress title to zettels with wip or todo tag metadata
-          var wip = document.createElement("h1");
+          isDraft = e.innerHTML === "draft";
+          var h1 = document.createElement("h1");
           var title = document.getElementById("title-h1");
-          wip.innerHTML = "🚧 WORK IN PROGRESS!";
-          title.parentNode.insertBefore(wip, title);
+
+          // Add another title to zettels with wip or draft tag metadata
+          if (isDraft) {
+            h1.innerHTML = "🔍 IN REVIEW! 🔍";
+          } else {
+            h1.innerHTML = "🚧 WORK IN PROGRESS! 🚧";
+          }
+
+          title.parentNode.insertBefore(h1, title);
           break;
         }
       }
