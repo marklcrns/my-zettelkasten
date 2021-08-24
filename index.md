@@ -21,7 +21,7 @@ feed:
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Node renderer -->
-<!-- <script src="//unpkg.com/three-spritetext"></script> -->
+<script src="//unpkg.com/three-spritetext"></script>
 <script src="//unpkg.com/three/examples/js/renderers/CSS2DRenderer.js"></script>
 
 <!-- Styles -->
@@ -29,6 +29,9 @@ feed:
 
 <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
 <div style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+  <button id="geometryToggle" style="margin: 8px; height: 25px; width: 150px;">
+    Text-Node Mode
+  </button>
   <button id="animationToggle" style="margin: 8px; height: 25px; width: 150px;">
     Pause Animation
   </button>
