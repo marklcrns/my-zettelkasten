@@ -188,9 +188,9 @@
 
           // Add another title to zettels with wip or draft tag metadata
           if (isDraft) {
-            h1.innerHTML = "🔍 IN REVIEW! 🔍";
+            h1.innerHTML = "🔍 IN REVIEW";
           } else {
-            h1.innerHTML = "🚧 WORK IN PROGRESS! 🚧";
+            h1.innerHTML = "🚧 WORK IN PROGRESS";
           }
 
           title.parentNode.insertBefore(h1, title);
@@ -330,7 +330,6 @@
 
 #subscriptionLinks {
   text-align: center;
-
 }
 </style>
 
@@ -398,13 +397,13 @@
 
 <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
 <div style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
-  <button id="geometryToggle" style="margin: 8px; height: 25px; width: 150px;">
+  <button id="geometryToggle" style="margin: 8px; height: 40px; width: 150px;">
     Text-Node Mode
   </button>
-  <button id="animationToggle" style="margin: 8px; height: 25px; width: 150px;">
+  <button id="animationToggle" style="margin: 8px; height: 40px; width: 150px;">
     Pause Animation
   </button>
-  <button id="rotationToggle" style="margin: 8px; height: 25px; width: 150px;">
+  <button id="rotationToggle" style="margin: 8px; height: 40px; width: 150px;">
     Resume Rotation
   </button>
 </div>
@@ -418,7 +417,7 @@
 <!-- > Drag to pin a node. Ctrl + Click to unpin a node. Double click node to view -->
 <!-- > note. Nodes are colored and sized based on incoming degree, so notes more   -->
 <!-- > heavily linked to will grow in relative size.                               -->
-<p><a href="https://github.com/marklcrns?tab=followers"><img alt="GitHub followers" src="https://img.shields.io/github/followers/marklcrns.svg?style=social&amp;label=Follow&amp;maxAge=2592000" /></a></p><p>Welcome! to my personal <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> inspired by Niklas Luhmann, powered by <a href="https://github.com/srid/neuron">neuron</a>.</p><p>Check out the <a href="/impulse.html">Impulse</a> page for the list of all my zettels in folgezettel clusters.</p><br>
+<p><a href="https://github.com/marklcrns?tab=followers"><img alt="GitHub followers" src="https://img.shields.io/github/followers/marklcrns.svg?style=social&amp;label=Follow&amp;maxAge=2592000" /></a></p><p>Welcome! To my personal <a href="https://en.wikipedia.org/wiki/Zettelkasten">Zettlekasten</a> inspired by Niklas Luhmann, powered by <a href="https://github.com/srid/neuron">neuron</a>.</p><p>Check out the <a href="/impulse.html">Impulse</a> page for the list of all my zettels in folgezettel clusters.</p><br>
 <!-- _Credits goes to [Devon Morris](https://github.com/DevonMorris)'s           -->
 <!-- [Zettelkasten](https://github.com/DevonMorris/zettelkasten) for his awesome -->
 <!-- directed graph made with [D3.js](https://d3js.org/)_                        -->
