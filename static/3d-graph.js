@@ -6,7 +6,6 @@ import { UnrealBloomPass } from '//cdn.skypack.dev/three/examples/jsm/postproces
 var excludedNodes = ["index", "README", "faq", "LICENSE"];
 
 $.getJSON('../cache.json', function(data) {
-
   console.log(data.Graph);
 
   const NODE_REL_SIZE = 3;
@@ -15,9 +14,24 @@ $.getJSON('../cache.json', function(data) {
   const DOUBLE_CLICK_DURATION = 500;
   // const FORCE_STRENGTH = -graph.nodes.length * 2;
   const FORCE_STRENGTH = -15;
-  const BLOOM_PASS_STRENGTH = 1.5;
-  const BLOOM_PASS_RADIUS = 1;
-  const BLOOM_PASS_THRESHOLD = 0.1;
+
+  // Dim Bloom Post-Processing effect
+  const bloomPassDim = new UnrealBloomPass();
+  bloomPassDim.strength = 0.8;
+  bloomPassDim.radius = 1;
+  bloomPassDim.threshold = 0.1;
+
+  // Low Bloom Post-Processing effect
+  const bloomPassLow = new UnrealBloomPass();
+  bloomPassLow.strength = 1.3;
+  bloomPassLow.radius = 1;
+  bloomPassLow.threshold = 0.1;
+
+  // Bright Bloom Post-Processing effect
+  const bloomPassBright = new UnrealBloomPass();
+  bloomPassBright.strength = 1.5;
+  bloomPassBright.radius = 1;
+  bloomPassBright.threshold = 0.1;
 
   var hoverNode = null;
   var highlightNodes = new Set();
@@ -25,39 +39,12 @@ $.getJSON('../cache.json', function(data) {
   var isCamRotationActive = false;
   var isAnimationActive = true;
   var camDistance = 300;
+  var nodeGeometryMode = 0;   // 0: text-node, 1: text-only, 2: node-only
 
   var lastNodeClick = 0;
   var lastBackgroundClick = 0;
 
-  // // Text-only nodes graph
-  // const Graph = ForceGraph3D()
-  //   (document.getElementById("3d-graph"))
-  //   .graphData(graph)
-  //
-  // Graph
-  //   .nodeThreeObject((node) => {
-  //     // const sprite = new SpriteText(node.name);
-  //     // sprite.material.depthWrite = false; // make sprite background transparent
-  //     // sprite.color = node.color;
-  //     // sprite.textHeight = 8;
-  //     // return sprite;
-  //   })
-
-  // Create graph
-  const Graph = ForceGraph3D({ extraRenderers: [new THREE.CSS2DRenderer()] })
-    (document.getElementById("3d-graph"))
-    .graphData(buildGraph(data.Graph));
-
-  // HTML-nodes
-  Graph
-    .nodeThreeObject((node) => {
-      const nodeEl = document.createElement('div');
-      nodeEl.textContent = node.name;
-      nodeEl.style.color = node.color;
-      nodeEl.className = 'node-label';
-      return new THREE.CSS2DObject(nodeEl);
-    })
-    .nodeThreeObjectExtend(true);
+  var Graph = createNewForceGraph(nodeGeometryMode, data.Graph);
 
   // Some Properties
   Graph
@@ -68,6 +55,9 @@ $.getJSON('../cache.json', function(data) {
     .height('600')
     .showNavInfo(true)
     .d3Force("charge").strength(FORCE_STRENGTH);
+
+  Graph
+    .postProcessingComposer().addPass(bloomPassBright);
 
   // DAG
   Graph
@@ -144,13 +134,6 @@ $.getJSON('../cache.json', function(data) {
       updateHighlight(Graph);
     });
 
-  // Bloom Post-Processing effect
-  const bloomPass = new UnrealBloomPass();
-  bloomPass.strength = BLOOM_PASS_STRENGTH;
-  bloomPass.radius = BLOOM_PASS_RADIUS;
-  bloomPass.threshold = BLOOM_PASS_THRESHOLD;
-  Graph.postProcessingComposer().addPass(bloomPass);
-
   // Auto resize canvas
   var erd = elementResizeDetectorMaker({
     strategy: "scroll",
@@ -181,6 +164,38 @@ $.getJSON('../cache.json', function(data) {
 
 
   // Add HTML toggle buttons listeners
+  document.getElementById('geometryToggle').addEventListener('click', event => {
+    nodeGeometryMode++;
+    if (nodeGeometryMode > 2) nodeGeometryMode = 0;
+    setNodeGeometryMode(Graph, nodeGeometryMode);
+
+    var text = "";
+    switch (nodeGeometryMode) {
+      case 0:   text = "Text-Node Mode";
+                Graph
+                  .nodeLabel('date')
+                  .postProcessingComposer().passes[1] = bloomPassBright;
+                break;
+      case 1:   text = "Text-Only Mode";
+                Graph
+                  .nodeLabel('date')
+                  .postProcessingComposer().passes[1] = bloomPassDim;
+                break;
+      case 2:   text = "Node-Only Mode";
+                Graph
+                  .nodeLabel('name')
+                  .postProcessingComposer().passes[1] = bloomPassLow;
+                break;
+      default:  text = "--- Mode";
+                Graph
+                  .nodeLabel('date')
+                  .postProcessingComposer().passes[1] = bloomPassBright;
+                break;
+    }
+
+    event.target.innerHTML = text;
+  });
+  // Add HTML toggle buttons listeners
   document.getElementById('rotationToggle').addEventListener('click', event => {
     isCamRotationActive = !isCamRotationActive;
     event.target.innerHTML = `${(isCamRotationActive ? 'Pause' : 'Resume')} Rotation`;
@@ -194,6 +209,56 @@ $.getJSON('../cache.json', function(data) {
   addGUIDAGControls(Graph, data.Graph);
   loadGraphZettelJumbotron(Graph);
 })
+
+
+function createNewForceGraph(mode, data) {
+  // Text-only nodes graph
+  const graph = ForceGraph3D({ extraRenderers: [new THREE.CSS2DRenderer()] })
+  (document.getElementById("3d-graph"))
+    .graphData(buildGraph(data));
+
+  setNodeGeometryMode(graph, mode);
+  return graph
+}
+
+function setNodeGeometryMode(graph, mode) {
+  if (mode === 0) {
+    console.log("text-node mode");
+    graph
+      .nodeThreeObject((node) => {
+        const nodeEl = document.createElement('div');
+        nodeEl.textContent = node.name;
+        nodeEl.style.color = node.color;
+        nodeEl.className = 'node-label';
+        return new THREE.CSS2DObject(nodeEl);
+      })
+      .nodeThreeObjectExtend(true);
+  } else if (mode === 1) {
+    console.log("text-only mode");
+    graph
+      .nodeThreeObject((node) => {
+        const sprite = new SpriteText(node.name);
+        sprite.material.depthWrite = false; // make sprite background transparent
+        sprite.color = node.color;
+        sprite.textHeight = 8;
+        return sprite;
+      })
+      .nodeThreeObjectExtend(false)
+  } else if (mode === 2){
+    console.log("node-only mode");
+    graph
+      .nodeThreeObject((node) => {
+        var sphere = new THREE.SphereGeometry();
+        var lambert = new THREE.MeshLambertMaterial({ color: node.color, transparent: true, opacity: 0.75 });
+        var mesh = new THREE.Mesh(sphere, lambert);
+        var group = new THREE.Group();
+        group.add(mesh);
+        return group;
+      })
+      .nodeThreeObjectExtend(true);
+  }
+}
+
 
 function buildGraph(data) {
   var graph = {};
@@ -299,6 +364,7 @@ function buildGraph(data) {
 
   return graph;
 }
+
 
 function loadGraphZettelJumbotron(graph) {
   const loader = new THREE.FontLoader();
