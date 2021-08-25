@@ -432,30 +432,44 @@ function loadGraphZettelJumbotron(graph) {
 }
 
 function addGUIDAGControls(graph, data) {
-  const controls = { '3D Graph DAG': 'null'};
-  const gui = new dat.GUI();
-  gui.add(controls, '3D Graph DAG', [
-    'null',
-    'td',
-    'bu',
-    'lr',
-    'rl',
-    'zout',
-    'zin',
-    'radialout',
-    'radialin',
-    "null-index",
-    'td-index',
-    'bu-index',
-    'lr-index',
-    'rl-index',
-    'zout-index',
-    'zin-index',
-    'radialout-index',
-    'radialin-index',
+  const controlsDict = {
+    'Scattered': 'null',
+    'Top-down': 'td',
+    'Bottom-up': 'bu',
+    'Left-to-right': 'lr',
+    'Right-to-left': 'rl',
+    'Near-to-far': 'zout',
+    'Far-to-near': 'zin',
+    'Outwards-radially': 'radialout',
+    'Inwards-radially': 'radialin',
+  };
+  const controls = { '3D Graph Orientation': 'Scattered'};
+  const gui = new dat.GUI({width: 300, closeOnTop: true});
+  // const gui = new dat.GUI({autoPlace: false, width: 300, closeOnTop: true});
+  // $('.graph-controls').append($(gui.domElement));
+  gui.domElement.id = 'graph-control';
+  gui.add(controls, '3D Graph Orientation', [
+    'Scattered',
+    'Top-down',
+    'Bottom-up',
+    'Left-to-right',
+    'Right-to-left',
+    'Near-to-far',
+    'Far-to-near',
+    'Outwards-radially',
+    'Inwards-radially',
+    'Scattered (index)',
+    'Top-down (index)',
+    'Bottom-up (index)',
+    'Left-to-right (index)',
+    'Right-to-left (index)',
+    'Near-to-far (index)',
+    'Far-to-near (index)',
+    'Outwards-radially (index)',
+    'Inwards-radially (index)',
   ])
     .onChange(orientation => {
-      if (orientation.includes('index')) {
+      if (orientation.includes('(index)')) {
         const idx = excludedNodes.indexOf('index');
         if (idx > -1) {
           excludedNodes.splice(idx, 1);
@@ -464,7 +478,7 @@ function addGUIDAGControls(graph, data) {
             .graphData(buildGraph(data));
           loadGraphZettelJumbotron(graph);
         }
-        graph && graph.dagMode(orientation.replace('-index', ''));
+        graph && graph.dagMode(controlsDict[orientation.replace(' (index)', '')]);
       } else {
         if (!excludedNodes.includes('index')) {
           excludedNodes.push('index');
@@ -473,7 +487,7 @@ function addGUIDAGControls(graph, data) {
             .graphData(buildGraph(data));
           loadGraphZettelJumbotron(graph);
         }
-        graph && graph.dagMode(orientation)
+        graph && graph.dagMode(controlsDict[orientation]);
       }
       console.log("excluded nodes: [" + excludedNodes + "]");
     });

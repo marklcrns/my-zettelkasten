@@ -28,7 +28,7 @@ feed:
 <link rel="stylesheet" href="./static/3d-graph.css">
 
 <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
-<div style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+<div class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
   <button id="geometryToggle" style="margin: 8px; height: 40px; width: 150px;">
     Text-Node Mode
   </button>
