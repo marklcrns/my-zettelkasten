@@ -29,9 +29,9 @@ to help us strategically attack those habits while minimizing relapses.
 
 **The Framework:**
 
-- [[cc255a3f]]#
-- [[66362667]]#
-- [[b8010b9f]]#
+- [[cc255a3f]]# (how)
+- [[66362667]]# (why)
+- [[b8010b9f]]# (what)
 - [[bb63ba32]]#
 
 ## Resources
