@@ -9,10 +9,3 @@
 .node-label::hover {
   visibility: hidden;
 }
-
-/* .graph-controls {     */
-/*   display: flex;      */
-/*   position: absolute; */
-/*   top: 13.1em;        */
-/*   right: -1em;        */
-/* }                     */

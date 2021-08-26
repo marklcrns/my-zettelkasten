@@ -27,26 +27,37 @@ feed:
 <!-- Styles -->
 <link rel="stylesheet" href="./static/3d-graph.css">
 
-<div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
-<div class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
-  <button id="geometryToggle" style="margin: 8px; height: 40px; width: 150px;">
-    Text-Node Mode
+<div id="graph-visibility-controls" class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+  <button id="visibilityToggle" style="margin: 8px; height: 30px; width: 130px;">
+    Hide Graph
   </button>
-  <button id="animationToggle" style="margin: 8px; height: 40px; width: 150px;">
-    Pause Animation
-  </button>
-  <button id="rotationToggle" style="margin: 8px; height: 40px; width: 150px;">
-    Resume Rotation
-  </button>
+</div>
+
+<div id="3d-graph-container">
+  <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
+
+  <div id="graph-behavior-controls" class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+    <button id="geometryToggle">
+      Text-Node Mode
+    </button>
+    <button id="animationToggle">
+      Pause Animation
+    </button>
+    <button id="rotationToggle">
+      Resume Rotation
+    </button>
+  </div>
+
+  <blockquote id="graph-instructions">
+    Drag to rellocate a node. Click to focus on node (while rotation is paused).
+    Double click a node to view its Zettel page. Double click background to
+    zoom-to-fit. Nodes are colored and sized based on clustering. Nodes that has
+    more subnodes will be displayed relatively bigger.
+  </blockquote>
 </div>
 
 <script src="./static/3d-graph.js" type="module"></script>
 ```
-
-> Drag to rellocate a node. Click to focus on node (while rotation is paused).
-> Double click a node to view its Zettel page. Double click background to
-> zoom-to-fit. Nodes are colored and sized based on clustering. Nodes that has
-> more subnodes will be displayed relatively bigger.
 
 Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph)
 
