@@ -15,6 +15,8 @@ date: 2021-08-23T07:01
 ---
 
 
+![wide](https://cdn.pixabay.com/photo/2016/11/18/08/38/text-1833625_1280.jpg "image from Pixabay (cc)")
+
 The tricky thing about #[[df8128c0]] is that there is no single blanket formula
 that can change any habit we want to change. If its that easy, then we should
 all be the best version of our selves as we speak, right?
