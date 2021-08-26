@@ -8,10 +8,11 @@ var excludedNodes = ["index", "README", "faq", "LICENSE"];
 $.getJSON('../cache.json', function(data) {
   console.log(data.Graph);
 
+  const GRAPH_HEIGHT = 600;
   const NODE_REL_SIZE = 3;
   const ON_CLICK_CAM_DISTANCE = 300;
   const FOCUS_TRANSITION_DURATION = 2500;
-  const DOUBLE_CLICK_DURATION = 500;
+  const DOUBLE_CLICK_DURATION = 800;
   // const FORCE_STRENGTH = -graph.nodes.length * 2;
   // const FORCE_STRENGTH = -100;
 
@@ -20,7 +21,8 @@ $.getJSON('../cache.json', function(data) {
   var highlightLinks = new Set();
   var isCamRotationActive = false;
   var isAnimationActive = true;
-  var camDistance = 1000;
+  var isGraphHidden = false;
+  var camDistance = 800;
   var nodeGeometryMode = 1;   // 0: text-node, 1: text-only, 2: node-only
 
   var lastNodeClick = 0;
@@ -33,7 +35,7 @@ $.getJSON('../cache.json', function(data) {
     .nodeAutoColorBy("clusterid")
     .nodeVal('size')
     .linkColor(() => 'rgba(255,255,255,0.4)')
-    .height('600')
+    .height(GRAPH_HEIGHT)
     .showNavInfo(true)
     .d3Force("charge")
     .strength(node => { return -(node.size * 10); });
@@ -79,6 +81,9 @@ $.getJSON('../cache.json', function(data) {
         }
       }
       lastNodeClick = t;
+    })
+    .onNodeRightClick(node => {
+      window.open("../" + node.value + ".html", "_blank").focus();
     })
     .linkWidth(link => highlightLinks.has(link) ? 1 : 0.8)
     .linkDirectionalParticles(link => highlightLinks.has(link) ? 2 : 0)
@@ -143,6 +148,20 @@ $.getJSON('../cache.json', function(data) {
 
 
   // Add HTML toggle buttons listeners
+  document.getElementById('visibilityToggle').addEventListener('click', event => {
+    isGraphHidden = !isGraphHidden;
+    var graphContainer = document.getElementById('3d-graph-container');
+    var graphOrientControl = document.getElementById('graph-control');
+    if (isGraphHidden) {
+      graphContainer.style['display'] = 'none';
+      graphOrientControl.style['visibility'] = 'hidden';
+    } else {
+      graphContainer.style['display'] = 'inherit';
+      graphOrientControl.style['visibility'] = 'inherit';
+    }
+    isGraphHidden ? Graph.pauseAnimation() : Graph.resumeAnimation();
+    event.target.innerHTML = `${(isGraphHidden ? 'Show' : 'Hide')} 3D Graph`;
+  });
   document.getElementById('geometryToggle').addEventListener('click', event => {
     nodeGeometryMode++;
     if (nodeGeometryMode > 2) nodeGeometryMode = 0;
