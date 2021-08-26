@@ -29,7 +29,7 @@ personal habit changing formula.
 However, there is a framework that we can follow to diagnose our own habits and
 to help us strategically attack those habits while minimizing relapses.
 
-**The Framework:**
+### The Framework
 
 - [[cc255a3f]]# (how)
 - [[66362667]]# (why)
