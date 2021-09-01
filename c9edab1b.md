@@ -15,15 +15,16 @@ date: 2021-08-23T07:01
 ---
 
 
-![wide](https://cdn.pixabay.com/photo/2016/11/18/hkkk/38/text-1833625_1280.jpg "image from Pixabay (cc)")
+![wide](https://cdn.pixabay.com/photo/2014/03/25/17/01/chain-297842_960_720.png "image from Pixabay (cc)")
 
 The tricky thing about #[[df8128c0]] is that there is no single blanket formula
-that can change any habit we want to change. If its that easy, then we should
-all be the best version of our selves as we speak, right?
+that can change any habit we want to change. We are all slaves to our habits, if
+its easy to break free, then this framework would not have existed and therefore
+my interest in creating this blog entry.
 
 Changing a habit is very personal and unique to our needs and experiences. Bad
 habit of drinking alcohol under stressful events needs different approach than
-a habit of drinking out of boredom. Therefore, personal predicament calls for
+a habit of drinking for pleasure. Therefore, personal predicament calls for
 personal habit changing formula.
 
 However, there is a framework that we can follow to diagnose our own habits and
