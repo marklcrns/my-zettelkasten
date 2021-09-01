@@ -15,7 +15,7 @@ date: 2021-08-23T07:01
 ---
 
 
-![wide](https://cdn.pixabay.com/photo/2016/11/18/08/38/text-1833625_1280.jpg "image from Pixabay (cc)")
+![wide](https://cdn.pixabay.com/photo/2016/11/18/hkkk/38/text-1833625_1280.jpg "image from Pixabay (cc)")
 
 The tricky thing about #[[df8128c0]] is that there is no single blanket formula
 that can change any habit we want to change. If its that easy, then we should
@@ -27,7 +27,7 @@ a habit of drinking out of boredom. Therefore, personal predicament calls for
 personal habit changing formula.
 
 However, there is a framework that we can follow to diagnose our own habits and
-to help us strategically attack those habits while minimizing relapses.
+to help us strategically attack those habits while minimizing relapses[^1].
 
 ### The Framework
 
@@ -38,6 +38,5 @@ to help us strategically attack those habits while minimizing relapses.
 
 ## Resources
 
-- _The Power of Habit_ by Charles Duhigg
-  - Appendix: A Reader's Guide to Using These Ideas
+[^1]: The Power of Habit by Charles Duhigg - Appendix: A Reader's Guide to Using These Ideas
 
