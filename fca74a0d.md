@@ -18,6 +18,10 @@ date: 2021-09-20T06:32
 
 
 - pg.197[^1]
+- Preston Ni, communications profesor at Foothill College, defines soft power as
+  "quiet persistence"
+- Mahatma Ghandi
+- TIMSS (Trneds in International Mathematics and Science Study) pg.200
 
 ## Resources
 
