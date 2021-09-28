@@ -37,7 +37,9 @@ or she is learning to self-regulate fearfulness and wariness." pg.249
 
 Don't force your introverted child to socialize if they don't click with
 a particular kid or their peers. You want most of their early social experiences
-to be positive.
+to be positive. As communications professor James McCroskey noted, "Forcing
+highly apprehensive young people to perform orally is harmful. It will increase
+apprehension and reduce self-esteem."
 
 Arrange your child to enter social situations as gradually as possible. For
 instance, having a talk with your child in advance what the party would be like
