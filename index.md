@@ -89,16 +89,14 @@ folgezettel clusters.
 
 ## Recent Posts
 
-[[z:zettels?tag=blog&limit=10&timeline]]
+<!-- NOTE: Forward folge # is essential for RSS -->
+[[z:zettels?tag=blog&limit=10&timeline]]#
 
 <!-- ## Topics                                                  -->
 
 <!-- [[z:zettels?tag=science/**&grouped&limit=10&timeline]]     -->
-
 <!-- [[z:zettels?tag=psychology/**&grouped&limit=10&timeline]]  -->
-
 <!-- [[z:zettels?tag=programming/**&grouped&limit=10&timeline]] -->
-
 <!-- [[z:zettels?tag=history/**&grouped&limit=10&timeline]]     -->
 
 <!-- ## Book Notes                                              -->
