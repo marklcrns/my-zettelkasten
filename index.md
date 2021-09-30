@@ -89,21 +89,21 @@ folgezettel clusters.
 
 ## Recent Posts
 
-[[z:zettels?tag=blog&limit=10&timeline]]#
+[[z:zettels?tag=blog&limit=10&timeline]]
 
-## Topics
+<!-- ## Topics                                                  -->
 
-[[z:zettels?tag=science/**&grouped&timeline]]
+<!-- [[z:zettels?tag=science/**&grouped&limit=10&timeline]]     -->
 
-[[z:zettels?tag=psychology/**&grouped&timeline]]
+<!-- [[z:zettels?tag=psychology/**&grouped&limit=10&timeline]]  -->
 
-[[z:zettels?tag=programming/**&grouped&timeline]]
+<!-- [[z:zettels?tag=programming/**&grouped&limit=10&timeline]] -->
 
-[[z:zettels?tag=history/**&grouped&timeline]]
+<!-- [[z:zettels?tag=history/**&grouped&limit=10&timeline]]     -->
 
-## Book Notes
+<!-- ## Book Notes                                              -->
 
-[[z:zettels?tag=book/*&grouped&timeline]]
+<!-- [[z:zettels?tag=book/*&grouped&limit=10&timeline]]         -->
 
 {.ui .horizontal .divider}
 <section id="subscriptionLinks"></section>
