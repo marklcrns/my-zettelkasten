@@ -1,7 +1,7 @@
 // 3D Directed graph
 // https://github.com/vasturiano/3d-force-graph
 
-import { UnrealBloomPass } from '//cdn.skypack.dev/three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { UnrealBloomPass } from 'https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js';
 
 var excludedNodes = ["index", "README", "faq", "LICENSE"];
 
