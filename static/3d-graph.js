@@ -2,6 +2,8 @@
 // https://github.com/vasturiano/3d-force-graph
 
 import { UnrealBloomPass } from 'https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { FontLoader } from 'https://threejs.org/examples/jsm/loaders/FontLoader.js';
+import { TextGeometry } from 'https://threejs.org/examples/jsm/geometries/TextGeometry.js';
 
 var excludedNodes = ["index", "README", "faq", "LICENSE"];
 
@@ -210,7 +212,6 @@ function createNewForceGraph(mode, data) {
 function setNodeGeometryMode(graph, mode) {
   if (mode === 0) {
     // Bright Bloom Post-Processing effect
-    console.log("text-node mode");
     const bloomPassBright = new UnrealBloomPass();
     bloomPassBright.strength = 1.8;
     bloomPassBright.radius = 1;
@@ -228,7 +229,6 @@ function setNodeGeometryMode(graph, mode) {
       .postProcessingComposer().passes[1] = bloomPassBright;
   } else if (mode === 1) {
     // Dim Bloom Post-Processing effect
-    console.log("text-only mode");
     const bloomPassDim = new UnrealBloomPass();
     bloomPassDim.strength = 0.8;
     bloomPassDim.radius = 1;
@@ -246,7 +246,6 @@ function setNodeGeometryMode(graph, mode) {
       .postProcessingComposer().passes[1] = bloomPassDim;
   } else if (mode === 2){
     // Low Bloom Post-Processing effect
-    console.log("node-only mode");
     const bloomPassLow = new UnrealBloomPass();
     bloomPassLow.strength = 1.4;
     bloomPassLow.radius = 1;
@@ -393,11 +392,11 @@ function buildGraph(data) {
 
 
 function loadGraphZettelJumbotron(graph) {
-  const loader = new THREE.FontLoader();
+  const loader = new FontLoader();
   loader.load('./static/optimer_regular.typface.json', function(font) {
 
     // Fetch title-h1 element stripped of non-alphanumeric characters to uppercase
-    const titleGeometry = new THREE.TextGeometry(
+    const titleGeometry = new TextGeometry(
       document.getElementById('title-h1').innerText.replace(/\W/g, '').toUpperCase(),
       {
         font: font,
@@ -416,7 +415,7 @@ function loadGraphZettelJumbotron(graph) {
     const titleMesh = new THREE.Mesh(titleGeometry, titleMaterial);
     titleMesh.position.set(-titleGeometry.boundingSphere.radius, 100, -800); // (x, y, z)
 
-    const countGeometry = new THREE.TextGeometry(
+    const countGeometry = new TextGeometry(
       'ct: ' +  graph.graphData().nodes.length.toString(),
       {
         font: font,
