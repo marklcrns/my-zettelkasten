@@ -28,4 +28,4 @@ Individuals engage Deliberate Practice only when they work in solitude.
 
 ## Resources
 
-[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking - Chapter 3: When Collaboration Kills Creativity
+[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 3: When Collaboration Kills Creativity

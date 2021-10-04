@@ -25,4 +25,4 @@ date: 2021-09-20T06:32
 
 ## Resources
 
-[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking - Chapter 8: Soft Power
+[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 8: Soft Power
