@@ -18,4 +18,4 @@ control blushing.[^1]
 
 ## Resources
 
-[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking - Chapter 6: "Franklin Was A Politician, But Eleanor Spoke Out Of Conscience"
+[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 6: "Franklin Was A Politician, But Eleanor Spoke Out Of Conscience"

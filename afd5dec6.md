@@ -31,4 +31,4 @@ wave of [[0ad97bc4|cultural ideals]]# from which we would never quite recover.
 
 ## Resources
 
-[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking - Chapter 1: The Rise of the "Mighty Likeable Fellow"
+[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 1: The Rise of the "Mighty Likeable Fellow"

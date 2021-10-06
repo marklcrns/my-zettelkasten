@@ -49,4 +49,4 @@ company than breaking into a preexisting groups.
 
 ## Resources
 
-[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking - Chapter 11: On Cobblers and Generals
+[^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 11: On Cobblers and Generals
