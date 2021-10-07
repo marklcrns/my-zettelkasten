@@ -32,11 +32,12 @@ ganglia which was recently discovered of its actual functionality.
 
 Basal ganglia controls our automatic behavior such as walking or breathing.
 Repeated actions or behavior undergo the process called "chunking", our brain's
-way of learning new [[b11c411a]]#. As we process new information, our brain
-requires more memory space to store new memory for recollection. Converting
-routine activity into a concrete habit is one of our brains primal ability for
-maximum efficiency. Executing habits require far lesser brain activity and
-cognitive power than processing new information for the first few times.
+way of learning new [[b11c411a|habits]]#. As we process new information, our
+brain requires more memory space to store new memory for recollection.
+Converting routine activity into a concrete habit is one of our brains primal
+ability for maximum efficiency. Executing habits require far lesser brain
+activity and cognitive power than processing new information for the first few
+times.
 
 Also, our basal ganglia, being the core of our brain, is the last to give up
 when the rest of our memory shuts down. Its the reason why some diseases
