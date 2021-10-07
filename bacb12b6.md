@@ -2,7 +2,7 @@
 title: Deliberate Practice
 slug: deliberate-practice
 tags:
-  - wip
+  - draft
   - deliberate-practice
   - psychology
   - personality
@@ -17,14 +17,39 @@ date: 2021-09-02T06:34
 ---
 
 
-Individuals engage Deliberate Practice only when they work in solitude.
+![wide](https://c.pxhere.com/images/79/9b/6de758e7c4692a0053ca0aeb1392-1637021.jpg!d "image from PxHere (cc)")
 
-- Studies suggests that elite performers spends more time practicing alone than
-  those in their peers.
-- Open office nullifies the efficacies of #[[ad16f5c5|collaboration]]
-- The minds who created revolutionary inventions such as Linux, Wikipedia, or
-  Personal Computer spends more of their time not with their colleagues
-  collaborating, but their time working alone.
+Research psychologist Anders Ericsson identified the key to exceptional
+achievement is through _Deliberate Practice_. Only when you work in solitude,
+never in groups, can you engage Deliberate Practice, in other words, be _in the
+zone_.
+
+Studies suggests that elite performers spends more time practicing alone than
+those in their peers. Chess grandmasters typically spend five thousand hours,
+almost five times as many as the average players, studying the game by
+themselves in their first ten years of learning to play. College students who
+studies alone learn more quickly than studying with their peers. Elite athletes
+and musicians who outperform their peers by a huge gap spends unusual amount of
+time in solitary practice.
+
+Deliberate Practice requires intense concentration and deep motivation and
+having people around you can be distracting. Studies have found that the simple
+act of being interrupted is one of the biggest barrier to productivity. Also,
+when practicing deliberately, it is imperative that you work on something that
+is most challenging personally. "When you practice deliberately, you identify
+the tasks or knowledge that are just out of reach, strive to upgrade your
+performance, monitor your progress, and revise accordingly. Practice sessions
+that fall short of this standard are not only less useful-- they're counter
+productive. They reinforce existing cognitive mechanisms instead of improving
+them", wrote Susan Cain on Deliberate Practice[^1].
+
+In business setting, evidences show that open-plan offices
+#[[ad16f5c5|nullifies the efficacies of collaboration]]. It reduces productivity
+and makes people sick, literally. Another study found that people who take
+a quiet stroll through the woods learn far better than the people who walk down
+busy city streets. The minds who created revolutionary inventions such as Linux,
+Wikipedia, or Personal Computer spends more of their time not with their
+colleagues collaborating, but their time working alone.
 
 ## Resources
 
