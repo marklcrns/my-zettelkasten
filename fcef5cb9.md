@@ -12,6 +12,7 @@ tags:
   - brain
   - science/biology
   - science/biology/brain
+  - science/biology/brain/cerebrum
   - memory
   - the-power-of-habit
   - book
