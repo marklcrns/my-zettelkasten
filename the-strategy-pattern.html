@@ -45,19 +45,36 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
-    height: 600px;
-    object-fit: cover;
+    width: 600px;
+    height: 800px;
+    object-fit: contain;
   }
 
   img[alt*="square"],
   img.square {
-    display: block;
     margin-left: auto;
     margin-right: auto;
     width: 400px;
     height: 400px;
-    object-fit: cover;
+    object-fit: contain;
+  }
+
+  img[alt*="square-small"],
+  img.square {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+  }
+
+  img[alt*="square-large"],
+  img.square {
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    height: 600px;
+    object-fit: contain;
   }
 
   /* Relax width constraint a bit */
