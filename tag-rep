@@ -23,10 +23,7 @@ cat << EOF
 USAGE: <required> [optional]
 
   ./${SCRIPT_NAME} [!] <content-pattern> <tag-match> <tag-replace> [all] [exact] [directory]
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-tag' .
-  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' test-dir/
-  ./${SCRIPT_NAME} "lorem ipsum" 'new-*' 1
-  ./${SCRIPT_NAME} ! "lorem ipsum" 'new-*' 1 test-dir/
+  ./${SCRIPT_NAME} "title:" ".*/biology/brain" "/biology/cns/brain" 1 0
 
   [!]                 Only include files not matching <content-pattern>.
   <content-pattern>   regex pattern to match the file(s) content to be included
