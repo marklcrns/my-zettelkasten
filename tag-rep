@@ -30,9 +30,9 @@ USAGE: <required> [optional]
 
   [!]                 Only include files not matching <content-pattern>.
   <content-pattern>   regex pattern to match the file(s) content to be included
-                      in tag deletion.
-  <tag>               name of tag to delete.
-  [all]               0 (default) to delete first match. 1 to delete all
+                      in tag replacement.
+  <tag>               name of tag to replace.
+  [all]               0 (default) to replace first match. 1 to replace all
                       matching pattern.
   [exact]             0 for loose tag matching. 1 (default) for exact tag match.
   [directory]         directory (default '.') to search into, recursively.

@@ -8,8 +8,8 @@ tags:
   - biology
   - brain
   - science/biology
-  - science/biology/brain
-  - science/biology/brain/cerebellum
+  - science/biology/cns/brain
+  - science/biology/cns/brain/cerebellum
 date: 2021-10-11T07:41
 ---
 
