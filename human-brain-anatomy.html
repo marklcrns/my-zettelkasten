@@ -35,9 +35,29 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 800px;
-    height: 600px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+  }
+
+  img[alt*="wide-left"],
+  img.wide-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+  }
+
+  img[alt*="wide-right"],
+  img.wide-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
   }
 
   img[alt*="tall"],
@@ -45,36 +65,128 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
-    height: 800px;
-    object-fit: contain;
+    width: auto;
+    height: 100%;
+    max-height: 800px;
+  }
+
+  img[alt*="tall-left"],
+  img.tall-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 100%;
+    max-height: 800px;
+  }
+
+  img[alt*="tall-right"],
+  img.tall-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 100%;
+    max-height: 800px;
   }
 
   img[alt*="square"],
   img.square {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
-    height: 400px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  img[alt*="square-left"],
+  img.square-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  img[alt*="square-right"],
+  img.square-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
   }
 
   img[alt*="square-small"],
-  img.square {
+  img.square-small {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
-    height: 300px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  img[alt*="square-small-left"],
+  img.square-small-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  img[alt*="square-small-right"],
+  img.square-small-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
   }
 
   img[alt*="square-large"],
-  img.square {
+  img.square-large {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
-    height: 600px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  img[alt*="square-large-left"],
+  img.square-large-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  img[alt*="square-large-right"],
+  img.square-large-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
   }
 
   /* Relax width constraint a bit */
@@ -102,6 +214,10 @@
     margin-right: 1.2em;
   }
 
+  .ui.segment.zettel-content p {
+    font-size: 1.1rem;
+  }
+
   .ui.attached.segment.zettel-content h2,
   .ui.attached.segment.zettel-content h3,
   .ui.attached.segment.zettel-content h4,
@@ -120,7 +236,7 @@
   }
 
   .ui.header + p {
-    margin-top: 1.5em;
+    margin-top: 1.7em;
   }
 
   body .zettel-content h1#title-h1 {
@@ -152,7 +268,7 @@
   body h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
-    font-size: 2em;
+    font-size: 2.2em;
   }
 
   body h3, h4, h5, h6 {
@@ -163,6 +279,11 @@
   body p, li, a {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
+  }
+
+  div.pandoc {
+    margin-left: 2.0em;
+    margin-right: 2.0em;
   }
 
   /* Hide the query divider */
@@ -412,4 +533,4 @@
 
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
-<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-11T08:24"><a href="central-nervous-system">Central Nervous System</a></span></span></div></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link"><a href="wip">🚧 WIP 🚧</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Human Brain Anatomy</h1><p><img alt="wide" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/7_Tesla_MRI_of_the_ex_vivo_human_brain_at_100_micron_resolution_%28100_micron_MRI_acquired_FA25_sagittal%29_%28downsized%2C_original_speed%29.gif/300px-7_Tesla_MRI_of_the_ex_vivo_human_brain_at_100_micron_resolution_%28100_micron_MRI_acquired_FA25_sagittal%29_%28downsized%2C_original_speed%29.gif" title="image from Wikipedia (cc)" /></p><h2 id="main-parts-of-the-brain">Main Parts of the Brain</h2><ul><li><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Cerebrum"><a href="cerebrum">Cerebrum</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></li><li><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Brainstem"><a href="brainstem">Brainstem</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></li><li><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Cerebellum"><a href="cerebellum">Cerebellum</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></li></ul><p><img alt="square-large" src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Diagram_showing_some_of_the_main_areas_of_the_brain_CRUK_188.svg" title="image from Wikimedia Commons (cc)" /></p><h2 id="12-cranial-nerves">12 Cranial Nerves</h2><ol><li>Olfactory</li><li>Optic</li><li>Oculomotor</li><li>Trochlear</li><li>Trigeminal</li><li>Abducens</li><li>Facial</li><li>Vestibulocochlear (Auditory)</li><li>Glossopharyngeal</li><li>Vagus</li><li>Accessory</li><li>Hypoglossal</li></ol><p><img alt="square-large" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Blausen_0284_CranialNerves.png/800px-Blausen_0284_CranialNerves.png" title="image from Wikimedia Commons (cc)" /></p><h2 id="resources">Resources</h2><ul><li><a href="https://www.hopkinsmedicine.org/health/conditions-and-diseases/anatomy-of-the-brain">Brain Anatomy and How the Brain Works</a></li><li><a href="https://mayfieldclinic.com/pe-anatbrain.htm">Anatomy of the Brain</a></li></ul></div><div class="metadata"><div class="date" title="Zettel date"><time datetime="2021-10-11T06:51">2021-10-11</time></div></div></article><nav class="ui attached segment deemphasized backlinksPane" id="neuron-backlinks-pane"><h3 class="ui header"><span title="Backlinks from folgezettel parents">Uplinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folge"><span class="zettel-link" title="2021-10-11T08:24"><a href="central-nervous-system">Central Nervous System</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"><li class="item"><div class="pandoc"><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Human Brain Anatomy"><a href="human-brain-anatomy">Brain</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></div></li></ul></li><li><span class="zettel-link-container folge"><span class="zettel-link"><a href="wip">🚧 WIP 🚧</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"></ul></li></ul></nav><nav class="ui attached segment deemphasized bottomPane" id="neuron-tags-pane"><div><span class="ui basic label zettel-tag" title="Tag">biology</span><span class="ui basic label zettel-tag" title="Tag">brain</span><span class="ui basic label zettel-tag" title="Tag">human-brain-anatomy</span><span class="ui basic label zettel-tag" title="Tag">science</span><span class="ui basic label zettel-tag" title="Tag">science/biology</span><span class="ui basic label zettel-tag" title="Tag">science/biology/cns/brain</span><span class="ui basic label zettel-tag" title="Tag">wip</span></div></nav><nav class="ui bottom attached icon compact inverted menu red" id="neuron-nav-bar"><!--replace-start-9--><a class="item" href="." title="Home"><i class="home icon"></i></a><!--replace-end-9--><a class="right item" href="impulse" title="Open Impulse"><i class="wave square icon"></i></a></nav></div></div><!--replace-end-6--><!--replace-end-3--><!--replace-end-2--><div class="ui center aligned container footer-version"><div class="ui tiny image"><a href="https://neuron.zettel.page"><img alt="logo" src="https://raw.githubusercontent.com/srid/neuron/master/assets/neuron.svg" title="Generated by Neuron 1.9.35.3" /></a></div></div></div></body></html>
+<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-11T08:24"><a href="central-nervous-system">Central Nervous System</a></span></span></div></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link"><a href="wip">🚧 WIP 🚧</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Human Brain Anatomy</h1><p><img alt="wide" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/7_Tesla_MRI_of_the_ex_vivo_human_brain_at_100_micron_resolution_%28100_micron_MRI_acquired_FA25_sagittal%29_%28downsized%2C_original_speed%29.gif/300px-7_Tesla_MRI_of_the_ex_vivo_human_brain_at_100_micron_resolution_%28100_micron_MRI_acquired_FA25_sagittal%29_%28downsized%2C_original_speed%29.gif" title="image from Wikipedia (cc)" /></p><h2 id="main-parts-of-the-brain">Main Parts of the Brain</h2><ul><li><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Cerebrum"><a href="cerebrum">Cerebrum</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></li><li><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Brainstem"><a href="brainstem">Brainstem</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></li><li><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Cerebellum"><a href="cerebellum">Cerebellum</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></li></ul><p><img alt="square" src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Diagram_showing_some_of_the_main_areas_of_the_brain_CRUK_188.svg" title="image from Wikimedia Commons (cc)" /></p><h2 id="12-cranial-nerves">12 Cranial Nerves</h2><ol><li>Olfactory</li><li>Optic</li><li>Oculomotor</li><li>Trochlear</li><li>Trigeminal</li><li>Abducens</li><li>Facial</li><li>Vestibulocochlear (Auditory)</li><li>Glossopharyngeal</li><li>Vagus</li><li>Accessory</li><li>Hypoglossal</li></ol><p><img alt="square" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Blausen_0284_CranialNerves.png/800px-Blausen_0284_CranialNerves.png" title="image from Wikimedia Commons (cc)" /></p><h2 id="resources">Resources</h2><ul><li><a href="https://www.hopkinsmedicine.org/health/conditions-and-diseases/anatomy-of-the-brain">Brain Anatomy and How the Brain Works</a></li><li><a href="https://mayfieldclinic.com/pe-anatbrain.htm">Anatomy of the Brain</a></li></ul></div><div class="metadata"><div class="date" title="Zettel date"><time datetime="2021-10-11T06:51">2021-10-11</time></div></div></article><nav class="ui attached segment deemphasized backlinksPane" id="neuron-backlinks-pane"><h3 class="ui header"><span title="Backlinks from folgezettel parents">Uplinks</span></h3><ul class="backlinks"><li><span class="zettel-link-container folge"><span class="zettel-link" title="2021-10-11T08:24"><a href="central-nervous-system">Central Nervous System</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"><li class="item"><div class="pandoc"><span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Human Brain Anatomy"><a href="human-brain-anatomy">Brain</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span></div></li></ul></li><li><span class="zettel-link-container folge"><span class="zettel-link"><a href="wip">🚧 WIP 🚧</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span><ul class="context-list" style="zoom: 85%;"></ul></li></ul></nav><nav class="ui attached segment deemphasized bottomPane" id="neuron-tags-pane"><div><span class="ui basic label zettel-tag" title="Tag">biology</span><span class="ui basic label zettel-tag" title="Tag">brain</span><span class="ui basic label zettel-tag" title="Tag">human-brain-anatomy</span><span class="ui basic label zettel-tag" title="Tag">science</span><span class="ui basic label zettel-tag" title="Tag">science/biology</span><span class="ui basic label zettel-tag" title="Tag">science/biology/cns/brain</span><span class="ui basic label zettel-tag" title="Tag">wip</span></div></nav><nav class="ui bottom attached icon compact inverted menu red" id="neuron-nav-bar"><!--replace-start-9--><a class="item" href="." title="Home"><i class="home icon"></i></a><!--replace-end-9--><a class="right item" href="impulse" title="Open Impulse"><i class="wave square icon"></i></a></nav></div></div><!--replace-end-6--><!--replace-end-3--><!--replace-end-2--><div class="ui center aligned container footer-version"><div class="ui tiny image"><a href="https://neuron.zettel.page"><img alt="logo" src="https://raw.githubusercontent.com/srid/neuron/master/assets/neuron.svg" title="Generated by Neuron 1.9.35.3" /></a></div></div></div></body></html>

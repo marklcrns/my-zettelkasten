@@ -35,9 +35,29 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 800px;
-    height: 600px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+  }
+
+  img[alt*="wide-left"],
+  img.wide-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+  }
+
+  img[alt*="wide-right"],
+  img.wide-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 800px;
   }
 
   img[alt*="tall"],
@@ -45,36 +65,128 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
-    height: 800px;
-    object-fit: contain;
+    width: auto;
+    height: 100%;
+    max-height: 800px;
+  }
+
+  img[alt*="tall-left"],
+  img.tall-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 100%;
+    max-height: 800px;
+  }
+
+  img[alt*="tall-right"],
+  img.tall-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 100%;
+    max-height: 800px;
   }
 
   img[alt*="square"],
   img.square {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
-    height: 400px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  img[alt*="square-left"],
+  img.square-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  img[alt*="square-right"],
+  img.square-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
   }
 
   img[alt*="square-small"],
-  img.square {
+  img.square-small {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
-    height: 300px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  img[alt*="square-small-left"],
+  img.square-small-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  img[alt*="square-small-right"],
+  img.square-small-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 300px;
+    max-height: 300px;
   }
 
   img[alt*="square-large"],
-  img.square {
+  img.square-large {
+    display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 600px;
-    height: 600px;
-    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  img[alt*="square-large-left"],
+  img.square-large-left {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
+  }
+
+  img[alt*="square-large-right"],
+  img.square-large-right {
+    float: right;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    max-height: 600px;
   }
 
   /* Relax width constraint a bit */
@@ -102,6 +214,10 @@
     margin-right: 1.2em;
   }
 
+  .ui.segment.zettel-content p {
+    font-size: 1.1rem;
+  }
+
   .ui.attached.segment.zettel-content h2,
   .ui.attached.segment.zettel-content h3,
   .ui.attached.segment.zettel-content h4,
@@ -120,7 +236,7 @@
   }
 
   .ui.header + p {
-    margin-top: 1.5em;
+    margin-top: 1.7em;
   }
 
   body .zettel-content h1#title-h1 {
@@ -152,7 +268,7 @@
   body h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
-    font-size: 2em;
+    font-size: 2.2em;
   }
 
   body h3, h4, h5, h6 {
@@ -163,6 +279,11 @@
   body p, li, a {
     font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
+  }
+
+  div.pandoc {
+    margin-left: 2.0em;
+    margin-right: 2.0em;
   }
 
   /* Hide the query divider */
