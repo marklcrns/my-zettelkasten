@@ -70,17 +70,18 @@ $.getJSON('../cache.json', function(data) {
         window.open("../" + node.value + ".html", "_blank").focus();
       // Single click
       } else{
-        if (!isCamRotationActive) {
-          // Aim at node from outside it
-          camDistance = ON_CLICK_CAM_DISTANCE;
-          const distRatio = 1 + camDistance/Math.hypot(node.x, node.y, node.z);
-
-          Graph.cameraPosition(
-            { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
-            node, // lookAt ({ x, y, z })
-            FOCUS_TRANSITION_DURATION  // ms transition duration
-          );
+        if (isCamRotationActive) {
+          isCamRotationActive = false;
         }
+        // Aim at node from outside it
+        camDistance = ON_CLICK_CAM_DISTANCE;
+        const distRatio = 1 + camDistance/Math.hypot(node.x, node.y, node.z);
+
+        Graph.cameraPosition(
+          { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio }, // new position
+          node, // lookAt ({ x, y, z })
+          FOCUS_TRANSITION_DURATION  // ms transition duration
+        );
       }
       lastNodeClick = t;
     })
@@ -147,7 +148,6 @@ $.getJSON('../cache.json', function(data) {
       angle += Math.PI / 500;
     }
   }, 10);
-
 
   // Add HTML toggle buttons listeners
   document.getElementById('visibilityToggle').addEventListener('click', event => {

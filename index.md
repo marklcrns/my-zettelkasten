@@ -34,19 +34,19 @@ date: 2021-05-22
   </button>
 </div>
 
-<div id="graph-behavior-controls" class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
-  <button id="geometryToggle">
-    Text-Node Mode
-  </button>
-  <button id="animationToggle">
-    Pause Animation
-  </button>
-  <button id="rotationToggle">
-    Resume Rotation
-  </button>
-</div>
-
 <div id="3d-graph-container">
+  <div id="graph-behavior-controls" class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+    <button id="geometryToggle">
+      Text-Node Mode
+    </button>
+    <button id="animationToggle">
+      Pause Animation
+    </button>
+    <button id="rotationToggle">
+      Resume Rotation
+    </button>
+  </div>
+
   <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
 
   <blockquote id="graph-instructions">
