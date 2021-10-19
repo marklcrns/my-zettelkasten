@@ -2,7 +2,7 @@
 title: Culture of Character to Culture of Personality
 slug: culture-of-character-to-culture-of-personality
 tags:
-  - blog
+  - zettel
   - culture-of-personality
   - psychology
   - personality

@@ -2,7 +2,7 @@
 title: The Framework for Changing Habits
 slug: the-framework-for-changing-habits
 tags:
-  - blog
+  - zettel
   - the-framework-for-changing-habits
   - psychology
   - habits

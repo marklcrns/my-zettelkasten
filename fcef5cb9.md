@@ -2,7 +2,7 @@
 slug: basal-ganglia
 title: Basal Ganglia
 tags:
-  - blog
+  - zettel
   - basal-ganglia
   - psychology
   - habits

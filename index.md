@@ -90,7 +90,7 @@ folgezettel clusters.
 ## Recent Posts
 
 <!-- NOTE: Forward folge # is essential for RSS -->
-[[z:zettels?tag=blog&limit=10&timeline]]#
+[[z:zettels?tag=zettel&limit=10&timeline]]#
 
 <!-- ## Topics                                                  -->
 

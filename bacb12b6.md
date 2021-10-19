@@ -2,7 +2,7 @@
 title: Deliberate Practice
 slug: deliberate-practice
 tags:
-  - blog
+  - zettel
   - deliberate-practice
   - psychology
   - personality
