@@ -17,7 +17,7 @@ date: 2021-10-11T06:43
 ---
 
 
-![wide](https://c.pxhere.com/images/79/9b/6de758e7c4692a0053ca0aeb1392-1637021.jpg!d "image from PxHere (cc)")
+![wide](https://p0.piqsels.com/preview/658/396/939/woman-pose-hold-focus.jpg "image from Piqsels (cc)")
 
 Research psychologist Anders Ericsson identified the key to exceptional
 achievement is through _Deliberate Practice_. Only when you work in solitude,
