@@ -79,9 +79,8 @@ Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph
 
 [![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
 
-Welcome! To my personal
-[Zettlekasten](https://en.wikipedia.org/wiki/Zettelkasten) inspired by Niklas
-Luhmann, powered by [neuron](https://github.com/srid/neuron).
+Welcome! To my personal [[a10a5041|Zettlekasten]] inspired by Niklas Luhmann,
+powered by [neuron](https://github.com/srid/neuron).
 
 Check out the [Impulse](/impulse.html) page for the list of all my zettels in
 folgezettel clusters.
