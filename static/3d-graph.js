@@ -323,6 +323,7 @@ function buildGraph(data) {
           var visited = [];
           // recache clusterid from target's existing links
           recacheNodeImmediateLinks(link.target, links, nodeMap, visited, false);
+          recacheNodeImmediateLinks(link.source, links, nodeMap, visited, false);
           // Simply resize source without changing clusterid
           recacheNodeImmediateLinks(link.source, links, nodeMap, visited, true);
 
