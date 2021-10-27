@@ -20,7 +20,7 @@ date: 2021-08-23T07:01
 The tricky thing about #[[df8128c0]] is that there is no single blanket formula
 that can change any habit we want to change. We are all slaves to our habits, if
 its easy to break free, then this framework would not have existed and therefore
-my interest in creating this [[a10a5041|zettel]] entry.
+my interest in creating this entry.
 
 Changing a habit is very personal and unique to our needs and experiences. Bad
 habit of drinking alcohol under stressful events needs different approach than

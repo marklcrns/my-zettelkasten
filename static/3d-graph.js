@@ -8,7 +8,7 @@ import { TextGeometry } from 'https://threejs.org/examples/jsm/geometries/TextGe
 var excludedNodes = ["index", "README", "faq", "LICENSE"];
 
 $.getJSON('../cache.json', function(data) {
-  console.log(data.Graph);
+  // console.log(data.Graph);
 
   const GRAPH_HEIGHT = 600;
   const NODE_REL_SIZE = 3;
@@ -507,7 +507,7 @@ function addGUIDAGControls(graph, data) {
         }
         graph && graph.dagMode(controlsDict[orientation]);
       }
-      console.log("excluded nodes: [" + excludedNodes + "]");
+      // console.log("excluded nodes: [" + excludedNodes + "]");
     });
 }
 
