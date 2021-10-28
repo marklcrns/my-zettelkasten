@@ -8,55 +8,55 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-core.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
 
-<div class="search-box">
-  <div class="search">
-    <input type="text" autocomplete="none" autocorrect="none" autocapitalize="none" spellcheck="false" value/>
-    <button class="clear">×</button>
-  </div>
-</div>
+<!-- <div class="search-box">                                                                                       -->
+<!--   <div class="search">                                                                                         -->
+<!--     <input type="text" autocomplete="none" autocorrect="none" autocapitalize="none" spellcheck="false" value/> -->
+<!--     <button class="clear">×</button>                                                                          -->
+<!--   </div>                                                                                                       -->
+<!-- </div>                                                                                                         -->
 
-<script src="https://cdn.jsdelivr.net/npm/minisearch@3.1.0/dist/umd/index.min.js"></script>
-<script charset="utf-8">
-  window.addEventListener("load", function(){
-    $.getJSON('../cache.json', function(data) {
-      var graph = buildGraph(data.Graph).nodes
-      console.log(graph);
+<!-- <script src="https://cdn.jsdelivr.net/npm/minisearch@3.1.0/dist/umd/index.min.js"></script>                    -->
+<!-- <script charset="utf-8">                                                                                       -->
+<!--   window.addEventListener("load", function(){                                                                  -->
+<!--     $.getJSON('../cache.json', function(data) {                                                                -->
+<!--       var graph = buildGraph(data.Graph).nodes                                                                 -->
+<!--       console.log(graph);                                                                                      -->
 
-      let miniSearch = new MiniSearch({
-        fields: ['title'], // fields to index for full-text search
-        storeFields: ['title', 'date', 'tags'] // fields to return with search results
-      })
+<!--       let miniSearch = new MiniSearch({                                                                        -->
+<!--         fields: ['title'], // fields to index for full-text search                                             -->
+<!--         storeFields: ['title', 'date', 'tags'] // fields to return with search results                         -->
+<!--       })                                                                                                       -->
 
-      // Index all documents
-      miniSearch.addAll(graph)
-      let results = miniSearch.search('Reward Sens')
-      console.log(results);
-    })
-  });
+<!--       // Index all documents                                                                                   -->
+<!--       miniSearch.addAll(graph)                                                                                 -->
+<!--       let results = miniSearch.search('Reward Sens')                                                           -->
+<!--       console.log(results);                                                                                    -->
+<!--     })                                                                                                         -->
+<!--   });                                                                                                          -->
 
-  function buildGraph(data) {
-    var graph = {};
-    var excludedNodes = ["index", "README", "faq", "LICENSE"];
+<!--   function buildGraph(data) {                                                                                  -->
+<!--     var graph = {};                                                                                            -->
+<!--     var excludedNodes = ["index", "README", "faq", "LICENSE"];                                                 -->
 
-    // Build nodes
-    var nodes = [];
-    Object.entries(data.vertices).forEach(([node,e]) => {
-      if (!excludedNodes.includes(e.ID)) {
-        var node = {}
-        // Meta
-        node.id = e.ID;
-        node.title = e.Title;
-        node.slug = e.Slug;
-        node.date = new Date(e.Date).toDateString();
-        node.tags = e.Meta.tags;
-        nodes.push(node);
-      }
-    })
+<!--     // Build nodes                                                                                             -->
+<!--     var nodes = [];                                                                                            -->
+<!--     Object.entries(data.vertices).forEach(([node,e]) => {                                                      -->
+<!--       if (!excludedNodes.includes(e.ID)) {                                                                     -->
+<!--         var node = {}                                                                                          -->
+<!--         // Meta                                                                                                -->
+<!--         node.id = e.ID;                                                                                        -->
+<!--         node.title = e.Title;                                                                                  -->
+<!--         node.slug = e.Slug;                                                                                    -->
+<!--         node.date = new Date(e.Date).toDateString();                                                           -->
+<!--         node.tags = e.Meta.tags;                                                                               -->
+<!--         nodes.push(node);                                                                                      -->
+<!--       }                                                                                                        -->
+<!--     })                                                                                                         -->
 
-    graph.nodes = nodes;
-    return graph;
-  }
-</script>
+<!--     graph.nodes = nodes;                                                                                       -->
+<!--     return graph;                                                                                              -->
+<!--   }                                                                                                            -->
+<!-- </script>                                                                                                      -->
 
 <style>
   body .universe {
