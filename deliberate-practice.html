@@ -191,21 +191,34 @@
 
   /* Relax width constraint a bit */
   #zettel-container {
-    max-width: 90% !important;
-    max-height: 90% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
 
   .ui.ui.ui.container:not(.fluid) {
-    width: 90%
+    width: 100%
   }
 
-  /* .ui.raised.raised.segment, .ui.raised.raised.segments { */
-  /*   box-shadow: none;                                     */
-  /* }                                                       */
+  .ui.raised.raised.segment, .ui.raised.raised.segments {
+    box-shadow: none;
+  }
 
-  /* .ui.attached.segment {                                  */
-  /*   border: none;                                         */
-  /* }                                                       */
+  /* .ui.attached.segment { */
+  /*   border: none;        */
+  /* }                      */
+
+  .tldr {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .tldr p {
+    font-style: italic;
+    background-color: rgba(200, 200, 200, 0.2);
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
 
   .ui.attached.segment.zettel-content p,
   .ui.attached.segment.zettel-content ul,
