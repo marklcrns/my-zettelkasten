@@ -11,6 +11,7 @@ $.getJSON('../cache.json', function(data) {
   // console.log(data.Graph);
 
   const GRAPH_HEIGHT = 600;
+  const GRAPH_WIDTH = $('.pandoc').width();
   const NODE_REL_SIZE = 3;
   const ON_CLICK_CAM_DISTANCE = 300;
   const FOCUS_TRANSITION_DURATION = 2500;
@@ -37,10 +38,11 @@ $.getJSON('../cache.json', function(data) {
     .nodeAutoColorBy("clusterid")
     .nodeVal('size')
     .linkColor(() => 'rgba(255,255,255,0.4)')
+    .width(GRAPH_WIDTH)
     .height(GRAPH_HEIGHT)
     .showNavInfo(true)
     .d3Force("charge")
-    .strength(node => { return -(node.size * 10); });
+    .strength(node => { return -(node.size * 15); });
 
   // DAG
   Graph
@@ -391,9 +393,9 @@ function buildGraph(data) {
   return graph;
 }
 
-
 function loadGraphZettelJumbotron(graph) {
   const loader = new FontLoader();
+  const nodeCount = graph.graphData().nodes.length;
   loader.load('./static/optimer_regular.typface.json', function(font) {
 
     // Fetch title-h1 element stripped of non-alphanumeric characters to uppercase
@@ -414,10 +416,10 @@ function loadGraphZettelJumbotron(graph) {
     titleGeometry.computeBoundingSphere();
     const titleMaterial = new THREE.MeshLambertMaterial({color: 0x3F3F3F, side: THREE.DoubleSide});
     const titleMesh = new THREE.Mesh(titleGeometry, titleMaterial);
-    titleMesh.position.set(-titleGeometry.boundingSphere.radius, 100, -800); // (x, y, z)
+    titleMesh.position.set(-titleGeometry.boundingSphere.radius, 100, -(nodeCount * 15)); // (x, y, z)
 
     const countGeometry = new TextGeometry(
-      'ct: ' +  graph.graphData().nodes.length.toString(),
+      'ct: ' +  nodeCount.toString(),
       {
         font: font,
         size: 50,
@@ -430,6 +432,7 @@ function loadGraphZettelJumbotron(graph) {
         bevelSegments: 5
       }
     );
+
     countGeometry.computeBoundingSphere();
     const countMaterial = new THREE.MeshLambertMaterial({color: 0x8F6700, side: THREE.DoubleSide});
     const countMesh = new THREE.Mesh(countGeometry, countMaterial);
@@ -450,6 +453,20 @@ function loadGraphZettelJumbotron(graph) {
   });
 }
 
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
 function addGUIDAGControls(graph, data) {
   const controlsDict = {
     'Scattered': 'null',
@@ -462,10 +479,11 @@ function addGUIDAGControls(graph, data) {
     'Outwards-radially': 'radialout',
     'Inwards-radially': 'radialin',
   };
+
   const controls = { '3D Graph Orientation': 'Scattered'};
-  const gui = new dat.GUI({width: 300, closeOnTop: true});
-  // const gui = new dat.GUI({autoPlace: false, width: 300, closeOnTop: true});
-  // $('.graph-controls').append($(gui.domElement));
+  // const gui = new dat.GUI({width: 300, closeOnTop: true});
+  const gui = new dat.GUI({autoPlace: false, width: 280, closeOnTop: true});
+  $('#dat-gui').prepend($(gui.domElement));
   gui.domElement.id = 'graph-control';
   gui.add(controls, '3D Graph Orientation', [
     'Scattered',

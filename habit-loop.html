@@ -11,7 +11,7 @@
 <!-- <div class="search-box">                                                                                       -->
 <!--   <div class="search">                                                                                         -->
 <!--     <input type="text" autocomplete="none" autocorrect="none" autocapitalize="none" spellcheck="false" value/> -->
-<!--     <button class="clear">×</button>                                                                          -->
+<!--     <button class="clear">×</button>                                                                           -->
 <!--   </div>                                                                                                       -->
 <!-- </div>                                                                                                         -->
 
@@ -57,6 +57,12 @@
 <!--     return graph;                                                                                              -->
 <!--   }                                                                                                            -->
 <!-- </script>                                                                                                      -->
+
+<script async src="https://cse.google.com/cse.js?cx=6a88cf4a35fa98fc2"></script>
+<div id="searchbox">
+  <div class="gcse-search"></div>
+</div>
+
 
 <style>
   body .universe {
@@ -387,6 +393,45 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+  }
+
+  #graph-behavior-controls,
+  #graph-visibility-controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #graph-behavior-controls button {
+    margin: 0 5px 0 5px;
+    padding: 5px;
+  }
+
+  #visibilityToggle {
+    margin: 8px;
+    padding: 10px 20px 10px 20px;
+  }
+
+  #3d-graph {
+    visibility: hidden;
+    text-align: center;
+  }
+
+  #dat-gui {
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+
+  .dg {
+    margin: auto !important;
+  }
+
+  .dg ul {
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 11px !important;
   }
 </style>
 
