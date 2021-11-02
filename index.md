@@ -29,14 +29,14 @@ date: 2021-05-22
 <!-- Styles -->
 <link rel="stylesheet" href="./static/3d-graph.css">
 
-<div id="graph-visibility-controls" class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
-  <button id="visibilityToggle" style="margin: 8px; height: 30px; width: 130px;">
+<div id="graph-visibility-controls" class="graph-controls">
+  <button id="visibilityToggle">
     Hide Graph
   </button>
 </div>
 
 <div id="3d-graph-container">
-  <div id="graph-behavior-controls" class="graph-controls" style="position: relative; display: flex; align-items: center; justify-content: center; padding: 5px;">
+  <div id="graph-behavior-controls" class="graph-controls">
     <button id="geometryToggle">
       Text-Node Mode
     </button>
@@ -47,8 +47,8 @@ date: 2021-05-22
       Resume Rotation
     </button>
   </div>
-
-  <div id="3d-graph" style='visibility:hidden; text-align: center;'></div>
+  <div id="dat-gui"></div>
+  <div id="3d-graph"></div>
 
   <blockquote id="graph-instructions">
     Drag to rellocate a node. Click to focus on node (while rotation is paused).
