@@ -13,7 +13,7 @@ tags:
   - book
   - book/quiet
   - susan-cain
-date: 2021-09-20T06:32
+date: 2021-11-05T06:47
 ---
 
 
