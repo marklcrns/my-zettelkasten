@@ -16,6 +16,5 @@ control blushing.[^1]
 - Reference my presentation in public speaking class about "Why Do People
   Blush?".
 
-## Resources
 
 [^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 6: "Franklin Was A Politician, But Eleanor Spoke Out Of Conscience"

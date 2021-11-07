@@ -41,7 +41,7 @@ the tasks or knowledge that are just out of reach, strive to upgrade your
 performance, monitor your progress, and revise accordingly. Practice sessions
 that fall short of this standard are not only less useful-- they're counter
 productive. They reinforce existing cognitive mechanisms instead of improving
-them", wrote Susan Cain on Deliberate Practice[^1].
+them", wrote Susan Cain on Deliberate Practice.[^1]
 
 In business setting, evidences show that
 #[[ad16f5c5|open-plan offices nullifies the efficacies of collaboration]]. It
@@ -51,6 +51,5 @@ people who walk down busy city streets. The minds who created revolutionary
 inventions such as Linux, Wikipedia, or Personal Computer spends more of their
 time not with their colleagues collaborating, but their time working alone.
 
-## Resources
 
 [^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 3: When Collaboration Kills Creativity

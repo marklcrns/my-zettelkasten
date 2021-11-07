@@ -28,7 +28,7 @@ a habit of drinking for pleasure. Therefore, personal predicament calls for
 personal habit changing formula.
 
 However, there is a framework that we can follow to diagnose our own habits and
-to help us strategically attack those habits while minimizing relapses[^1].
+to help us strategically attack those habits while minimizing relapses.[^1]
 
 ### The Framework
 
@@ -42,7 +42,5 @@ done with the previous step. It will help you focus and really absorb what each
 step is meant for as it is important not rush this over. This is already
 a shortcut so don't cut it short still.
 
-## Resources
 
 [^1]: The Power of Habit by Charles Duhigg - Appendix: A Reader's Guide to Using These Ideas
-

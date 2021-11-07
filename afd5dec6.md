@@ -23,12 +23,10 @@ self." As opposed to the Culture of Character where "the ideal self was serious,
 disciplined and honorable". People value not so much as the impression they make
 in public but as how they behave in their privacy. The word _personality_
 weren't even invented until the eighteenth century, and the idea of "having
-a good personality" was not widespread until the twentieth. [^1]
+a good personality" was not widespread until the twentieth.[^1]
 
 A shift from the Culture of Character to the Culture of Personality brings new
 wave of [[0ad97bc4|cultural ideals]]# from which we would never quite recover.
 
-
-## Resources
 
 [^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 1: The Rise of the "Mighty Likeable Fellow"

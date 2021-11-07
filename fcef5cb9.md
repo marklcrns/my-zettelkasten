@@ -50,6 +50,4 @@ recognizing facial expression for not knowing where to focus our eyes on in
 a conversation.
 
 
-## Resources
-
 [^1]: The Power of Habit by Charles Duhigg - Chapter 1: The Habit Loop
