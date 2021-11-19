@@ -7,62 +7,93 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-core.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Tailwind -->
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/combine/npm/twind/twind.umd.min.js,npm/twind/observe/observe.umd.min.js"></script>
+<script type="text/javascript">
+   twind.setup(
+    {
+      mode: 'silent',  // Behave well with semantic UI classes
+      preflight: () => {
+        return {
+           // Custom styles based on selectors go here (use the selector in Markdown; see below)
+           ".my-highlight": twind.apply("bg-yellow-100 text-green-500 font-bold p-2")
+        }
+      }
+    }
+  );
+  twindObserve.observe(document.documentElement)
+</script>
 
 <!-- <div class="search-box">                                                                                       -->
 <!--   <div class="search">                                                                                         -->
 <!--     <input type="text" autocomplete="none" autocorrect="none" autocapitalize="none" spellcheck="false" value/> -->
-<!--     <button class="clear">×</button>                                                                           -->
+<!--     <button class="clear">×</button>                                                                          -->
 <!--   </div>                                                                                                       -->
 <!-- </div>                                                                                                         -->
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/minisearch@3.1.0/dist/umd/index.min.js"></script>                    -->
-<!-- <script charset="utf-8">                                                                                       -->
-<!--   window.addEventListener("load", function(){                                                                  -->
-<!--     $.getJSON('../cache.json', function(data) {                                                                -->
-<!--       var graph = buildGraph(data.Graph).nodes                                                                 -->
-<!--       console.log(graph);                                                                                      -->
+<!-- <form autocomplete="off" action="/action_page.php">                                         -->
+<!--   <div class="autocomplete" style="width:300px;">                                           -->
+<!--     <input id="myInput" type="text" name="myCountry" placeholder="Country">                 -->
+<!--   </div>                                                                                    -->
+<!--   <input type="submit">                                                                     -->
+<!-- </form>                                                                                     -->
 
-<!--       let miniSearch = new MiniSearch({                                                                        -->
-<!--         fields: ['title'], // fields to index for full-text search                                             -->
-<!--         storeFields: ['title', 'date', 'tags'] // fields to return with search results                         -->
-<!--       })                                                                                                       -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/minisearch@3.1.0/dist/umd/index.min.js"></script> -->
+<!-- <style>                                                                                     -->
+<!--   .autocomplete {                                                                           -->
+<!--     /*the container must be positioned relative:*/                                          -->
+<!--     position: relative;                                                                     -->
+<!--     display: inline-block;                                                                  -->
+<!--   }                                                                                         -->
+<!--   input {                                                                                   -->
+<!--     border: 1px solid transparent;                                                          -->
+<!--     background-color: #f1f1f1;                                                              -->
+<!--     padding: 10px;                                                                          -->
+<!--     font-size: 16px;                                                                        -->
+<!--   }                                                                                         -->
+<!--   input[type=text] {                                                                        -->
+<!--     background-color: #f1f1f1;                                                              -->
+<!--     width: 100%;                                                                            -->
+<!--   }                                                                                         -->
+<!--   input[type=submit] {                                                                      -->
+<!--     background-color: DodgerBlue;                                                           -->
+<!--     color: #fff;                                                                            -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-items {                                                                     -->
+<!--     position: absolute;                                                                     -->
+<!--     border: 1px solid #d4d4d4;                                                              -->
+<!--     border-bottom: none;                                                                    -->
+<!--     border-top: none;                                                                       -->
+<!--     z-index: 99;                                                                            -->
+<!--     /*position the autocomplete items to be the same width as the container:*/              -->
+<!--     top: 100%;                                                                              -->
+<!--     left: 0;                                                                                -->
+<!--     right: 0;                                                                               -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-items div {                                                                 -->
+<!--     padding: 10px;                                                                          -->
+<!--     cursor: pointer;                                                                        -->
+<!--     background-color: #fff;                                                                 -->
+<!--     border-bottom: 1px solid #d4d4d4;                                                       -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-items div:hover {                                                           -->
+<!--     /*when hovering an item:*/                                                              -->
+<!--     background-color: #e9e9e9;                                                              -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-active {                                                                    -->
+<!--     /*when navigating through the items using the arrow keys:*/                             -->
+<!--     background-color: DodgerBlue !important;                                                -->
+<!--     color: #ffffff;                                                                         -->
+<!--   }                                                                                         -->
+<!-- </style>                                                                                    -->
+<!-- <script src="./static/js/search.js"></script>                                               -->
 
-<!--       // Index all documents                                                                                   -->
-<!--       miniSearch.addAll(graph)                                                                                 -->
-<!--       let results = miniSearch.search('Reward Sens')                                                           -->
-<!--       console.log(results);                                                                                    -->
-<!--     })                                                                                                         -->
-<!--   });                                                                                                          -->
-
-<!--   function buildGraph(data) {                                                                                  -->
-<!--     var graph = {};                                                                                            -->
-<!--     var excludedNodes = ["index", "README", "faq", "LICENSE"];                                                 -->
-
-<!--     // Build nodes                                                                                             -->
-<!--     var nodes = [];                                                                                            -->
-<!--     Object.entries(data.vertices).forEach(([node,e]) => {                                                      -->
-<!--       if (!excludedNodes.includes(e.ID)) {                                                                     -->
-<!--         var node = {}                                                                                          -->
-<!--         // Meta                                                                                                -->
-<!--         node.id = e.ID;                                                                                        -->
-<!--         node.title = e.Title;                                                                                  -->
-<!--         node.slug = e.Slug;                                                                                    -->
-<!--         node.date = new Date(e.Date).toDateString();                                                           -->
-<!--         node.tags = e.Meta.tags;                                                                               -->
-<!--         nodes.push(node);                                                                                      -->
-<!--       }                                                                                                        -->
-<!--     })                                                                                                         -->
-
-<!--     graph.nodes = nodes;                                                                                       -->
-<!--     return graph;                                                                                              -->
-<!--   }                                                                                                            -->
-<!-- </script>                                                                                                      -->
-
-<script async src="https://cse.google.com/cse.js?cx=6a88cf4a35fa98fc2"></script>
-<div id="searchbox">
-  <div class="gcse-search" enableAutoComplete="true"></div>
-</div>
-
+<!-- <script async src="https://cse.google.com/cse.js?cx=6a88cf4a35fa98fc2"></script> -->
+<!--   <div id="searchbox">                                                           -->
+<!--   <div class="gcse-search" enableAutoComplete="true"></div>                      -->
+<!-- </div>                                                                           -->
 
 <style>
   body .universe {
@@ -271,7 +302,6 @@
 
   .tldr p {
     font-style: italic;
-    background-color: rgba(200, 200, 200, 0.2);
     padding: 5px;
   }
 
@@ -640,7 +670,7 @@
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
 <!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-22T07:08"><a href="reward-sensitivity">Reward Sensitivity</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-21T06:34"><a href="limbic-system">Limbic System</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-11T07:37"><a href="cerebrum">Cerebrum</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-11T06:51"><a href="human-brain">Human Brain</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-11T08:24"><a href="central-nervous-system">Central Nervous System</a></span></span></div></li></ul></li></ul></li></ul></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-21T06:24"><a href="neocortex">Neocortex</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-13T06:37"><a href="cerebral-cortex">Cerebral Cortex</a></span></span></div></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-05-22"><a href="wip">🚧 WIP 🚧</a></span></span></div></li></ul></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-20T06:40"><a href="how-did-introverts-survive-the-process-of-evolution">How Did Introverts Survive The Process of Evolution</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-30T09:08"><a href="struggles-of-the-introverts-in-an-extroverted-society">Struggles of the Introverts in an Extroverted Society</a></span></span></div></li></ul></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-03T07:55"><a href="the-great-divide-of-personality">The Great Divide in Personality</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-03T07:55"><a href="culture-of-character-to-culture-of-personality">Culture of Character to Culture of Personality</a></span></span></div></li></ul></li></ul></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-05-22"><a href=".">🧠 Index 🧠</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Delayed Gratification</h1><p>Delay of Gratification is the act of resisting an immediate pleasure in hope of obtaining a more gratifying reward in the future. As simple as it sounds, as it turns out, most of us, if not all, struggles to resist our impulses to take immediately available rewards even with the knowledge that a bigger reward is available had we resisted. This applies to almost every aspect of our life: from our occupation, to our education, to our hobbies, to our life choices. The famous <em>Marshmallow Test</em><span data-nosnippet=""><sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></span>, despite of what we think of ourselves, outlines our very weakness when it comes to immediate rewards and self discipline. It shows our ability to resist temptation which tells a lot about our <span class="zettel-link-container cf"><span class="zettel-link" title="Zettel: The Great Divide in Personality"><a href="the-great-divide-of-personality">personality</a></span></span> and potentially vaguely predict our future. In our defense, self-discipline can taught to fight our most primal urges. But part of our innate <span class="zettel-link-container cf"><span class="zettel-link" title="Zettel: Is Temperament Destiny?"><a href="is-temperament-destiny">temperament stick around</a></span></span> even how much we train to resist.</p><p><strong>The Marshmallow Test | Igniter Media | Church Video</strong><span data-nosnippet=""><sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></span></p><iframe width="420" height="315" src="https://www.youtube.com/embed/QX_oy9614HQ"></iframe>
-<p>Furthermore, a psychologist at the University of Wisconsin, Joseph Newman, conducted a study where participants were to play a game: simply the more points gained, the more money won. Participants were given a button and a screen that flashes twelve different numbers randomly, and were instructed that a “good” number will win them points and a “bad” number will lose them points; pressing nothing at all will do nothing. Through trial and error, participants eventually learned that the number four is a good number and nine is not. Instinctively, we know good enough not to press the button when number nine comes across the screen, except that sometimes people press the button in spite of this knowledge. Newman found that extroverts were likely to make this mistake. In the words of the psychologists John Brebner and Chris Cooper who have shown that extroverts think less and act faster on such tasks, introverts are “geared to inspect” and extroverts are “geared to respond.”</p><p>But the most interesting part of the experiment is not what extroverts do <em>before</em> they hit the button, but what they do <em>after</em>. “When introverts hit the number nine button and find they’ve lost a point, they slow down before moving on to the next number, as if to reflect on what went wrong. But extroverts not only fail to slow down, <em>they actually speed up,</em>” wrote Susan Cain.<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup></span></p><p>As Newman explains, it makes perfect sense because focusing on achieving our goals as <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Reward Sensitivity"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="reward-sensitivity">reward-sensitive</a></span></span> extroverts do, we don’t want anything to get in our way, we speed up to reach our goals quicker. Yet, it is crucial that we take a pause to process our misstep so we can learn from it. If extroverts were to be <em>forced</em> to pause at such instance, Newman says, they’ll do just as well as introverts did. But left on their own devices, they don’t stop. In contrast, introverts are programmed to kill their <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Reward Sensitivity"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="reward-sensitivity">&quot;buzz&quot;</a></span></span> and scan for problems. However, this doesn’t imply that introverts are smarter than extroverts, as explained in the <span class="zettel-link-container folge"><span class="zettel-link" title="2021-10-28T08:29"><a href="are-introverts-smarter-than-extroverts">Are Introverts Smarter Than Extroverts?</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span>.</p><div class="tldr">
+<p>Furthermore, a psychologist at the University of Wisconsin, Joseph Newman, conducted a study where participants were to play a game: simply the more points gained, the more money won. Participants were given a button and a screen that flashes twelve different numbers randomly, and were instructed that a “good” number will win them points and a “bad” number will lose them points; pressing nothing at all will do nothing. Through trial and error, participants eventually learned that the number four is a good number and nine is not. Instinctively, we know good enough not to press the button when number nine comes across the screen, except that sometimes people press the button in spite of this knowledge. Newman found that extroverts were likely to make this mistake. In the words of the psychologists John Brebner and Chris Cooper who have shown that extroverts think less and act faster on such tasks, introverts are “geared to inspect” and extroverts are “geared to respond.”</p><p>But the most interesting part of the experiment is not what extroverts do <em>before</em> they hit the button, but what they do <em>after</em>. “When introverts hit the number nine button and find they’ve lost a point, they slow down before moving on to the next number, as if to reflect on what went wrong. But extroverts not only fail to slow down, <em>they actually speed up,</em>” wrote Susan Cain.<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup></span></p><p>As Newman explains, it makes perfect sense because focusing on achieving our goals as <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Reward Sensitivity"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="reward-sensitivity">reward-sensitive</a></span></span> extroverts do, we don’t want anything to get in our way, we speed up to reach our goals quicker. Yet, it is crucial that we take a pause to process our misstep so we can learn from it. If extroverts were to be <em>forced</em> to pause at such instance, Newman says, they’ll do just as well as introverts did. But left on their own devices, they don’t stop. In contrast, introverts are programmed to kill their <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Reward Sensitivity"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="reward-sensitivity">&quot;buzz&quot;</a></span></span> and scan for problems. However, this doesn’t imply that introverts are smarter than extroverts, as explained in the <span class="zettel-link-container folge"><span class="zettel-link" title="2021-10-28T08:29"><a href="are-introverts-smarter-than-extroverts">Are Introverts Smarter Than Extroverts?</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span>.</p><div class="tldr rounded shadow-2xl">
   <h2>TL;DR</h2>
   <p>
     Delay of Gratification is the act of resisting an immediate pleasure in hope

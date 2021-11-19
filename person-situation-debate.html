@@ -7,62 +7,93 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-core.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Tailwind -->
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/combine/npm/twind/twind.umd.min.js,npm/twind/observe/observe.umd.min.js"></script>
+<script type="text/javascript">
+   twind.setup(
+    {
+      mode: 'silent',  // Behave well with semantic UI classes
+      preflight: () => {
+        return {
+           // Custom styles based on selectors go here (use the selector in Markdown; see below)
+           ".my-highlight": twind.apply("bg-yellow-100 text-green-500 font-bold p-2")
+        }
+      }
+    }
+  );
+  twindObserve.observe(document.documentElement)
+</script>
 
 <!-- <div class="search-box">                                                                                       -->
 <!--   <div class="search">                                                                                         -->
 <!--     <input type="text" autocomplete="none" autocorrect="none" autocapitalize="none" spellcheck="false" value/> -->
-<!--     <button class="clear">×</button>                                                                           -->
+<!--     <button class="clear">×</button>                                                                          -->
 <!--   </div>                                                                                                       -->
 <!-- </div>                                                                                                         -->
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/minisearch@3.1.0/dist/umd/index.min.js"></script>                    -->
-<!-- <script charset="utf-8">                                                                                       -->
-<!--   window.addEventListener("load", function(){                                                                  -->
-<!--     $.getJSON('../cache.json', function(data) {                                                                -->
-<!--       var graph = buildGraph(data.Graph).nodes                                                                 -->
-<!--       console.log(graph);                                                                                      -->
+<!-- <form autocomplete="off" action="/action_page.php">                                         -->
+<!--   <div class="autocomplete" style="width:300px;">                                           -->
+<!--     <input id="myInput" type="text" name="myCountry" placeholder="Country">                 -->
+<!--   </div>                                                                                    -->
+<!--   <input type="submit">                                                                     -->
+<!-- </form>                                                                                     -->
 
-<!--       let miniSearch = new MiniSearch({                                                                        -->
-<!--         fields: ['title'], // fields to index for full-text search                                             -->
-<!--         storeFields: ['title', 'date', 'tags'] // fields to return with search results                         -->
-<!--       })                                                                                                       -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/minisearch@3.1.0/dist/umd/index.min.js"></script> -->
+<!-- <style>                                                                                     -->
+<!--   .autocomplete {                                                                           -->
+<!--     /*the container must be positioned relative:*/                                          -->
+<!--     position: relative;                                                                     -->
+<!--     display: inline-block;                                                                  -->
+<!--   }                                                                                         -->
+<!--   input {                                                                                   -->
+<!--     border: 1px solid transparent;                                                          -->
+<!--     background-color: #f1f1f1;                                                              -->
+<!--     padding: 10px;                                                                          -->
+<!--     font-size: 16px;                                                                        -->
+<!--   }                                                                                         -->
+<!--   input[type=text] {                                                                        -->
+<!--     background-color: #f1f1f1;                                                              -->
+<!--     width: 100%;                                                                            -->
+<!--   }                                                                                         -->
+<!--   input[type=submit] {                                                                      -->
+<!--     background-color: DodgerBlue;                                                           -->
+<!--     color: #fff;                                                                            -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-items {                                                                     -->
+<!--     position: absolute;                                                                     -->
+<!--     border: 1px solid #d4d4d4;                                                              -->
+<!--     border-bottom: none;                                                                    -->
+<!--     border-top: none;                                                                       -->
+<!--     z-index: 99;                                                                            -->
+<!--     /*position the autocomplete items to be the same width as the container:*/              -->
+<!--     top: 100%;                                                                              -->
+<!--     left: 0;                                                                                -->
+<!--     right: 0;                                                                               -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-items div {                                                                 -->
+<!--     padding: 10px;                                                                          -->
+<!--     cursor: pointer;                                                                        -->
+<!--     background-color: #fff;                                                                 -->
+<!--     border-bottom: 1px solid #d4d4d4;                                                       -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-items div:hover {                                                           -->
+<!--     /*when hovering an item:*/                                                              -->
+<!--     background-color: #e9e9e9;                                                              -->
+<!--   }                                                                                         -->
+<!--   .autocomplete-active {                                                                    -->
+<!--     /*when navigating through the items using the arrow keys:*/                             -->
+<!--     background-color: DodgerBlue !important;                                                -->
+<!--     color: #ffffff;                                                                         -->
+<!--   }                                                                                         -->
+<!-- </style>                                                                                    -->
+<!-- <script src="./static/js/search.js"></script>                                               -->
 
-<!--       // Index all documents                                                                                   -->
-<!--       miniSearch.addAll(graph)                                                                                 -->
-<!--       let results = miniSearch.search('Reward Sens')                                                           -->
-<!--       console.log(results);                                                                                    -->
-<!--     })                                                                                                         -->
-<!--   });                                                                                                          -->
-
-<!--   function buildGraph(data) {                                                                                  -->
-<!--     var graph = {};                                                                                            -->
-<!--     var excludedNodes = ["index", "README", "faq", "LICENSE"];                                                 -->
-
-<!--     // Build nodes                                                                                             -->
-<!--     var nodes = [];                                                                                            -->
-<!--     Object.entries(data.vertices).forEach(([node,e]) => {                                                      -->
-<!--       if (!excludedNodes.includes(e.ID)) {                                                                     -->
-<!--         var node = {}                                                                                          -->
-<!--         // Meta                                                                                                -->
-<!--         node.id = e.ID;                                                                                        -->
-<!--         node.title = e.Title;                                                                                  -->
-<!--         node.slug = e.Slug;                                                                                    -->
-<!--         node.date = new Date(e.Date).toDateString();                                                           -->
-<!--         node.tags = e.Meta.tags;                                                                               -->
-<!--         nodes.push(node);                                                                                      -->
-<!--       }                                                                                                        -->
-<!--     })                                                                                                         -->
-
-<!--     graph.nodes = nodes;                                                                                       -->
-<!--     return graph;                                                                                              -->
-<!--   }                                                                                                            -->
-<!-- </script>                                                                                                      -->
-
-<script async src="https://cse.google.com/cse.js?cx=6a88cf4a35fa98fc2"></script>
-<div id="searchbox">
-  <div class="gcse-search" enableAutoComplete="true"></div>
-</div>
-
+<!-- <script async src="https://cse.google.com/cse.js?cx=6a88cf4a35fa98fc2"></script> -->
+<!--   <div id="searchbox">                                                           -->
+<!--   <div class="gcse-search" enableAutoComplete="true"></div>                      -->
+<!-- </div>                                                                           -->
 
 <style>
   body .universe {
@@ -271,7 +302,6 @@
 
   .tldr p {
     font-style: italic;
-    background-color: rgba(200, 200, 200, 0.2);
     padding: 5px;
   }
 
@@ -639,7 +669,7 @@
 
 <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt=""/></noscript>
-<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-03T09:16"><a href="temperament">Temperament</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-03T07:55"><a href="the-great-divide-of-personality">The Great Divide in Personality</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-03T07:55"><a href="culture-of-character-to-culture-of-personality">Culture of Character to Culture of Personality</a></span></span></div></li></ul></li></ul></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-05-22"><a href=".">🧠 Index 🧠</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Person-Situation Debate</h1><p><img alt="wide" src="https://www.maxpixel.net/static/photo/1x/Debate-Exchange-Of-Ideas-Discussion-Entertainment-222787.jpg" title="image from Max Pixel (cc)" /></p><p>Does our <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Temperament"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="temperament">temperament</a></span></span> act as <span class="zettel-link-container cf"><span class="zettel-link" title="Zettel: Is Temperament Destiny?"><a href="is-temperament-destiny">an anchor that we cannot get too far away from</a></span></span>, even with the greatest of effort to change it will only pull us back to our base personality no matter how hard we try? Or, on the other hand, does our personality traits shift according to the situation in which we find ourselves in? Perhaps a quiet disposition around family members but a comic around the company of friends? Psychologists call this the “person-situation” debate.<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></span></p><p>Professor Brian Little, former Harvard University psychology lecturer and winner for the 3M Teaching Fellowship, despite his brilliant and engaging lectures with a flair for entertainment that always ended with a hearty applause, he calls himself a devout introvert. Little believes that our personality shape our lives in profound ways based on psychological mechanisms that last our lifetime. This fall squarely on the “person” side of the debate.</p><p>On the other side of the debate, a group of psychologist known as the <em>Situationist</em>. “Situationism posits that our generalizations about people, including the words we use to describe one another–shy, aggressive, conscientious, agreeable–are misleading. There is no core self; there are only the various selves of Situations X, Y, Z,” wrote Susan Cain.<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup></span> This view of personality rose to popularity in 1968 when Walter Mischel Published <em>Personality and Assessment</em><span data-nosnippet=""><sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup></span>, rivaling the idea of the “person” side of the debate arguing that situational factors predicts behavior of people more accurately.</p><p>Decades after the debate has been raised, Situationism prevailed. “The postmodern view of self that emerged around this time, influenced by theorist like Erving Goffman, author of <em>The Presentation of Self in Everyday Life</em><span data-nosnippet=""><sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup></span>, suggested that social life is a performance and social masks are our true selves,” Cain explains, “Many researchers doubted whether personality traits even existed in any meaningful sense. Personality researchers had trouble finding jobs.”</p><p>In the end, just as the <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Temperament"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="temperament">nature-nurture</a></span></span> debate melted down to interactionism<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn5" id="fnref5">5</a></sup></span>, person-situation debate has been superseded by a more nuanced understanding. Personality psychologists accepted that fluctuations in our behavior are real and situation-dependent, while making aware that there truly are fixed personality traits each of us cannot escape from.</p><p>Even Mischel admitted that some traits are fixed, but believed that they tend to occur in patterns. Brian Little tend to posit the same claim as he almost created single-handedly the <span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Free Trait Theory"><a href="free-trait-theory">Free Trait Theory</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span>, claiming that fixed traits and free traits coexist.</p><div class="tldr">
+<!--replace-end-7--><!--replace-end-4--><!--replace-end-1--></head><body><div class="ui fluid container universe"><!--replace-start-2--><!--replace-start-3--><!--replace-start-6--><nav class="flipped tree deemphasized" id="zettel-uptree" style="transform-origin: 50%"><ul class="root"><li><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-10-03T09:16"><a href="temperament">Temperament</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-03T07:55"><a href="the-great-divide-of-personality">The Great Divide in Personality</a></span></span></div><ul><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-09-03T07:55"><a href="culture-of-character-to-culture-of-personality">Culture of Character to Culture of Personality</a></span></span></div></li></ul></li></ul></li><li><div class="forest-link"><span class="zettel-link-container"><span class="zettel-link" title="2021-05-22"><a href=".">🧠 Index 🧠</a></span></span></div></li></ul></li></ul></nav><div class="ui text container" id="zettel-container" style="position: relative"><div class="zettel-view"><article class="ui raised attached segment zettel-content"><div class="pandoc"><h1 id="title-h1">Person-Situation Debate</h1><p><img alt="wide" src="https://www.maxpixel.net/static/photo/1x/Debate-Exchange-Of-Ideas-Discussion-Entertainment-222787.jpg" title="image from Max Pixel (cc)" /></p><p>Does our <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Temperament"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="temperament">temperament</a></span></span> act as <span class="zettel-link-container cf"><span class="zettel-link" title="Zettel: Is Temperament Destiny?"><a href="is-temperament-destiny">an anchor that we cannot get too far away from</a></span></span>, even with the greatest of effort to change it will only pull us back to our base personality no matter how hard we try? Or, on the other hand, does our personality traits shift according to the situation in which we find ourselves in? Perhaps a quiet disposition around family members but a comic around the company of friends? Psychologists call this the “person-situation” debate.<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn1" id="fnref1">1</a></sup></span></p><p>Professor Brian Little, former Harvard University psychology lecturer and winner for the 3M Teaching Fellowship, despite his brilliant and engaging lectures with a flair for entertainment that always ended with a hearty applause, he calls himself a devout introvert. Little believes that our personality shape our lives in profound ways based on psychological mechanisms that last our lifetime. This fall squarely on the “person” side of the debate.</p><p>On the other side of the debate, a group of psychologist known as the <em>Situationist</em>. “Situationism posits that our generalizations about people, including the words we use to describe one another–shy, aggressive, conscientious, agreeable–are misleading. There is no core self; there are only the various selves of Situations X, Y, Z,” wrote Susan Cain.<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn2" id="fnref2">2</a></sup></span> This view of personality rose to popularity in 1968 when Walter Mischel Published <em>Personality and Assessment</em><span data-nosnippet=""><sup class="footnote-ref"><a href="#fn3" id="fnref3">3</a></sup></span>, rivaling the idea of the “person” side of the debate arguing that situational factors predicts behavior of people more accurately.</p><p>Decades after the debate has been raised, Situationism prevailed. “The postmodern view of self that emerged around this time, influenced by theorist like Erving Goffman, author of <em>The Presentation of Self in Everyday Life</em><span data-nosnippet=""><sup class="footnote-ref"><a href="#fn4" id="fnref4">4</a></sup></span>, suggested that social life is a performance and social masks are our true selves,” Cain explains, “Many researchers doubted whether personality traits even existed in any meaningful sense. Personality researchers had trouble finding jobs.”</p><p>In the end, just as the <span class="zettel-link-container folgeinv"><span class="zettel-link" title="Zettel: Temperament"><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span><a href="temperament">nature-nurture</a></span></span> debate melted down to interactionism<span data-nosnippet=""><sup class="footnote-ref"><a href="#fn5" id="fnref5">5</a></sup></span>, person-situation debate has been superseded by a more nuanced understanding. Personality psychologists accepted that fluctuations in our behavior are real and situation-dependent, while making aware that there truly are fixed personality traits each of us cannot escape from.</p><p>Even Mischel admitted that some traits are fixed, but believed that they tend to occur in patterns. Brian Little tend to posit the same claim as he almost created single-handedly the <span class="zettel-link-container folge"><span class="zettel-link" title="Zettel: Free Trait Theory"><a href="free-trait-theory">Free Trait Theory</a><span data-nosnippet="" style="user-select: none; color: gray" title="Folgezettel">#</span></span></span>, claiming that fixed traits and free traits coexist.</p><div class="tldr rounded shadow-2xl">
   <h2>TL;DR</h2>
   <p>
     "A man has as many social selves as there are distinct groups of persons
