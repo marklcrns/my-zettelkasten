@@ -2,7 +2,7 @@
 title: 🧠 Index 🧠
 slug: index
 feed:
-  count: 5
+  count: 1000
 date: 2021-05-22
 ---
 
