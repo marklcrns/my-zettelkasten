@@ -19,14 +19,13 @@ date: 2021-05-22
 <script src="//unpkg.com/three"></script>
 <script src="//unpkg.com/element-resize-detector/dist/element-resize-detector.min.js"></script>
 <script src="//unpkg.com/3d-force-graph"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <!-- Node renderer -->
 <script src="//unpkg.com/three-spritetext"></script>
 <script src="//unpkg.com/three/examples/js/renderers/CSS2DRenderer.js"></script>
 
 <!-- Styles -->
-<link rel="stylesheet" href="./static/3d-graph.css">
+<link rel="stylesheet" href="./static/css/3d-graph.css">
 
 <div id="graph-visibility-controls" class="graph-controls">
   <button id="visibilityToggle">
@@ -57,15 +56,15 @@ date: 2021-05-22
   </blockquote>
 </div>
 
-<script src="./static/3d-graph.js" type="module"></script>
+<script src="./static/js/3d-graph.js" type="module"></script>
 ```
 
 Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph)
 
 <!-- ``` {=html}                                             -->
 <!-- <script src="https://d3js.org/d3.v6.min.js"></script>   -->
-<!-- <link rel="stylesheet" href="./static/graph.css">       -->
-<!-- <script src="./static/graph.js" type="module"></script> -->
+<!-- <link rel="stylesheet" href="./static/css/graph.css">       -->
+<!-- <script src="./static/js/graph.js" type="module"></script> -->
 <!-- ```                                                     -->
 
 <!-- > Drag to pin a node. Ctrl + Click to unpin a node. Double click node to view -->

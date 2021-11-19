@@ -63,13 +63,16 @@ receive the honor as the "father of the nation" in India with his efforts to
 lead the non-violent independence movement against British rule and an advocate
 of the civil rights of Indians in South Africa.[^3]
 
-<div class="tldr">
+``` {=html}
+<div class="tldr rounded shadow-2xl">
   <h2>TL;DR</h2>
   <p>
     Soft power is leadership "by water rather than by fire." Soft power is quiet
     persistence ~ Preston Ni
   </p>
 </div>
+```
+
 
 [^1]: Quiet: The Power of Introverts in a World That Can't Stop Talking by Susan Cain - Chapter 8: Soft Power
 [^2]: https://en.wikipedia.org/wiki/Satyagraha Satyagraha, meaning "holding onto truth" in Sanskrit and Hindi, a concept introduced by Mahatma Gandhi to designate a determinded but nonviolent resistance to evil.
