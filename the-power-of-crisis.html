@@ -277,7 +277,6 @@
     max-height: 600px;
   }
 
-  /* Relax width constraint a bit */
   #zettel-container {
     max-width: 100% !important;
     max-height: 100% !important;
@@ -559,6 +558,9 @@
         hackernewsBtn.appendChild(hackernewsIcon);
         hackernewsBtn.innerHTML += "Share";
 
+        var disqus = document.createElement("div");
+        disqus.id = "disqus_thread";
+
         sectionSocial.appendChild(facebookBtn);
         sectionSocial.appendChild(twitterBtn);
         sectionSocial.appendChild(linkedinBtn);
@@ -566,28 +568,11 @@
         sectionSocial.appendChild(hackernewsBtn);
         contentDiv.appendChild(sectionDiv);
         contentDiv.appendChild(sectionSocial);
+        contentDiv.appendChild(disqus);
       }
     }
 
-    // replace logo with copyright
-    let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
-    let parent = element.parentNode.parentNode.parentNode
-    // element.remove()
-
-    let p = document.createElement("p")
-    let n = document.createTextNode("© 2021 Mark Lucernas")
-    p.appendChild(n)
-    p.style.height = "100%";
-    p.style.paddingBottom = "10px";
-    // parent.appendChild(n)
-    parent.replaceChild(p, parent.firstChild)
-    // parent.replaceChild(element.parentNode, p)
-  }
-</script>
-
-<!-- Add event listener to RSS btn -->
-<script charset="utf-8">
-  window.addEventListener("load", function(){
+    // RSS button
     var socialButtons = document.getElementById("subscriptionLinks");
     if (socialButtons) {
       socialButtons.innerHTML += "<a id='rss' title='Subscribe to RSS feed' class='ui rss button'><i class='rss square icon'></i> RSS</a>"
@@ -595,12 +580,42 @@
         window.open('https://marklucernas.dev/index.xml');
       });
     }
-  })
+
+    // Replace logo with copyright
+    let element = document.querySelector('div.footer-version > div > a > img[alt="logo"]')
+    let parent = element.parentNode.parentNode.parentNode
+    let p = document.createElement("p")
+    let n = document.createTextNode("© 2021 Mark Lucernas")
+    p.appendChild(n)
+    p.style.height = "100%";
+    p.style.paddingBottom = "10px";
+    parent.replaceChild(p, parent.firstChild);
+
+    /**
+     * Disqus Comment Section
+     *
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-marklucernas-dev.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+  }
 </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
 <style>
 #socialMediaLinks {
   text-align: center;
+  margin: 10px;
 }
 
 #socialMediaLinks .ui.reddit.button {
