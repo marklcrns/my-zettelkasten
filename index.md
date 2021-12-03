@@ -80,26 +80,45 @@ Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph
 Welcome! To my personal [[a10a5041|Zettlekasten]] inspired by Niklas Luhmann,
 powered by [neuron](https://github.com/srid/neuron).
 
-Check out the [Impulse](/impulse.html) page for the list of all my zettels in
-folgezettel clusters.
-
-<br>
-
 ## Recent Posts
 
 <!-- NOTE: Forward folge # is essential for RSS -->
 [[z:zettels?tag=zettel&limit=10&timeline]]#
 
-<!-- ## Topics                                                  -->
+[[zettel|See more]]
 
-<!-- [[z:zettels?tag=science/**&grouped&limit=10&timeline]]     -->
-<!-- [[z:zettels?tag=psychology/**&grouped&limit=10&timeline]]  -->
-<!-- [[z:zettels?tag=programming/**&grouped&limit=10&timeline]] -->
-<!-- [[z:zettels?tag=history/**&grouped&limit=10&timeline]]     -->
+## Book Notes
 
-<!-- ## Book Notes                                              -->
+[[z:zettels?tag=book&limit=5&timeline]]
 
-<!-- [[z:zettels?tag=book/*&grouped&limit=10&timeline]]         -->
+[[book|See more]]
+
+## Topics
+
+### Computer Programming
+
+[[z:zettels?tag=programming&limit=5&timeline]]
+
+[[programming|See more]]
+
+### Science
+
+[[z:zettels?tag=science&limit=5&timeline]]
+
+[[science|See more]]
+
+### Psychology
+
+[[z:zettels?tag=psychology&limit=5&timeline]]
+
+[[psychology|See more]]
+
+### History
+
+[[z:zettels?tag=history&limit=5&timeline]]
+
+[[history|See more]]
+
 
 {.ui .horizontal .divider}
 <section id="subscriptionLinks"></section>

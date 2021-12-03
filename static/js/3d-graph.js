@@ -5,7 +5,18 @@ import { UnrealBloomPass } from 'https://threejs.org/examples/jsm/postprocessing
 import { FontLoader } from 'https://threejs.org/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'https://threejs.org/examples/jsm/geometries/TextGeometry.js';
 
-var excludedNodes = ["index", "README", "faq", "LICENSE"];
+var excludedNodes = [
+  "index",
+  "zettel",
+  "book",
+  "programming",
+  "science",
+  "psychology",
+  "history",
+  "README",
+  "faq",
+  "LICENSE"
+];
 
 $.getJSON('../cache.json', function(data) {
   // console.log(data.Graph);
