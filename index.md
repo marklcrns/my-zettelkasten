@@ -61,20 +61,6 @@ date: 2021-05-22
 
 Made with [3D Force-Directed Graph](https://github.com/vasturiano/3d-force-graph)
 
-<!-- ``` {=html}                                             -->
-<!-- <script src="https://d3js.org/d3.v6.min.js"></script>   -->
-<!-- <link rel="stylesheet" href="./static/css/graph.css">       -->
-<!-- <script src="./static/js/graph.js" type="module"></script> -->
-<!-- ```                                                     -->
-
-<!-- > Drag to pin a node. Ctrl + Click to unpin a node. Double click node to view -->
-<!-- > note. Nodes are colored and sized based on incoming degree, so notes more   -->
-<!-- > heavily linked to will grow in relative size.                               -->
-
-<!-- _Credits goes to [Devon Morris](https://github.com/DevonMorris)'s           -->
-<!-- [Zettelkasten](https://github.com/DevonMorris/zettelkasten) for his awesome -->
-<!-- directed graph made with [D3.js](https://d3js.org/)_                        -->
-
 [![GitHub followers](https://img.shields.io/github/followers/marklcrns.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/marklcrns?tab=followers)
 
 Welcome! To my personal [[a10a5041|Zettlekasten]] inspired by Niklas Luhmann,

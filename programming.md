@@ -15,4 +15,11 @@ tags:
 <script src="./static/js/2d-graph.js" type="module"></script>
 ```
 
+> Drag to pin a node. Ctrl + Click to unpin a node. Double click node to view
+> note. Nodes are colored and sized based on incoming degree, so notes more
+> heavily linked to will grow in relative size.
+
+_Credits goes to Devon Morris' [Zettelkasten](https://devonmorris.dev/) for his
+2D force-directed graph made with [D3.js](https://d3js.org/)_
+
 [[z:zettels?tag=programming/**&timeline&grouped]]
