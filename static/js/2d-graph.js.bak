@@ -1,3 +1,16 @@
+var excludedNodes = [
+  "index",
+  "zettel",
+  "book",
+  "programming",
+  "science",
+  "psychology",
+  "history",
+  "README",
+  "faq",
+  "LICENSE"
+];
+
 // 2D Directed Graph
 d3.json("../cache.json", function (d) {
   return d;
@@ -10,6 +23,9 @@ d3.json("../cache.json", function (d) {
       n.inDegree = 0;
     });
 
+    // Fetch all tags
+    // var currZettelTags = $('#neuron-tags-pane').text();
+
     // Compute number of incoming links
     var links = [];
     Object.entries(graph.adjacencyMap).forEach(([k,e]) => {
@@ -21,6 +37,11 @@ d3.json("../cache.json", function (d) {
         links.push(link);
       })
     });
+
+    var data = buildGraph(data.Graph);
+    console.log(graph);
+    console.log(data);
+
 
     // Create a scale for radius
     var radius_scale = d3
@@ -202,3 +223,100 @@ d3.json("../cache.json", function (d) {
     console.log(error);
   });
 
+function buildGraph(data) {
+  var graph = {};
+  var nodeMap = {};
+  var clusterCount = 0;
+
+  // Build nodes
+  var nodes = [];
+  Object.entries(data.vertices).forEach(([node,e]) => {
+    if (!excludedNodes.includes(e.ID)) {
+      var node = {}
+      // Meta
+      node.id = e.ID;
+      node.name = e.Title;
+      node.value = e.Slug;
+      node.date = new Date(e.Date).toDateString();
+      node.tags = e.Meta.tags;
+      node.clusterid = 0;
+      node.size = 0;
+      // For cross-linking
+      node.neighbors = [];
+      node.links = [];
+      // Push to nodeMap for ref
+      nodeMap[node.id] = nodes.length;
+
+      nodes.push(node);
+    }
+  })
+
+  // Build links
+  var links = [];
+  Object.entries(data.adjacencyMap).forEach(([source, entry]) => {
+    if (!$.isEmptyObject(entry)) {
+      Object.entries(entry).forEach((e) => {
+        var target = e[0];
+        var folgeType = e[1][0];
+
+        if (!excludedNodes.includes(source) && !excludedNodes.includes(target)) {
+          var link = {};
+          if (folgeType === "folgeinv") {
+            link.source = target;
+            link.target = source;
+          } else if (folgeType === "folge") {
+            link.source = source;
+            link.target = target;
+          } else {
+            return;   // equivalent to conventional `continue`
+          }
+
+          // Inherit clusterid from source node
+          if (nodes[nodeMap[link.source]].clusterid === 0) {
+            nodes[nodeMap[link.source]].clusterid = ++clusterCount;
+          }
+          nodes[nodeMap[link.target]].clusterid = nodes[nodeMap[link.source]].clusterid;
+
+          var visited = [];
+          // recache clusterid from target's existing links
+          recacheNodeImmediateLinks(link.target, links, nodeMap, visited, false);
+          recacheNodeImmediateLinks(link.source, links, nodeMap, visited, false);
+          // Simply resize source without changing clusterid
+          recacheNodeImmediateLinks(link.source, links, nodeMap, visited, true);
+
+          links.push(link);
+        }
+      });
+    }
+  })
+
+  function recacheNodeImmediateLinks(source, links, nodeMap, visited, isResize) {
+    for (var i = 0; i < links.length; ++i) {
+      if (!visited.includes(i) && links[i].source === source) {
+        var scid = nodes[nodeMap[source]].clusterid;
+        visited.push(i);
+        if (nodes[nodeMap[links[i].target]].clusterid === scid) {
+          nodes[nodeMap[source]].size += 2;
+        } else if (!isResize){
+          nodes[nodeMap[links[i].target]].clusterid = scid;
+        }
+        recacheNodeImmediateLinks(links[i].source, links, nodeMap, visited, isResize);
+      }
+    }
+  }
+
+  graph.nodes = nodes;
+  graph.links = links;
+
+  // Cross-link node objects
+  graph.links.forEach(link => {
+    const a = graph.nodes[nodeMap[link.source]];
+    const b = graph.nodes[nodeMap[link.target]];
+    a.neighbors.push(b);
+    b.neighbors.push(a);
+    a.links.push(link);
+    b.links.push(link);
+  });
+
+  return graph;
+}
