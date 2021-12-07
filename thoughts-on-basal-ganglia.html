@@ -108,7 +108,7 @@
 
 <!-- <script async src="https://cse.google.com/cse.js?cx=6a88cf4a35fa98fc2"></script> -->
 <script async src="https://cse.google.com/cse.js?cx=63a0107d8d9ea510a"></script>
-  <div id="searchbox">
+<div id="searchbox">
   <div class="gcse-search" enableAutoComplete="true"></div>
 </div>
 
@@ -116,6 +116,11 @@
   body .universe {
     background-color: #fff !important;
     color: #333;
+  }
+
+  div.fluid.container.universe {
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   a {
@@ -294,7 +299,8 @@
   }
 
   #zettel-container {
-    max-width: 100% !important;
+    width: 100%;
+    max-width: 1200px !important;
     max-height: 100% !important;
   }
 
@@ -325,14 +331,17 @@
     padding: 5px;
   }
 
+  .ui.attached.segment.zettel-content {
+    padding: 5px;
+  }
+
   .ui.attached.segment.zettel-content p,
   .ui.attached.segment.zettel-content ul,
   .ui.attached.segment.zettel-content pre,
-  .ui.attached.segment.zettel-content iframe,
   section.tag-query-results {
-    margin-left: 1em;
-    margin-right: 1em;
-    font-size: 1.15rem;
+    margin-left: 0.8em;
+    margin-right: 0.8em;
+    font-size: 1.1rem;
   }
 
   .ui.attached.segment.zettel-content h2,
@@ -405,8 +414,8 @@
   }
 
   div.pandoc {
-    margin-left: 2.0em;
-    margin-right: 2.0em;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
   div.pandoc ul, div#footnotes {
@@ -650,6 +659,10 @@
 #socialMediaLinks {
   text-align: center;
   margin: 10px;
+}
+
+.ui.button {
+  margin: 5px;
 }
 
 #socialMediaLinks .ui.reddit.button {
