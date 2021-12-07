@@ -30,7 +30,7 @@ d3.json("../cache.json", function (d) {
 
     var pandocDiv = document.getElementsByClassName("pandoc")[0];
     var width = pandocDiv.clientWidth;
-    var height = 800;
+    var height = 600;
 
     // Create a scale for radius
     var radius_scale = d3
@@ -39,7 +39,7 @@ d3.json("../cache.json", function (d) {
         d3.min(Object.values(graph.nodes), (n) => n.size),
         d3.max(Object.values(graph.nodes), (n) => n.size),
       ])
-      .range([5, Math.max(width/40, 10)]);
+      .range([3, Math.max(width/45, 10)]);
 
     // Create color scale
     var unpinned_color_scale = d3
