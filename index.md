@@ -34,17 +34,6 @@ date: 2021-05-22
 </div>
 
 <div id="3d-graph-container">
-  <div id="graph-behavior-controls" class="graph-controls">
-    <button id="geometryToggle">
-      Text-Node Mode
-    </button>
-    <button id="animationToggle">
-      Pause Animation
-    </button>
-    <button id="rotationToggle">
-      Resume Rotation
-    </button>
-  </div>
   <div id="dat-gui"></div>
   <div id="3d-graph"></div>
 

@@ -18,6 +18,11 @@ var excludedNodes = [
   "LICENSE"
 ];
 
+var camRotationActive = false;
+var animationActive = true;
+var graphVisibility = false;
+var nodeGeometryMode = 1;   // 0: text-node, 1: text-only, 2: node-only
+
 $.getJSON('../cache.json', function(data) {
   // console.log(data.Graph);
 
@@ -33,11 +38,7 @@ $.getJSON('../cache.json', function(data) {
   var hoverNode = null;
   var highlightNodes = new Set();
   var highlightLinks = new Set();
-  var isCamRotationActive = false;
-  var isAnimationActive = true;
-  var isGraphHidden = false;
   var camDistance = 800;
-  var nodeGeometryMode = 1;   // 0: text-node, 1: text-only, 2: node-only
 
   var lastNodeClick = 0;
   var lastBackgroundClick = 0;
@@ -83,8 +84,8 @@ $.getJSON('../cache.json', function(data) {
         window.open("../" + node.value + ".html", "_blank").focus();
       // Single click
       } else{
-        if (isCamRotationActive) {
-          isCamRotationActive = false;
+        if (camRotationActive) {
+          camRotationActive = false;
         }
         // Aim at node from outside it
         camDistance = ON_CLICK_CAM_DISTANCE;
@@ -153,7 +154,7 @@ $.getJSON('../cache.json', function(data) {
   // camera orbit
   let angle = 0;
   setInterval(() => {
-    if (isCamRotationActive) {
+    if (camRotationActive) {
       Graph.cameraPosition({
         x: camDistance * Math.sin(angle),
         z: camDistance * Math.cos(angle)
@@ -164,47 +165,18 @@ $.getJSON('../cache.json', function(data) {
 
   // Add HTML toggle buttons listeners
   document.getElementById('visibilityToggle').addEventListener('click', event => {
-    isGraphHidden = !isGraphHidden;
+    graphVisibility = !graphVisibility;
     var graphContainer = document.getElementById('3d-graph-container');
     var graphOrientControl = document.getElementById('graph-control');
-    if (isGraphHidden) {
+    if (graphVisibility) {
       graphContainer.style['display'] = 'none';
       graphOrientControl.style['visibility'] = 'hidden';
     } else {
       graphContainer.style['display'] = 'inherit';
       graphOrientControl.style['visibility'] = 'inherit';
     }
-    isGraphHidden ? Graph.pauseAnimation() : Graph.resumeAnimation();
-    event.target.innerHTML = `${(isGraphHidden ? 'Show' : 'Hide')} 3D Graph`;
-  });
-  document.getElementById('geometryToggle').addEventListener('click', event => {
-    nodeGeometryMode++;
-    if (nodeGeometryMode > 2) nodeGeometryMode = 0;
-    setNodeGeometryMode(Graph, nodeGeometryMode);
-
-    var text = "";
-    switch (nodeGeometryMode) {
-      case 0:   text = "Text-Node Mode";
-                break;
-      case 1:   text = "Text-Only Mode";
-                break;
-      case 2:   text = "Node-Only Mode";
-                break;
-      default:  text = "--- Mode";
-                break;
-    }
-
-    event.target.innerHTML = text;
-  });
-  // Add HTML toggle buttons listeners
-  document.getElementById('rotationToggle').addEventListener('click', event => {
-    isCamRotationActive = !isCamRotationActive;
-    event.target.innerHTML = `${(isCamRotationActive ? 'Pause' : 'Resume')} Rotation`;
-  });
-  document.getElementById('animationToggle').addEventListener('click', event => {
-    isAnimationActive ? Graph.pauseAnimation() : Graph.resumeAnimation();
-    isAnimationActive = !isAnimationActive;
-    event.target.innerHTML = `${(isAnimationActive ? 'Pause' : 'Resume')} Animation`;
+    graphVisibility ? Graph.pauseAnimation() : Graph.resumeAnimation();
+    event.target.innerHTML = `${(graphVisibility ? 'Show' : 'Hide')} 3D Graph`;
   });
 
   addGUIDAGControls(Graph, data.Graph);
@@ -491,7 +463,12 @@ function addGUIDAGControls(graph, data) {
     'Inwards-radially': 'radialin',
   };
 
-  const controls = { '3D Graph Orientation': 'Scattered'};
+  const controls = {
+    '3D Graph Orientation': 'Scattered',
+    'Geometry' : 'Text-Only',
+    'Animation' : animationActive,
+    'Rotation' : camRotationActive,
+  };
   // const gui = new dat.GUI({width: 300, closeOnTop: true});
   const gui = new dat.GUI({autoPlace: false, width: 280, closeOnTop: true});
   $('#dat-gui').prepend($(gui.domElement));
@@ -538,6 +515,33 @@ function addGUIDAGControls(graph, data) {
         graph && graph.dagMode(controlsDict[orientation]);
       }
       // console.log("excluded nodes: [" + excludedNodes + "]");
+    });
+  gui.add(controls, 'Geometry', [
+    'Text-Only',
+    'Node-Only',
+    'Text-Node'
+  ])
+    .onChange(orientation => {
+      if (orientation.includes('Text-Node')) {
+        setNodeGeometryMode(graph, 0);
+      } else if (orientation.includes('Text-Only')) {
+        setNodeGeometryMode(graph, 1);
+      } else if (orientation.includes('Node-Only')) {
+        setNodeGeometryMode(graph, 2);
+      }
+    });
+  gui.add(controls, 'Animation', [true, false])
+    .onChange(toggle => {
+      console.log(toggle.includes('true'));
+      if (toggle.includes('true')) {
+        graph.resumeAnimation();
+      } else if (toggle.includes('false')){
+        graph.pauseAnimation();
+      }
+    });
+  gui.add(controls, 'Rotation', [true, false])
+    .onChange(toggle => {
+      camRotationActive = toggle.includes('true');
     });
 }
 
