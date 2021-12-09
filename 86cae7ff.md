@@ -1,9 +1,9 @@
 ---
-title: Threshold Rule
-slug: threshold-rule
+title: Optimal Stopping When Selling a House
+slug: optimal-stopping-on-selling-a-house
 tags:
   - wip
-  - threshold-rule
+  - optimal-stopping-when-selling-a-house
   - statistics
   - probability
   - mathematics
@@ -13,8 +13,9 @@ tags:
   - brian-christian
   - tom-griffiths
   - brian-christian-and-tom-griffiths
-date: 2021-12-02T07:53
+date: 2021-12-09T06:56
 ---
+
 
 pg.20[^1]
 
