@@ -70,11 +70,11 @@ powered by [neuron](https://github.com/srid/neuron).
 
 ## Topics
 
-### Computer Programming
+### Computer Science
 
-[[z:zettels?tag=programming&limit=5&timeline]]
+[[z:zettels?tag=computer-science&limit=5&timeline]]
 
-[[programming|See more]]
+[[computer-science|See more]]
 
 ### Science
 

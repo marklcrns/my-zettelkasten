@@ -4,10 +4,13 @@ title: Observer Pattern
 tags:
   - zettel
   - observer-pattern
+  - computer-science
   - programming
   - oop
-  - design-pattern
-  - programming/oop/design-pattern
+  - design-principle
+  - computer-science/programming
+  - computer-science/programming/oop
+  - computer-science/programming/oop/design-principle
   - object-oriented-programming
   - head-first-design-pattern
   - book

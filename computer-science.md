@@ -1,8 +1,8 @@
 ---
-title: Computer Programming
-slug: computer-programming
+title: Computer Science
+slug: computer-science
 tags:
-  - programming
+  - computer-science
 ---
 
 
@@ -22,4 +22,4 @@ tags:
 _Credits goes to Devon Morris' [Zettelkasten](https://devonmorris.dev/) for his
 2D force-directed graph made with [D3.js](https://d3js.org/)_
 
-[[z:zettels?tag=programming/**&timeline&grouped]]
+[[z:zettels?tag=computer-science/**&timeline&grouped]]
