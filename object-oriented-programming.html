@@ -298,6 +298,14 @@
     max-height: 600px;
   }
 
+  /* Wikipedia style footnote reference */
+  .footnote-ref a::before {
+    content: "[" !important;
+  }
+  .footnote-ref a::after {
+    content: "]" !important;
+  }
+
   #zettel-container {
     width: 100%;
     max-width: 1200px !important;
