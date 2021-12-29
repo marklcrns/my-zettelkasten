@@ -7,8 +7,15 @@
 <script defer src="./static/katex/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
 
 <!-- Google font -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Unicase:wght@700&family=Cormorant:ital,wght@0,600;1,600&family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Roboto -->
+<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> -->
+<!-- Roboto Slab -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet">
+<!-- Fira Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+
 
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -113,6 +120,10 @@
 </div>
 
 <style>
+  * {
+    font-family: 'Roboto', sans-serif;
+  }
+
   body .universe {
     background-color: #fff !important;
     color: #333;
@@ -376,7 +387,6 @@
     background-color: white !important;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    font-family: 'Montserrat', sans-serif !important;
     font-weight: 500;
     font-size: 3.5em;
     text-align: center;
@@ -387,7 +397,6 @@
     background-color: white !important;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    font-family: 'Montserrat', sans-serif !important;
     font-weight: 500;
     font-size: 3em;
     text-align: center;
@@ -403,7 +412,6 @@
   body h4,
   body h5,
   body h6 {
-    font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
   }
 
@@ -417,7 +425,6 @@
   }
 
   body p, li, a {
-    font-family: 'Montserrat', sans-serif !important;
     font-weight: 400;
   }
 
@@ -503,6 +510,14 @@
     margin: 0 !important;
     padding: 0 !important;
     font-size: 11px !important;
+  }
+
+  span .katex-display {
+    font-size: 1.1rem !important;
+  }
+
+  span .katex-html {
+    font-size: .9em !important;
   }
 </style>
 
