@@ -1,9 +1,8 @@
 // 3D Directed graph
 // https://github.com/vasturiano/3d-force-graph
 
-import { UnrealBloomPass } from 'https://threejs.org/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { FontLoader } from 'https://threejs.org/examples/jsm/loaders/FontLoader.js';
-import { TextGeometry } from 'https://threejs.org/examples/jsm/geometries/TextGeometry.js';
+import { UnrealBloomPass } from 'https://unpkg.com/three@0.127.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+import dat from "https://cdn.skypack.dev/dat.gui@0.7.7";
 
 var excludedNodes = [
   "index",
@@ -377,12 +376,12 @@ function buildGraph(data) {
 }
 
 function loadGraphZettelJumbotron(graph) {
-  const loader = new FontLoader();
+  const loader = new THREE.FontLoader();
   const nodeCount = graph.graphData().nodes.length;
   loader.load('./static/optimer_regular.typface.json', function(font) {
 
     // Fetch title-h1 element stripped of non-alphanumeric characters to uppercase
-    const titleGeometry = new TextGeometry(
+    const titleGeometry = new THREE.TextGeometry(
       document.getElementById('title-h1').innerText.replace(/\W/g, '').toUpperCase(),
       {
         font: font,
@@ -401,7 +400,7 @@ function loadGraphZettelJumbotron(graph) {
     const titleMesh = new THREE.Mesh(titleGeometry, titleMaterial);
     titleMesh.position.set(-titleGeometry.boundingSphere.radius, 100, -(nodeCount * 15)); // (x, y, z)
 
-    const countGeometry = new TextGeometry(
+    const countGeometry = new THREE.TextGeometry(
       'ct: ' +  nodeCount.toString(),
       {
         font: font,
